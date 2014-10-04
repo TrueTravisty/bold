@@ -51,6 +51,45 @@ router.get('/loginredirect', function(req,res) {
   res.redirect("/");
 });
 
+router.param('user', function(req, res, next, id){
+  User.find({username:id}, function(err, user){
+    if (err) {
+      return next(err);
+    }
+    else if (!user) {
+      return next(new Error('failed to load user'));
+    }
+
+    req.ruser = user[0];
+    if (!req.ruser.displayname)
+      req.ruser.displayname="";
+    if (!req.ruser.email)
+      req.ruser.email="";
+    if (!req.ruser.api)
+      req.ruser.api="";
+    if (!req.ruser.apiVer)
+      req.ruser.apiVer="";
+    next();
+  });
+});
+
+router.get('/user/:user', function(req,res) {
+   if (!req.isAuthenticated()) {
+    req.session.loginredirect = req.originalUrl;
+    res.redirect('/login');
+    return;
+   } 
+   
+   if (req.user.username == req.ruser.username) {
+    res.render('user', {user:req.ruser});
+    return;
+   } else if (req.can('manageusers')) {
+     res.redirect('/admin/users/' + req.ruser.username);
+     return;
+   }
+   res.redirect('/');
+});
+
 router.get('/currentuser', 
   function(req, res) {
     if (req.isAuthenticated()) {

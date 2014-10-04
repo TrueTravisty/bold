@@ -49,7 +49,7 @@
     <div id="content_bg_bot"></div>
 	<div id="user_info">
 	<% if (username) { %>
-		Logged in as <%=username%>. <a href="/logout">Log out</a>.
+		Logged in as <a href="/user/<%=username%>"><%=username%></a>. <a href="/logout">Log out</a>.
 	<% } else { %>
 		Log in <a href="/login">here</a>
 	<% } %>

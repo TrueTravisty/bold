@@ -1,0 +1,21 @@
+<% include header.ejs %>
+<h2>User information</h2>
+	<form action="/edituser" method="POST">
+		<div>
+			<label>Username:</label>
+			<input type="text" class="username" name="username" value="<%=user.username%>"></input>
+		</div>
+		<div>
+			<label>Displayname:</label><input type="text" name="displayname" value="<%=user.displayname%>"></input>
+		</div>
+		<div>
+			<label>E-mail:</label><input type="text" name="email" value="<%=user.email%>"></input>
+		</div>
+		<div>
+			<label>API Key:</label><input type="text" name="api" value="<%=user.api%>"></input>
+		</div>
+		<div>
+			<label>API Verification:</label><input type="text" name="apiVer" value="<%=user.apiVer%>"></input>
+		</div>
+	</form>
+<% include footer.ejs %>

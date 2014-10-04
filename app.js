@@ -67,6 +67,18 @@ app.use(function(req,res,next) {
   return next();
 })
 
+app.use(function(req,res,next) {
+  req.can = function(verb) {
+    //if (req.username='torlivar') return true;
+    
+    if (verb == 'manageusers')
+      return req.user.roles.indexOf('admin') >= 0;
+      
+    return false;
+  };
+  next();
+});
+
 app.use('/', routes); // THIS MUST BE FIRST
 app.use('/', users);
 app.use('/', buyback);
