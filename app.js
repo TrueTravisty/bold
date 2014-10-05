@@ -61,19 +61,27 @@ app.use(passport.session());
 app.use(function(req,res,next) {
   if (req.isAuthenticated()){
     res.locals.username = req.user.username;
+    res.locals.user = req.user;
   } else {
     res.locals.username = "";
   }
   return next();
-})
+});
+
+var permissions = require('./model/permissions.json');
 
 app.use(function(req,res,next) {
   req.can = function(verb) {
-    //if (req.username='torlivar') return true;
-    
-    if (verb == 'manageusers')
-      return req.user.roles.indexOf('admin') >= 0;
-      
+    if (req.username='superadmin') return true;
+    if (!req.isAuthenticated()) return false;
+    if (verb in permissions) {
+      var i;
+      var roles = permissions[verb];
+      for (var i = 0; i < roles.length; i++) {
+        if (req.user.roles.indexOf(roles[i]) >= 0) return true;
+      }
+    }
+    if (req.user.roles.indexOf('superadmin') >= 0) return true; // superadmin can do all   
     return false;
   };
   next();

@@ -1,0 +1,6 @@
+{
+    "manageusers" : ["admin"],
+    "updatesite": ["admin"],
+    "updatenews": ["admin","contentprovider"],
+    "changeroles": ["superadmin"]
+}
