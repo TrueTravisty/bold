@@ -3,7 +3,18 @@ var router = express.Router();
 var User = require('../model/User');
 var passport = require('passport');
 var slideshow = require('./slideshow');
+var permissions = require('../model/permissions.json');
 
+var roles = [];
+var unique = {};
+for (perm in permissions) {
+  permissions[perm].forEach(function(role){
+    if (!unique[role]) {
+      roles.push(role);
+      unique[role] = true;
+    }
+  })
+}
 
 
 router.use(function(req,res,next) {
@@ -86,7 +97,13 @@ router.get('/users/:user', function(req,res, next) {
        });
      }
    }
-   res.end(req.ruser.username);
+   debugger;
+   res.render('admin/user', {
+     edituser:req.ruser,
+     roles:roles,
+     canroles:req.can('manageroles'),
+     message:''
+   })
 });
 
 router.post('/users/:user', function(req,res,next) {
@@ -95,6 +112,9 @@ router.post('/users/:user', function(req,res,next) {
     err.status = 401;
     return next(err);
   }
+  
+  
+  
 });
 
 

@@ -1,9 +1,12 @@
-<% include header.ejs %>
-<h2>User information for</h2>
-	<form action="admin/edituser/<%=edituser.username%>" method="POST">
+<% include ../header.ejs %>
+<h2>User information for <%=edituser.username%></h2>
+<% if (message) { %>
+	<div class="message"><%=message%></div>
+<% } %>
+	<form method="POST">
 		<div>
 			<label>Username:</label>
-			<input type="text" class="username" name="username" value="<%=edituser.username%>"></input>
+			<input type="text" class="username" name="username" value="<%=edituser.username%>" readonly></input>
 		</div>
 		<div>
 			<label>Displayname:</label><input type="text" name="displayname" value="<%=edituser.displayname%>"></input>
@@ -14,5 +17,24 @@
 		<div>
 			<label>API Key:</label><input type="text" name="api" value="<%=edituser.api%>"></input>
 		</div>
+		<div>
+			<label>API Verification:</label><input type="text" name="apiVer" value="<%=edituser.apiVer%>"></input>
+		</div>
+		<% if (canroles) { %>
+		<div>
+			<label>Roles:</label>
+			<UL>
+			<% roles.forEach(function(role) { %>
+				<LI><input type="checkbox" name="role" value="<%=role%>"
+				<% if (edituser.roles.indexOf(role) >= 0) { %>
+					checked
+				<% } %> /> <%=role%></LI>
+			<% }); %>
+			</UL>
+		</div>
+		<% } %>
+		<div>
+			<input type="submit" value="Submit">
+		</div>
 	</form>
-<% include footer.ejs %>
+<% include ../footer.ejs %>
