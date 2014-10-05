@@ -81,13 +81,24 @@ router.get('/user/:user', function(req,res) {
    } 
    
    if (req.user.username == req.ruser.username) {
-    res.render('user', {user:req.ruser});
+    res.render('user', {user:req.ruser, message: ""});
     return;
    } else if (req.can('manageusers')) {
      res.redirect('/admin/users/' + req.ruser.username);
      return;
    }
    res.redirect('/');
+});
+
+router.post('/user/:user', function(req,res,next) {
+  req.ruser.displayname = req.body.displayname;
+  req.ruser.email = req.body.email;
+  req.ruser.api = req.body.api;
+  req.ruser.apiVer = req.body.apiVer;
+  req.ruser.save(function(err) {
+    if (err) return next(err);
+    res.render('user', {user:req.ruser, message:"Data saved successfully!"});
+  })
 });
 
 router.get('/currentuser', 

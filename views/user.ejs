@@ -1,9 +1,12 @@
 <% include header.ejs %>
 <h2>User information</h2>
-	<form action="/edituser" method="POST">
+<% if (message) { %>
+	<div class="message"><%=message%></div>
+<% } %>
+	<form method="POST">
 		<div>
 			<label>Username:</label>
-			<input type="text" class="username" name="username" value="<%=user.username%>"></input>
+			<input type="text" class="username" name="username" value="<%=user.username%>" readonly></input>
 		</div>
 		<div>
 			<label>Displayname:</label><input type="text" name="displayname" value="<%=user.displayname%>"></input>
@@ -16,6 +19,9 @@
 		</div>
 		<div>
 			<label>API Verification:</label><input type="text" name="apiVer" value="<%=user.apiVer%>"></input>
+		</div>
+		<div>
+			<input type="submit" value="Submit">
 		</div>
 	</form>
 <% include footer.ejs %>

@@ -546,3 +546,8 @@ table.team th, table.structure th {
 .deleteuser {
 	display: inline
 }
+
+.message {
+	background: darkgreen;
+	text: white;
+}
