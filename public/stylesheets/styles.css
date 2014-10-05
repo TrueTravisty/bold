@@ -551,3 +551,50 @@ table.team th, table.structure th {
 	background: darkgreen;
 	text: white;
 }
+
+form {
+	display: table;
+	border-color: white;
+	border-style: solid;
+	padding: 10px;
+}
+form div {
+	display: table-row;
+	
+}
+form div label {
+	display: table-cell;
+	text-align: right;
+	padding: 5px;
+}
+form div input {
+	display: table-cell;
+}
+form div div {
+	display: table-cell;
+}
+form div ul {
+	display: table-cell;
+	text-align: left;
+}
+form div ul li {
+	list-style-type: none;
+	text-align: left;
+}
+
+#user_info, #adminlink, #logoutlink{
+	width: 265px;
+	float: left;
+}
+#submit {
+	text-align: right;
+}
+
+#adminlink {
+	text-align: right;
+}
+#logoutlink {
+	text-align: center;
+}
+
+/*

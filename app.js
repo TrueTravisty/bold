@@ -85,6 +85,7 @@ app.use(function(req,res,next) {
     if (req.user.roles.indexOf('superadmin') >= 0) return true; // superadmin can do all   
     return false;
   };
+  res.locals.canadmin = req.can('administrate');
   next();
 });
 

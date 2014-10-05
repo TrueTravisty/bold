@@ -1,23 +1,26 @@
 <% include header.ejs %>
 <script src="/javascripts/register.js"></script>
-<h2>Log in</h2>
-  <div>
-  <form id="registerform" action="/register" method="post">
-    <div>
-        <label>Username:</label>
-        <input type="text" id="username" name="username"/><div id="usererror" class="formerror"/>
-    </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" id="password" name="password"/><div id="pwerror" class="formerror"/>
-    </div>
-    <div>
-    	<lable>Repeat password:</label>
-    	<input type="password" id="repeat" name="repeat"/><div id="reperror" class="formerror"/>
-    </div>
-    <div>
-        <input type="submit" value="Register"/>
-    </div>
-</form>
- </div> 
+<h2>Register User</h2>
+
+  	<form id="registerform" action="/register" method="post">
+	    <div>
+	        <label>Username:</label>
+	        <input type="text" id="username" name="username"/>
+	        <div id="usererror" class="formerror"></div>
+	    </div>
+	    <div>
+	        <label>Password:</label>
+	        <input type="password" id="password" name="password"/>
+	        <div id="pwerror" class="formerror"></div>
+	    </div>
+	    <div>
+	    	<label>Repeat password:</label>
+	    	<input type="password" id="repeat" name="repeat"/>
+	    	<div id="reperror" class="formerror"></div>
+	    </div>
+	    <div id="buttons">
+	        <div></div><div id=submit><input type="submit" value="Register"/></div>
+	    </div>
+	</form>
+
 <% include footer.ejs %>

@@ -43,17 +43,28 @@
         </div>
 
         <div class="clear"></div>
-      </div>
+      
+	    <div id="user_bar">
+			<div id="user_info">
+			<% if (username) { %>
+				Logged in as <a href="/user/<%=username%>"><%=username%></a>. 
+				</div>
+				<div id="logoutlink"><a href="/logout">Log out</a>.
+			<% } else { %>
+				Log in <a href="/login">here</a>
+			<% } %>
+			</div>
+			<% if (canadmin) { %>
+				<div id="adminlink"><a href="/admin">Admin</a></div>
+			<% } %>
+		</div>
+	</div>
+      
     </div>
 
     <div id="content_bg_bot"></div>
-	<div id="user_info">
-	<% if (username) { %>
-		Logged in as <a href="/user/<%=username%>"><%=username%></a>. <a href="/logout">Log out</a>.
-	<% } else { %>
-		Log in <a href="/login">here</a>
-	<% } %>
-	</div>
+    
+	
     <div id="footer_bot">
       <p>Copyright 2014. <!-- Do not remove -->Designed by <a href=
       "http://www.myfreecsstemplates.com/" title=
