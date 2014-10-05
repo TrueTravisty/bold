@@ -7,7 +7,7 @@ var slideshow = require('./slideshow');
 
 
 router.use(function(req,res,next) {
-  if (!req.isAuthenticated()) {
+  if (!req.can('administrate')) {
     req.session.loginredirect = req.originalUrl;
     res.redirect('/login');
     return;
@@ -21,7 +21,11 @@ router.use(function(req,res,next) {
 });
 
 router.get('/', function(req,res) {
-  res.render('admin/admin', { current: 'admin'});
+  res.render('admin/admin', {
+    current: 'admin',
+    canusers: req.can('manageusers'),
+    canupdate: req.can('updatesite')
+  });
 });
 
 router.get('/users', function(req,res) {

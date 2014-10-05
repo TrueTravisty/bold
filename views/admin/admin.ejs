@@ -1,7 +1,12 @@
 <% include ../header.ejs %>
 <h1>Admin pages</h1>
 <UL>
-<LI><a href="/admin/slides/upload">Manage front page slideshow</a>
+<% if (canupdate) { %>
+	<LI><a href="/admin/slides/upload">Manage front page slideshow</a>
+<% } %>
+<% if (canusers) { %>
+ <LI><a href="/admin/users">Manage users</a>
+<% } %>
 </UL>
 
 

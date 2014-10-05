@@ -3,5 +3,6 @@
     "updatesite": ["admin"],
     "updatenews": ["admin","contentprovider"],
     "manageroles": ["superadmin"],
-    "deleteusers": ["superadmin"]
+    "deleteusers": ["superadmin"],
+    "administrate" : ["admin"]
 }
