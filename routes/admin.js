@@ -75,7 +75,8 @@ router.param('user', function(req, res, next, id){
 router.get('/users/:user', function(req,res, next) {
    if (!req.can('manageusers')) {
      var err = new Error("Not authorized!");
-      err.status = 401;
+     err.status = 401;
+     return next(err);
    }
    if (req.param('delete', 'no') == 'yes' && req.can('deleteuser')){
      if (req.ruser.username != "superadmin"){
