@@ -7,10 +7,10 @@ var slideshow = require('./slideshow');
 
 
 router.use(function(req,res,next) {
-  if (!req.can('administrate')) {
-    req.session.loginredirect = req.originalUrl;
-    res.redirect('/login');
-    return;
+  if (!req.isAuthenticated() || !req.can('administrate')) {
+    var err = new Error("Not authorized!");
+    err.status = 401;
+    return next(err);
   }
   res.locals.mainpages.push({
         path: '/admin',
@@ -74,7 +74,8 @@ router.param('user', function(req, res, next, id){
 
 router.get('/users/:user', function(req,res, next) {
    if (!req.can('manageusers')) {
-     return res.redirect("/admin");
+     var err = new Error("Not authorized!");
+      err.status = 401;
    }
    if (req.param('delete', 'no') == 'yes' && req.can('deleteuser')){
      if (req.ruser.username != "superadmin"){
@@ -85,6 +86,14 @@ router.get('/users/:user', function(req,res, next) {
      }
    }
    res.end(req.ruser.username);
+});
+
+router.post('/users/:user', function(req,res,next) {
+  if (!req.can('manageusers')) {
+    var err = new Error("Not authorized!");
+    err.status = 401;
+    return next(err);
+  }
 });
 
 
