@@ -530,3 +530,19 @@ table.team th, table.structure th {
 	color: red;
 	margin-left: 3px;
 }
+
+#usertable th, 
+#usertable td { 
+  border: solid thin;
+  padding: 0.5rem 0.5rem;
+}
+
+#usertable td {
+	white-space: nowrap;
+	text-align: left;
+}
+
+.edituser,
+.deleteuser {
+	display: inline
+}

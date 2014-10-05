@@ -72,7 +72,7 @@ var permissions = require('./model/permissions.json');
 
 app.use(function(req,res,next) {
   req.can = function(verb) {
-    if (req.username='superadmin') return true;
+    if (req.user.username=='superadmin') return true;
     if (!req.isAuthenticated()) return false;
     if (verb in permissions) {
       var i;

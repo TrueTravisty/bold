@@ -1,0 +1,18 @@
+<% include header.ejs %>
+<h2>User information for</h2>
+	<form action="admin/edituser/<%=edituser.username%>" method="POST">
+		<div>
+			<label>Username:</label>
+			<input type="text" class="username" name="username" value="<%=edituser.username%>"></input>
+		</div>
+		<div>
+			<label>Displayname:</label><input type="text" name="displayname" value="<%=edituser.displayname%>"></input>
+		</div>
+		<div>
+			<label>E-mail:</label><input type="text" name="email" value="<%=edituser.email%>"></input>
+		</div>
+		<div>
+			<label>API Key:</label><input type="text" name="api" value="<%=edituser.api%>"></input>
+		</div>
+	</form>
+<% include footer.ejs %>

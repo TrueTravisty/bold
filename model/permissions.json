@@ -2,5 +2,6 @@
     "manageusers" : ["admin"],
     "updatesite": ["admin"],
     "updatenews": ["admin","contentprovider"],
-    "changeroles": ["superadmin"]
+    "manageroles": ["superadmin"],
+    "deleteusers": ["superadmin"]
 }

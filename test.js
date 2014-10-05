@@ -30,9 +30,9 @@ var req = {
 }
 
 req.can = function(verb) {
-//if (req.username='torlivar') return true;
-if (!req.isAuthenticated()) return false;
-if (verb in permissions) {
+  //if (req.username='torlivar') return true;
+  if (!req.isAuthenticated()) return false;
+  if (verb in permissions) {
     var i;
     var roles = permissions[verb];
     for (var i = 0; i < roles.length; i++) {
