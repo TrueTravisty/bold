@@ -4,5 +4,6 @@
     "updatenews": ["admin","contentprovider"],
     "manageroles": ["superadmin"],
     "deleteusers": ["superadmin"],
-    "administrate" : ["admin"]
+    "administrate" : ["admin"],
+    "managesso" : ["superadmin"]
 }

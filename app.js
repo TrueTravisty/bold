@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var User = require('./model/User');
+var Settings = require('./model/SettingsStore');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -19,6 +20,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/boldsite');
 
 var passport = require('passport');
+
 
 debugger;
 // use static authenticate method of model in LocalStrategy
@@ -56,6 +58,8 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.set("settings", Settings);
 
 // Make sure all views have access to username
 app.use(function(req,res,next) {

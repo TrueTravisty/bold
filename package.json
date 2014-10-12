@@ -21,6 +21,7 @@
     "connect-mongo": "~0.4.1",
     "connect-flash": "~0.1.1",
     "passport-local-mongoose": "~0.3.0",
-    "passport-local": "~1.0.0"
+    "passport-local": "~1.0.0",
+    "async": "~0.9.0"
   }
 }

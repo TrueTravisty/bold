@@ -1,0 +1,14 @@
+{
+    "sso-client-id" : {
+        "permission": "managesso",
+        "defaultvalue": ""
+    },
+    "sso-secret" : {
+        "permission": "managesso",
+        "defaultvalue": ""    
+    },
+    "test" : {
+        "permission": "admin",
+        "defaultvalue": "test"
+    }
+}

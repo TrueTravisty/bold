@@ -112,11 +112,56 @@ router.post('/users/:user', function(req,res,next) {
     err.status = 401;
     return next(err);
   }
-  
-  
-  
 });
 
+router.param('setting', function(req, res, next, setting){ 
+  var Settings = req.app.get("settings");
+  if (!Settings.permissions[setting]){
+    var err = new Error("Unknown setting");
+    err.status=404;
+    return next(err);
+  }
+  if (!req.can(Settings.permissions[setting])){
+    var err = new Error("Not authorised");
+    err.status=401;
+    return next(err);
+  }
+  req.settingName = setting;
+  next();
+});
+
+router.get('/settings', function(req,res){
+  var s = [];
+  debugger;
+  var Settings = req.app.get("settings");
+  for (setting in Settings.permissions) {
+    if (req.can(Settings.permissions[setting])) {
+      s.push({name: setting, value: Settings.settings[setting]});
+    }
+  }
+  res.render('admin/settings', {
+    settings: s
+  });
+});
+
+router.get('/settings/:setting', function(req,res,next){
+  var setting = req.settingName;
+  var Settings = req.app.get("settings");
+  res.end(Settings.settings[setting]);
+});
+
+router.post('/settings/:setting', function(req,res,next){
+  var Settings = req.app.get("settings");
+  var setting = req.settingName;
+  if (req.body.value !== Settings.settings[setting]){
+    Settings.set(setting, req.body.value, req.user, function(error) {
+      if (error) res.end("Failed");
+      res.end("OK");
+    });
+  } else {
+    res.end("Unchanged");
+  }
+});
 
 /* Other routes mapped to admin */
 router.use(slideshow);
