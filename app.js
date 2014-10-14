@@ -34,13 +34,14 @@ passport.use(User.createStrategy());
 Settings.populate(function(err) {
   if (err) throw err;
   passport.use('eve-authz', new OAuth2Strategy({
-    authorizationURL: 'https://sisilogin.testeveonline.com/oauth/authorize/',
+    authorizationURL: 'https://sisilogin.testeveonline.com/oauth/authorize',
     tokenURL: 'https://sisilogin.testeveonline.com/oauth/token',
     clientID: Settings.settings['sso-client-id'],
     clientSecret:  Settings.settings['sso-secret'],
     callbackURL: Settings.settings['sso-callback']
   },function(accessToken, refreshToken, profile, done) {
-    var char = new Character({Profile: JSON.stringify(profile)});
+    var character = new Character({Profile: JSON.stringify(profile)});
+    character.save(functoin(err) {})
   }));
   
 });
