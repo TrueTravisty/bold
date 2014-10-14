@@ -41,7 +41,7 @@ Settings.populate(function(err) {
     callbackURL: Settings.settings['sso-callback']
   },function(accessToken, refreshToken, profile, done) {
     var character = new Character({Profile: JSON.stringify(profile)});
-    character.save(functoin(err) {})
+    character.save(function(err) {})
   }));
   
 });
