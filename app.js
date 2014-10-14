@@ -34,8 +34,8 @@ passport.use(User.createStrategy());
 Settings.populate(function(err) {
   if (err) throw err;
   passport.use('eve-authz', new OAuth2Strategy({
-    authorizationURL: 'https://login.eveonline.com/oauth/authorize/',
-    tokenURL: 'http://localhost:4000/oauth/token',
+    authorizationURL: 'https://sisilogin.eveonline.com/oauth/authorize/',
+    tokenURL: 'https://sisilogin.eveonline.com/oauth/token',
     clientID: Settings.settings['sso-client-id'],
     clientSecret:  Settings.settings['sso-secret'],
     callbackURL: Settings.settings['sso-callback']
