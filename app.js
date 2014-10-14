@@ -34,7 +34,7 @@ passport.use(User.createStrategy());
 Settings.populate(function(err) {
   if (err) throw err;
   passport.use('eve-authz', new OAuth2Strategy({
-    authorizationURL: 'http://localhost:4000/oauth/authorize',
+    authorizationURL: 'https://login.eveonline.com/oauth/authorize/',
     tokenURL: 'http://localhost:4000/oauth/token',
     clientID: Settings.settings['sso-client-id'],
     clientSecret:  Settings.settings['sso-secret'],
