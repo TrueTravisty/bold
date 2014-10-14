@@ -20,10 +20,13 @@ var Settings = {
   permissions: {}
 }
 
-populateSettings(function(err, s) {
-  if (err) throw err;
-  Settings.settings = s;
-});
+Settings.populate = function(callback) {
+  populateSettings(function(err, s) {
+    if (err) return callback(err);
+    Settings.settings = s;
+    callback(err);
+  });
+}
 
 function populateSettings (callback) {
   debugger;

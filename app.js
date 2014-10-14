@@ -31,17 +31,19 @@ debugger;
 // use static authenticate method of model in LocalStrategy
 passport.use(User.createStrategy());
 
-if (Settings.settings['sso-client-id'] && Settings.settings['sso-callback']) {
-passport.use('eve-authz', new OAuth2Strategy({
-  authorizationURL: 'http://localhost:4000/oauth/authorize',
-  tokenURL: 'http://localhost:4000/oauth/token',
-  clientID: Settings.settings['sso-client-id'],
-  clientSecret:  Settings.settings['sso-secret'],
-  callbackURL: Settings.settings['sso-callback']
-},function(accessToken, refreshToken, profile, done) {
-  var char = new Character({Profile: JSON.stringify(profile)});
-}));
-}
+Settings.populate(function(err) {
+  if (err) throw err;
+  passport.use('eve-authz', new OAuth2Strategy({
+    authorizationURL: 'http://localhost:4000/oauth/authorize',
+    tokenURL: 'http://localhost:4000/oauth/token',
+    clientID: Settings.settings['sso-client-id'],
+    clientSecret:  Settings.settings['sso-secret'],
+    callbackURL: Settings.settings['sso-callback']
+  },function(accessToken, refreshToken, profile, done) {
+    var char = new Character({Profile: JSON.stringify(profile)});
+  }));
+  
+});
 /*
 
 */
