@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var User = require('./model/User');
-var Settings = require('./model/SettingsStore');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -19,12 +18,33 @@ var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/boldsite');
 
-var passport = require('passport');
+var passport = require('passport'),
+  OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
+
+
+var Settings = require('./model/SettingsStore');
+var Character = require('./model/Character');
+
 
 
 debugger;
 // use static authenticate method of model in LocalStrategy
 passport.use(User.createStrategy());
+
+if (Settings.settings['sso-client-id'] && Settings.settings['sso-callback']) {
+passport.use('eve-authz', new OAuth2Strategy({
+  authorizationURL: 'http://localhost:4000/oauth/authorize',
+  tokenURL: 'http://localhost:4000/oauth/token',
+  clientID: Settings.settings['sso-client-id'],
+  clientSecret:  Settings.settings['sso-secret'],
+  callbackURL: Settings.settings['sso-callback']
+},function(accessToken, refreshToken, profile, done) {
+  var char = new Character({Profile: JSON.stringify(profile)});
+}));
+}
+/*
+
+*/
 
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());

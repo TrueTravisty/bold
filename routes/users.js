@@ -41,6 +41,13 @@ router.get('/logout', function(req,res) {
 
 router.post('/login', passport.authenticate('local', { successRedirect: '/loginredirect',
                                    failureRedirect: '/login', failureFlash: true }));
+      
+      
+router.get('/loginsso', passport.authenticate('eve-authz'));                               
+
+router.get('/evecb',passport.authenticate('eve-authz', { successRedirect: '/',
+                                      failureRedirect: '/login' }));
+
 
 router.get('/loginredirect', function(req,res) {
   var redirect = req.session.loginredirect;

@@ -7,6 +7,10 @@
         "permission": "managesso",
         "defaultvalue": ""    
     },
+    "sso-callback" : {
+        "permission": "managesso",
+        "defaultvalue": ""   
+    },
     "test" : {
         "permission": "admin",
         "defaultvalue": "test"
