@@ -11,6 +11,10 @@
         "permission": "managesso",
         "defaultvalue": ""   
     },
+    "sso-provider" : {
+        "permission": "managesso",
+        "defaultvalue": "http://localhost:4000"
+    },
     "test" : {
         "permission": "admin",
         "defaultvalue": "test"

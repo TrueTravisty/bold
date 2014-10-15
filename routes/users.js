@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../model/User');
 var passport = require('passport')
+var evesso = require('../lib/evesso');
 
 router.get('/login', function(req, res) {
   if (req.isAuthenticated()) {
@@ -42,11 +43,20 @@ router.get('/logout', function(req,res) {
 router.post('/login', passport.authenticate('local', { successRedirect: '/loginredirect',
                                    failureRedirect: '/login', failureFlash: true }));
       
-      
-router.get('/loginsso', passport.authenticate('eve-authz'));                               
 
-router.get('/evecb',passport.authenticate('eve-authz', { successRedirect: '/',
-                                      failureRedirect: '/login' }));
+      
+router.get('/loginsso', evesso.authorize());                               
+
+router.get('/evecb', function(req, res, next) {
+  evesso.authenticate(req, function(err, tokenData){
+    if (err) return next (err);
+    evesso.verify(req, tokenData, function(err, characterData) {
+      if (err) return next(err);
+      res.end(JSON.stringify(characterData));
+    })
+  });
+
+});
 
 
 router.get('/loginredirect', function(req,res) {
