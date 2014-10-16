@@ -48,6 +48,7 @@ router.post('/login', passport.authenticate('local', { successRedirect: '/loginr
 router.get('/loginsso', evesso.authorize());                               
 
 router.get('/evecb', function(req, res, next) {
+  console.log("SSO Callback");
   evesso.authenticate(req, function(err, tokenData){
     if (err) return next (err);
     evesso.verify(req, tokenData, function(err, characterData) {
