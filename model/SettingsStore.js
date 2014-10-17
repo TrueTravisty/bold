@@ -74,6 +74,6 @@ Settings.set = function (setting, value, user, callback) {
       setSetting(setting, value, user, version, callback);
     }
   });
-}
+};
 
 module.exports = Settings;
