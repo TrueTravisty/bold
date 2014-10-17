@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../model/User');
-var passport = require('passport')
+var passport = require('passport');
 var evesso = require('../lib/evesso');
 
 router.get('/login', function(req, res) {
@@ -38,7 +38,7 @@ router.post('/register', function(req, res) {
 router.get('/logout', function(req,res) {
   req.logout();
   res.redirect('/');
-})
+});
 
 router.post('/login', passport.authenticate('local', { successRedirect: '/loginredirect',
                                    failureRedirect: '/login', failureFlash: true }));
@@ -48,13 +48,12 @@ router.post('/login', passport.authenticate('local', { successRedirect: '/loginr
 router.get('/loginsso', evesso.authorize());                               
 
 router.get('/evecb', function(req, res, next) {
-  console.log("SSO Callback");
   evesso.authenticate(req, function(err, tokenData){
     if (err) return next (err);
     evesso.verify(req, tokenData, function(err, characterData) {
       if (err) return next(err);
       res.end(JSON.stringify(characterData));
-    })
+    });
   });
 
 });
@@ -116,7 +115,7 @@ router.post('/user/:user', function(req,res,next) {
   req.ruser.save(function(err) {
     if (err) return next(err);
     res.render('user', {user:req.ruser, message:"Data saved successfully!"});
-  })
+  });
 });
 
 router.get('/currentuser', 

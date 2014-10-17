@@ -10,8 +10,7 @@ var User = new Schema({
   email: String,
   verified: Boolean,
   characters: [String],
-  api: String,
-  apiVer: String
+  APIs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Api'}]
 });
 
 User.plugin(passportLocalMongoose);

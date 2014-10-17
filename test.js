@@ -1,20 +1,12 @@
+
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/boldsite');
+mongoose.connect('mongodb://localhost/boldsite_test');
 
-var Settings = require('./model/SettingsStore');
-var User = require('./model/User');
+var api = require('./model/EveXmlApi');
 
-var settings = {};
-
-User.findOne({username:'torlivar'}, function(err, user) {
-  debugger;
-  Settings.set('test', 'updated again',user,function(err) {
-    if (err) throw err;
-      
-    for (setting in Settings.settings) {
-      console.log(setting + ": " + JSON.stringify(Settings.settings[setting]));
-    }
-  
-  });
-
+api.callApi('eve/CharacterInfo.xml.aspx', {characterID:94361861}, function(err, result) {
+  if (err) return console.log("Error: " + err);
+  return console.log(result);
 });
+
+

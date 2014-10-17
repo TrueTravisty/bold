@@ -6,7 +6,9 @@ var Character = new Schema({
   CharacterName: String,
   CharacterOwnerHash: String,
   User: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  Profile: String
+  Profile: String,
+  Validated: Boolean,
+  APIs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Api'}]
 });
 
 module.exports = mongoose.model('Character', Character);
