@@ -7,6 +7,7 @@ debugger;
 
 api.eveApi('eve/CharacterInfo.xml.aspx', {characterID:94331649}, function(err, result) {
   if (err) return console.log("Error: " + err);
+  debugger;
   return console.log(JSON.stringify(result));
 });
 

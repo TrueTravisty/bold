@@ -16,51 +16,45 @@ var ApiCache = new Schema({
 ApiCacheModel = mongoose.model('ApiCache', ApiCache);
 
 function eveApi(path, query, apiId, apiVerify, callback) {
-    if (path.substr(0,1) != '/')
-      path = '/' + path;
-    if (apiId && isFunction(apiId) && !apiVerify && !callback) {
-      return eveApi(path, query, null, null, apiId);
+  if (path.substr(0,1) != '/')
+    path = '/' + path;
+  if (apiId && isFunction(apiId) && !apiVerify && !callback) {
+    return eveApi(path, query, null, null, apiId);
+  }
+  
+  var cacheQueryString = querystring.stringify(query);
+  
+  ApiCacheModel.find({
+    path: path,
+    query: cacheQueryString,
+    key: apiId,
+  }, function(err, result) {
+    if (err) return callback(err);
+    if (result.length > 0) {
+      cachedResult = JSON.parse(result[0].result);
+      cachedResult.fromLocalCache = true;
+      return callback(null, cachedResult);
     }
-    
-    var cacheQueryString = querystring.stringify(query);
-    
-    ApiCacheModel.find({
-      path: path,
-      query: cacheQueryString,
-      key: apiId,
-    }, function(err, result) {
-      if (err) return callback(err);
-      if (result.length > 0) {
-        cachedResult = JSON.parse(result[0].result);
-        cachedResult.fromLocalCache = true;
-        return callback(null, cachedResult);
-    
-      callApi(path, query, apiId, apiVerify, function(err, result) {
-        if (result.substr(0,5) !== "<?xml") {
-          var err = new Error("Unrecognized results from API call");
-          return callback(err);
-        }
-        xml2js.parseString(result, function(err, result) {
-          if (err) return callback(err);
-          var cached = new ApiCacheModel();
-          cached.path = path;
-          cached.query = cacheQueryString;
-          cached.key = apiId;
-          cached.result = JSON.stringify(result);
-          cached.cached_until = Date.now() + 60*5*1000;
-          cached.save();
-          result.fromLocalCache = false;
-          
-          callback(null, result);
-        });
+    callApi(path, query, apiId, apiVerify, function(err, result) {
+      if (result.substr(0,5) !== "<?xml") {
+        var err = new Error("Unrecognized results from API call");
+        return callback(err);
+      }
+      xml2js.parseString(result, function(err, result) {
+        if (err) return callback(err);
+        var cached = new ApiCacheModel();
+        cached.path = path;
+        cached.query = cacheQueryString;
+        cached.key = apiId;
+        cached.result = JSON.stringify(result);
+        cached.cached_until = Date.now() + 60*5*1000;
+        cached.save();
+        result.fromLocalCache = false;
         
-          
-      });
+        callback(null, result);
+      });  
     });
-    
-    
-    
-    
+  });    
 }
 
 function callApi(path, query, apiId, apiVerify, icallback) {
