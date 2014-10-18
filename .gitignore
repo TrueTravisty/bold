@@ -1,6 +1,6 @@
 # Ignore slideshow folder (populated on site)
 public/images/slideshow/**
+.metadata/**
 
 # Ignore local debug log
 npm-debug.log
-
