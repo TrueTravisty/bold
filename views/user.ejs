@@ -15,13 +15,19 @@
 			<label>E-mail:</label><input type="text" name="email" value="<%=user.email%>"></input>
 		</div>
 		<div>
-			<label>API Key:</label><input type="text" name="api" value="<%=user.api%>"></input>
-		</div>
-		<div>
-			<label>API Verification:</label><input type="text" name="apiVer" value="<%=user.apiVer%>"></input>
-		</div>
-		<div>
 			<div></div><div><input type="submit" value="Submit"></div>
 		</div>
 	</form>
+	<% if (characters && characters.length > 0) { %>
+		<div id="characters">
+			<% characters.forEach(function(character) { %>
+				<div class="character">
+					<img src="/eveimages/<%= character.id %>" height="100" width="100"/>
+					<name><%=character.name%></name>
+					<corp><%=character.corp%></name>
+					<validated><%=character.validated%></validated>
+				</div>
+			<% }) %>
+		</div>
+	<% } %>
 <% include footer.ejs %>

@@ -3,6 +3,7 @@ var router = express.Router();
 var User = require('../model/User');
 var passport = require('passport');
 var evesso = require('../lib/evesso');
+var Character = require('../model/Character');
 
 router.get('/login', function(req, res) {
   if (req.isAuthenticated()) {
@@ -31,7 +32,7 @@ router.post('/register', function(req, res) {
       if (err) { return next(err); }
       return res.end('OK');
     });
-    
+
   });
 });
 
@@ -42,20 +43,75 @@ router.get('/logout', function(req,res) {
 
 router.post('/login', passport.authenticate('local', { successRedirect: '/loginredirect',
                                    failureRedirect: '/login', failureFlash: true }));
-      
 
-      
-router.get('/loginsso', evesso.authorize());                               
+
+
+router.get('/loginsso', evesso.authorize());
 
 router.get('/evecb', function(req, res, next) {
   evesso.authenticate(req, function(err, tokenData){
     if (err) return next (err);
     evesso.verify(req, tokenData, function(err, characterData) {
       if (err) return next(err);
-      res.end(JSON.stringify(characterData));
+      characterLoggedIn(req,res,next,characterData);
     });
   });
 
+});
+
+function characterLoggedIn(req,res,next,characterData) {
+  Character.find({CharacterID: characterData.CharacterID}).populate('User').exec(function(err, result) {
+    debugger;
+    if (err) return next(err);
+    if (result.length > 0) {
+      var savedCharacter = result[0];
+      //savedCharacter.populate("User");
+      if (savedCharacter.Validated) {
+        req.login(savedCharacter.User, function(err) {
+          if (err) return next(err);
+          return res.redirect('/loginredirect');
+        });
+      } else {
+        req.session.savedCharacter = savedCharacter;
+        return res.redirect('/connectaccounts');
+      }
+    } else {
+      req.session.characterData = characterData;
+      return res.redirect('/connectaccounts');
+    }
+  });
+
+  //res.end(JSON.stringify(characterData));
+}
+
+router.get('/connectaccounts', function(req,res,next) {
+  debugger;
+  var savedCharacter = req.session.savedCharacter;
+  var characterData = req.session.characterData;
+  req.session.characterData = null;
+  req.session.savedCharacter = null;
+
+  if (savedCharacter) {
+
+  } else if (characterData) {
+    if (req.isAuthenticated()) {
+      var char = new Character({
+        CharacterID: characterData.CharacterID,
+        Validated: true,
+        CharacterName: characterData.CharacterName,
+        CharacterOwnerHash: characterData.CharacterOwnerHash,
+        User: req.user._id
+      });
+      char.save(function(err) {
+        if (err) return next(err);
+        res.redirect('/user/' + req.user.username);
+      });
+    }
+  } else {
+    var err = new Error("No character or user found");
+    err.status = 404;
+    next(err);
+  }
 });
 
 
@@ -95,8 +151,8 @@ router.get('/user/:user', function(req,res) {
     req.session.loginredirect = req.originalUrl;
     res.redirect('/login');
     return;
-   } 
-   
+   }
+
    if (req.user.username == req.ruser.username) {
     res.render('user', {user:req.ruser, message: ""});
     return;
@@ -118,7 +174,7 @@ router.post('/user/:user', function(req,res,next) {
   });
 });
 
-router.get('/currentuser', 
+router.get('/currentuser',
   function(req, res) {
     if (req.isAuthenticated()) {
       res.end(req.user.username);
