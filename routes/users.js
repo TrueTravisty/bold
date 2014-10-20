@@ -92,7 +92,17 @@ router.get('/connectaccounts', function(req,res,next) {
   req.session.savedCharacter = null;
 
   if (savedCharacter) {
-
+    // Character known, but not validated
+    if (req.isAuthenticated()) {
+      if (savedCharacter.User.username == req.user.username) {
+        // Character known for logged in user - validate
+        return validateCharacter(savedCharacter, req, res, next);
+      } else {
+        // Character known, but on a different user
+        req.session.savedCharacter = savedCharacter;
+        return res.redirect('/user/' + req.user.username + '/merge');
+      }
+    }
   } else if (characterData) {
     if (req.isAuthenticated()) {
       var char = new Character({
@@ -104,7 +114,7 @@ router.get('/connectaccounts', function(req,res,next) {
       });
       char.save(function(err) {
         if (err) return next(err);
-        res.redirect('/user/' + req.user.username);
+        return res.redirect('/user/' + req.user.username);
       });
     }
   } else {
@@ -113,6 +123,15 @@ router.get('/connectaccounts', function(req,res,next) {
     next(err);
   }
 });
+
+function validateCharacter(savedCharacter, req, res, next) {
+  savedCharacter.Validated = true;
+  savedCharacter.save(function(err) {
+    if (err) return next(err);
+    res.redirect('/user/' + req.user.username);
+  });
+}
+
 
 
 router.get('/loginredirect', function(req,res) {

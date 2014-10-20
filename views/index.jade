@@ -1,0 +1,42 @@
+extends ./layout.jade
+
+append bodyscripts
+    script(type="text/javascript", src="/javascripts/jquery.nivo.slider.pack.js")
+
+block endofbody
+  script
+    include ./includes/sliderBottomScript.txt
+
+block content
+  #header
+    #wrapper
+      #slider-wrapper
+        #slider
+          each photo in photos
+            img(
+              src="/images/slideshow/" + photo.path,
+              alt=photo.caption,
+              title="#" + photo.path.replace('.','') + "_caption")
+        each photo in photos
+          div.nivo-html-caption(id=photo.path.replace('.','') + "_caption" class="nivo-html-caption")
+            = photo.caption
+
+  #column_box
+    .column
+      h2 About us
+      img(src="/images/img1.png", alt="", title="About Us")
+      p.
+        Brave Operations - Lollipop Division (BO-LD) is an EVE Online corporation within the BRAVE collective.
+        We specialize in small gang PVP content. Currently, we are living in the BRAVE sov null region of Catch.
+
+    .column
+      h2 News
+      img(src="/images/img2.png", alt="News", title="")
+      p
+        | Redeployed to
+        a(href="http://evemaps.dotlan.net/system/W-MPTH") W-MPTH
+        | .
+    .column
+      h2 Have a Question?
+      img(src="/images/img3.png", alt="", title="")
+      p Join us in our public recruitment channel "BOLD recruitment" if you have any questions about BO-LD.

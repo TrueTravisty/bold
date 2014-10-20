@@ -1,0 +1,5 @@
+//<![CDATA[
+$(window).load(function() {
+    $('#slider').nivoSlider({ pauseTime: 20000 });
+});
+//]]>

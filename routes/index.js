@@ -16,7 +16,7 @@ router.use(function(req,res,next) {
   } else {
     res.locals.username = "";
   }
-  
+
   res.locals.mainpages = [
       {
         path: '/',
@@ -34,7 +34,7 @@ router.use(function(req,res,next) {
         displayname: 'Buyback'
       }
     ];
-    
+
   res.locals.lookuppath = function(name) {
       for (var i = 0; i < res.locals.mainpages.length; i++) {
         if (name === res.locals.mainpages[i].name) return res.locals.mainpages[i].displayname;
@@ -51,7 +51,7 @@ router.use(function(req,res,next) {
 router.get('/', function(req, res) {
   Slideshow.find({}, function(err, photos) {
     debugger;
-      res.render('index', { 
+      res.render('index.jade', {
         title: 'Home',
         current: 'home',
         photos: photos
@@ -60,7 +60,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/buyback', function(req, res) {
-  res.render('buyback', {
+  res.render('buyback.jade', {
     title: 'Buyback program',
     current: 'buyback',
   });
@@ -80,8 +80,8 @@ router.param('eve_id', function (req, res, next, id) {
     next(null);
   } else {
     next(new Error('ID is not a number'));
-  } 
-  
+  }
+
 });
 
 router.get('/eveimages/:eve_id', function(req, res){
@@ -101,7 +101,7 @@ router.get('/team', function(req, res) {
           title: 'The Team',
           current: 'team',
           managers: managers
-        }); 
+        });
       });
     } else {
       res.statusCode = 500;
