@@ -3,3 +3,7 @@ $(document).ready(function() {
        $(this).select();
   });
 });
+
+$(document).ready(function() {
+  if ()
+});

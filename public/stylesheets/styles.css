@@ -43,16 +43,16 @@ h3{
 	text-align: center;
 	line-height: 43px;
 	font-weight: normal;
-	
+
 }
 
-body{	
+body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     line-height: 18px;
     color: #ffffff;
     background: #000000 url(/images/bg.jpg) no-repeat center 87px fixed;
-	
+
 }
 
 #bg2 {
@@ -69,11 +69,11 @@ body{
 }
 
 .clear{
-	clear: both;	
+	clear: both;
 }
 
 .contractvalue_section {
-	display: none;	
+	display: none;
 }
 
 /*
@@ -119,6 +119,17 @@ body{
 	background: url(/images/hover.png) no-repeat center;
 }
 
+#messagebox{
+  width: 900px;
+  text-align: center;
+  color: red;
+  font-size: 18px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  z-index: 100;
+  background: yellow;
+}
+
 
 /*logo*/
 
@@ -128,7 +139,7 @@ body{
 	height: 140px;
 	padding-top: 105px;
 	padding-left: 60px;
-	
+
 }
 
 #logo h1 {
@@ -182,7 +193,7 @@ download_box
 	background:url(/images/download_box.png) no-repeat top left;
 	width: 876px;
 	height: 112px;
-	
+
 }
 
 #download_box p {
@@ -194,7 +205,7 @@ download_box
 	color: #303030;
 	font: 12px Arial, Helvetica, sans-serif;
 	font-weight: bold;
-	
+
 }
 #download_box p a:hover {
 	color: #0870d7;
@@ -259,7 +270,7 @@ column_box
 }
 
 .column img {
- float: left; 
+ float: left;
  padding-right: 20px;
 }
 
@@ -273,7 +284,7 @@ column_box
 
 
 #footer_top{
-	padding-top: 35px;	
+	padding-top: 35px;
 }
 
 
@@ -456,7 +467,7 @@ a.nivo-prevNav {
     text-shadow:none;
     font-family: Helvetica, Arial, sans-serif;
 }
-.nivo-caption a { 
+.nivo-caption a {
     color:#efe9d1;
     text-decoration:underline;
 }
@@ -531,8 +542,8 @@ table.team th, table.structure th {
 	margin-left: 3px;
 }
 
-#usertable th, 
-#usertable td { 
+#usertable th,
+#usertable td {
   border: solid thin;
   padding: 0.5rem 0.5rem;
 }
@@ -560,7 +571,7 @@ form {
 }
 form div {
 	display: table-row;
-	
+
 }
 form div label {
 	display: table-cell;

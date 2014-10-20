@@ -68,11 +68,12 @@ router.get('/buyback', function(req, res) {
 
 
 router.get('/info/newtobold', function(req, res) {
-  res.render('newtocorp', {
+  res.render('newtocorp.jade', {
     title: 'New to corp',
     current: 'info_newtobold',
   });
 });
+
 
 router.param('eve_id', function (req, res, next, id) {
   if (parseInt(id).toString() == id) {

@@ -1,0 +1,16 @@
+extends ./layout.jade
+
+block content
+  h2 Log in
+
+  form(action="/login", method="post")
+    div
+      label Username:
+      input(type="text", name="username")
+    div
+      label Password:
+      input(type="password", name="password")
+    div
+      input type="submit" value="Log In"/>
+
+  div: a(href="/register") Register new user

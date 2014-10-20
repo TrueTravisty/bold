@@ -10,7 +10,7 @@ router.get('/login', function(req, res) {
     res.redirect('/');
     return;
   }
-  res.render('login', {
+  res.render('login.jade', {
     loginerror: req.flash('error')
   });
 });
