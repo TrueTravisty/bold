@@ -17,10 +17,11 @@ router.get('/login', function(req, res) {
 
 router.get('/register', function(req, res) {
   if (req.isAuthenticated()) {
+    req.flash('info','Already logged in as ' + req.user.username + '!');
     res.redirect('/');
     return;
   }
-  res.render('register');
+  res.render('register.jade');
 });
 
 router.post('/register', function(req, res) {
