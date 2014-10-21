@@ -1,0 +1,41 @@
+extends ../layout.jade
+
+block content
+  h2 User information for #{edituser.username}
+
+  form(method='POST')
+    div
+      label Username:
+      input.username(type="text", name="username", value=edituser.username, readonly)
+
+    div
+      label Displayname:
+      input(type="text", name="displayname", value=edituser.displayname)
+
+    div
+      label E-mail:
+      input(type="text", name="email", value = edituser.email)
+
+    if canroles
+      div
+        label Roles:
+        ul
+          each role in roles
+            li
+              input(type="checkbox", name="role", value=role, checked=edituser.roles.indexOf(role) >= 0)
+              = ' ' + role
+
+    div
+      div
+      div
+        input(type="submit", value="Submit")
+
+    if characters
+      #characters
+        each character in characters
+          .character
+            img(src="/eveimages/" + character.id, height="100", width="100")
+            name character.name
+            corp character.corp
+            validated
+              = character.validated ? "yes" : "no"

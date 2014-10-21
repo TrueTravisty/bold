@@ -1,0 +1,10 @@
+extends ../layout.jade
+
+block content
+  h1 Admin pages
+  ul
+  if canupdate
+    li: a(href="/admin/slides/upload") Manage front page slideshow
+  if canusers
+    li: a(href="/admin/users") Manage users
+    li: a(href="/admin/settings") Site settings

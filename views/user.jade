@@ -1,0 +1,32 @@
+extends ./layout.jade
+
+block content
+  h2 User information
+
+  form(method="POST")
+    div
+      label Username:
+      input.username(type="text", name="username", value=user.username, readonly)
+
+    div
+      label Displayname:
+      input(type="text", name="displayname", value=user.displayname)
+
+    div
+      label E-mail:
+      input(type="text", name="email", value = user.email)
+
+    div
+      div
+      div
+        input(type="submit", value="Submit")
+
+  if characters
+    #characters
+      each character in characters
+        .character
+          img(src="/eveimages/" + character.id, height="100", width="100")
+          name character.name
+          corp character.corp
+          validated
+            = character.validated ? "yes" : "no"

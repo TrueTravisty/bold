@@ -32,7 +32,7 @@ router.use(function(req,res,next) {
 });
 
 router.get('/', function(req,res) {
-  res.render('admin/admin', {
+  res.render('admin/admin.jade', {
     current: 'admin',
     canusers: req.can('manageusers'),
     canupdate: req.can('updatesite')
@@ -43,7 +43,7 @@ router.get('/users', function(req,res) {
   if (!req.can('manageusers')) {
     return res.redirect("/admin");
   }
-  
+
   User.find({}, function(err, users){
     if (err) {
       return next(err);
@@ -51,10 +51,10 @@ router.get('/users', function(req,res) {
     else if (!users) {
       return next(new Error('failed to load users'));
     }
-    res.render('admin/users', { 
-      current:    'users', 
-      users:      users, 
-      canedit:    req.can('manageusers'), 
+    res.render('admin/users.jade', {
+      current:    'users',
+      users:      users,
+      canedit:    req.can('manageusers'),
       candelete:  req.can('deleteuser'),
       canroles:   req.can('manageroles')
     });
@@ -98,7 +98,7 @@ router.get('/users/:user', function(req,res, next) {
      }
    }
    debugger;
-   res.render('admin/user', {
+   res.render('admin/user.jade', {
      edituser:req.ruser,
      roles:roles,
      canroles:req.can('manageroles'),
@@ -114,7 +114,7 @@ router.post('/users/:user', function(req,res,next) {
   }
 });
 
-router.param('setting', function(req, res, next, setting){ 
+router.param('setting', function(req, res, next, setting){
   var Settings = req.app.get("settings");
   if (!Settings.permissions[setting]){
     var err = new Error("Unknown setting");
@@ -139,7 +139,7 @@ router.get('/settings', function(req,res){
       s.push({name: setting, value: Settings.settings[setting]});
     }
   }
-  res.render('admin/settings', {
+  res.render('admin/settings.jade', {
     settings: s
   });
 });
