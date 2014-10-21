@@ -38,6 +38,7 @@ router.post('/register', function(req, res) {
 
 router.get('/logout', function(req,res) {
   req.logout();
+  req.flash("info", "Logged out")
   res.redirect('/');
 });
 
@@ -136,6 +137,7 @@ function validateCharacter(savedCharacter, req, res, next) {
 
 router.get('/loginredirect', function(req,res) {
   var redirect = req.session.loginredirect;
+  req.flash("info", "Logged in as " + req.user.username);
   if (redirect) {
     req.session.loginredirect = false;
     return res.redirect(redirect);

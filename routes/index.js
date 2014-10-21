@@ -35,6 +35,28 @@ router.use(function(req,res,next) {
       }
     ];
 
+  res.locals.flash = {
+    errors: [],
+    warnings: [],
+    notices: []
+  };
+debugger;
+  req.flash("error").forEach(function(msg) {
+    res.locals.flash.errors.push(msg);
+  });
+  req.flash("warning").forEach(function(msg) {
+    res.locals.flash.warnings.push(msg);
+  });
+  var all = req.flash();
+  for (cat in all) {
+    if (cat === "error" && cat === "warning") {
+      continue;
+    }
+    all[cat].forEach(function(msg) {
+      res.locals.flash.notices.push(msg);
+    });
+  }
+
   res.locals.lookuppath = function(name) {
       for (var i = 0; i < res.locals.mainpages.length; i++) {
         if (name === res.locals.mainpages[i].name) return res.locals.mainpages[i].displayname;

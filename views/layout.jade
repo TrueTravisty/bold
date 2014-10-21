@@ -14,13 +14,15 @@ html
 
     block links
       link(rel="stylesheet", href="/stylesheets/nivo-slider.css", type="text/css", media="screen")
+      link(rel="stylesheet", href="/stylesheets/jquery.growl.css", type="text/css", media="screen")
       link(href="/stylesheets/styles.css", rel="stylesheet", type="text/css", media="screen")
       link(rel="icon", href="images/bold.ico", type="image/x-icon")
       link(rel="shortcut icon", href="bundles/boldhome/images/bold.ico", type="image/x-icon")
 
   body
     block bodyscripts
-      script(type="text/javascript", src= "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
+      script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
+      script(type="text/javascript", src="/javascripts/jquery.growl.js")
       script(type="text/javascript", src="/javascripts/bold.js")
 
     #bg2
@@ -37,5 +39,17 @@ html
 
       #footer_bot
         include ./includes/notices.html
+
+      #messagebox
+        block messages
+          each error in flash.errors
+            .error
+              = error
+          each warning in flash.warnings
+            .warning
+              = warning
+          each notice in flash.notices
+            .info
+              = notice
 
     block endofbody

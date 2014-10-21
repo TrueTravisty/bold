@@ -5,5 +5,14 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  if ()
+  $("#messagebox .error").each(function() {
+    $.growl.error({message: $(this).text(), static: true});
+  });
+  $("#messagebox .warning").each(function() {
+    $.growl.warning({message: $(this).text(), duration: 10000});
+  });
+  $("#messagebox .info").each(function() {
+    $.growl.notice({message: $(this).text(), duration: 5000});
+  });
+
 });
