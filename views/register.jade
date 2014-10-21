@@ -1,0 +1,25 @@
+extends ./layout.jade
+
+block content
+  h2 Register User
+
+  form#registerform(action="/register", method="POST")
+    div
+      label Username:
+      input#username(type="text", name="username")
+      #usererror.formerror
+
+    div
+      label Password:
+      input#password(type="password", name="password")
+      #pwerror.formerror
+
+    div
+      label Repeat password:
+      input#repeat(type="password", name="repeat")
+      #reperror.formerror
+
+    #buttons
+      div
+      #submit
+        input(type="submit", value="Register")

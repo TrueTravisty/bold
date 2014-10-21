@@ -120,7 +120,8 @@ router.get('/team', function(req, res) {
         if (err) throw err;
         var dataa = data.toString();
         var managers = JSON.parse(dataa || '[]');
-        res.render('structure', {
+        managers.sort(compareManagers);
+        res.render('structure.jade', {
           title: 'The Team',
           current: 'team',
           managers: managers
@@ -132,5 +133,12 @@ router.get('/team', function(req, res) {
     }
   });
 });
+
+function compareManagers(a, b) {
+  var cmp =  a.title.localeCompare(b.title);
+  if (!cmp)
+    cmp = a.name.localeCompare(b.name);
+  return cmp;
+}
 
 module.exports = router;

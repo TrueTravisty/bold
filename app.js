@@ -89,7 +89,7 @@ var permissions = require('./model/permissions.json');
 
 app.use(function(req,res,next) {
   req.can = function(verb) {
-    
+
     if (!req.isAuthenticated()) return false;
     if (req.user.username=='superadmin') return true;
     if (verb in permissions) {
@@ -99,7 +99,7 @@ app.use(function(req,res,next) {
         if (req.user.roles.indexOf(roles[i]) >= 0) return true;
       }
     }
-    if (req.user.roles.indexOf('superadmin') >= 0) return true; // superadmin can do all   
+    if (req.user.roles.indexOf('superadmin') >= 0) return true; // superadmin can do all
     return false;
   };
   res.locals.canadmin = req.can('administrate');
@@ -125,7 +125,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        res.render('error', {
+        res.render('error.jade', {
             message: err.message,
             error: err
         });
@@ -136,7 +136,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render('error.jade', {
         message: err.message,
         error: {}
     });
