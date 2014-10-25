@@ -73,7 +73,7 @@ debugger;
 router.get('/', function(req, res) {
   Slideshow.find({}, function(err, photos) {
     debugger;
-      res.render('index.jade', {
+      res.render('index', {
         title: 'Home',
         current: 'home',
         photos: photos
@@ -82,7 +82,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/buyback', function(req, res) {
-  res.render('buyback.jade', {
+  res.render('buyback', {
     title: 'Buyback program',
     current: 'buyback',
   });
@@ -90,7 +90,7 @@ router.get('/buyback', function(req, res) {
 
 
 router.get('/info/newtobold', function(req, res) {
-  res.render('newtocorp.jade', {
+  res.render('newtocorp', {
     title: 'New to corp',
     current: 'info_newtobold',
   });

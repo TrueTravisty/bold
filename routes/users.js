@@ -4,6 +4,8 @@ var User = require('../model/User');
 var passport = require('passport');
 var evesso = require('../lib/evesso');
 var Character = require('../model/Character');
+var Api = require('../model/Api');
+var eveApi = require('../lib/eveApi');
 
 router.get('/login', function(req, res) {
   if (req.isAuthenticated()) {
@@ -154,7 +156,11 @@ router.param('user', function(req, res, next, id){
     else if (!user) {
       return next(new Error('failed to load user'));
     }
-
+    if (user.length < 1) {
+      var error = new Error('User not found');
+      error.status = 404;
+      return next(error);
+    }
     req.ruser = user[0];
     if (!req.ruser.displayname)
       req.ruser.displayname="";
@@ -205,5 +211,58 @@ router.get('/currentuser',
     }
   });
 
+router.post('/newapi', function(req, res) {
+  if (!req.isAuthenticated()) {
+    var err = new Error("Not logged in!");
+    err.status = 401;
+    return next(err);
+  }
+
+  if (!req.body.apiKey || !req.body.apiVerification) {
+    var err = new Error("Missing apiKey or apiVerification");
+    err.status = 400;
+    return next(err);
+  }
+
+  var api = new Api({User: req.user._id, key: req.body.apiKey, code: req.body.apiVerification});
+  api.save(function(err) {
+    if (err) {
+      var err = new Error("Could not save API");
+      err.status = 500;
+      return next(err);
+    }
+    res.end("OK");
+  });
+});
+
+router.get('/apiList', function(req,res) {
+  if (!req.isAuthenticated()) {
+    var err = new Error("Not logged in!");
+    err.status = 401;
+    return next(err);
+  }
+  Api.find({User: req.user._id}, function(err, result) {
+    if (err) return next(err);
+    res.render('includes/apiKeyList', {
+      apis: result
+    })
+  });
+});
+
+router.post('/validateApi', eveApi.validate());
+
+
+router.param('apiKey',function(req, res, next, id){
+    req.apiKey = id;
+    next();
+});
+
+router.delete('/deleteApi/:apiKey', function(req, res, next) {
+  var key = req.apiKey;
+  Api.remove({key: key}, function(err){
+    if (err) return next(err);
+    res.end("REMOVED");
+  });
+});
 
 module.exports = router;

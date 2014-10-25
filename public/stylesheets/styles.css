@@ -612,4 +612,41 @@ form div ul li {
 	border-style: none;
 }
 
+.api-list {
+  display: table;
+}
+
+.api {
+  display: table-row;
+  height: 26px;
+  font-size: 16px;
+  font-family: monospace;
+  border: thin;
+  border-style: solid;
+  border-color: white;
+}
+
+.apikey {
+  display: table-cell;
+  vertical-align: middle;
+
+}
+
+.verification {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 12px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.deleteApi {
+  background: url(/images/icons/edit-delete.png);
+  background-size: 12px 12px;
+  height: 16px;
+  width: 16px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
 /*
