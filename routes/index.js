@@ -37,7 +37,7 @@ router.use(function(req,res,next) {
 
   if (req.can('submitsrp')) {
     res.locals.mainpages.push({
-      path: '/srp',
+      path: '/submitsrp',
       name: 'srp',
       displayname: 'SRP'
     })
@@ -103,6 +103,18 @@ router.get('/info/newtobold', function(req, res) {
     current: 'info_newtobold',
   });
 });
+
+router.get('/submitsrp', function(req, res, next) {
+  if (!req.can('srp')){
+    var error = new Error("SRP only for logged in members of corp");
+    error.status = 401;
+    next(error);
+  }
+  res.render('submitsrp', {
+    title: 'SRP',
+    current: 'srp'
+  });
+})
 
 
 router.param('eve_id', function (req, res, next, id) {
