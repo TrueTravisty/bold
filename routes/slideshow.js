@@ -24,7 +24,7 @@ router.get('/slides/upload', function(req, res, next){
 
 router.get('/slides/delete', function(req,res, next){
   var file = req.query['image'];
-  debugger;
+  ;
   Slideshow.remove({path:file}, function(err){
     if (err) return next(err);
     fs.unlink(getFilePath(file), function(err){
@@ -49,7 +49,7 @@ router.post('/slides/upload', function(req, res, next) {
 });
 
 router.post('/slides/upload', function(req, res, next) {
-  debugger;
+  ;
   
   var img = req.upload.file;
   var name = img.name;

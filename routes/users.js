@@ -65,7 +65,7 @@ router.get('/evecb', function(req, res, next) {
 
 function characterLoggedIn(req,res,next,characterData) {
   Character.find({CharacterID: characterData.CharacterID}).populate('User').exec(function(err, result) {
-    debugger;
+    ;
     if (err) return next(err);
     if (result.length > 0) {
       var savedCharacter = result[0];
@@ -89,7 +89,7 @@ function characterLoggedIn(req,res,next,characterData) {
 }
 
 router.get('/connectaccounts', function(req,res,next) {
-  debugger;
+  ;
   var savedCharacter = req.session.savedCharacter;
   var characterData = req.session.characterData;
   req.session.characterData = null;
@@ -210,59 +210,5 @@ router.get('/currentuser',
       res.end('');
     }
   });
-
-router.post('/newapi', function(req, res) {
-  if (!req.isAuthenticated()) {
-    var err = new Error("Not logged in!");
-    err.status = 401;
-    return next(err);
-  }
-
-  if (!req.body.apiKey || !req.body.apiVerification) {
-    var err = new Error("Missing apiKey or apiVerification");
-    err.status = 400;
-    return next(err);
-  }
-
-  var api = new Api({User: req.user._id, key: req.body.apiKey, code: req.body.apiVerification});
-  api.save(function(err) {
-    if (err) {
-      var err = new Error("Could not save API");
-      err.status = 500;
-      return next(err);
-    }
-    res.end("OK");
-  });
-});
-
-router.get('/apiList', function(req,res) {
-  if (!req.isAuthenticated()) {
-    var err = new Error("Not logged in!");
-    err.status = 401;
-    return next(err);
-  }
-  Api.find({User: req.user._id}, function(err, result) {
-    if (err) return next(err);
-    res.render('includes/apiKeyList', {
-      apis: result
-    })
-  });
-});
-
-router.post('/validateApi', eveApi.validate());
-
-
-router.param('apiKey',function(req, res, next, id){
-    req.apiKey = id;
-    next();
-});
-
-router.delete('/deleteApi/:apiKey', function(req, res, next) {
-  var key = req.apiKey;
-  Api.remove({key: key}, function(err){
-    if (err) return next(err);
-    res.end("REMOVED");
-  });
-});
 
 module.exports = router;

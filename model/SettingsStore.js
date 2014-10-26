@@ -29,7 +29,7 @@ Settings.populate = function(callback) {
 }
 
 function populateSettings (callback) {
-  debugger;
+  ;
   var settings = {};
   for (setting in defaultSettings) {
       settings[setting] = defaultSettings[setting].defaultvalue;
@@ -45,7 +45,7 @@ function populateSettings (callback) {
 }
 
 function setSetting(setting, value, user, version, callback) {
-  debugger;
+  ;
   var store = new SettingsStore({
     name: setting,
     value: value,

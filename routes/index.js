@@ -40,7 +40,7 @@ router.use(function(req,res,next) {
     warnings: [],
     notices: []
   };
-debugger;
+;
   req.flash("error").forEach(function(msg) {
     res.locals.flash.errors.push(msg);
   });
@@ -72,7 +72,7 @@ debugger;
 /* GET home page. */
 router.get('/', function(req, res) {
   Slideshow.find({}, function(err, photos) {
-    debugger;
+    ;
       res.render('index', {
         title: 'Home',
         current: 'home',

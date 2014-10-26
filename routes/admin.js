@@ -97,7 +97,7 @@ router.get('/users/:user', function(req,res, next) {
        });
      }
    }
-   debugger;
+   ;
    res.render('admin/user.jade', {
      edituser:req.ruser,
      roles:roles,
@@ -132,7 +132,7 @@ router.param('setting', function(req, res, next, setting){
 
 router.get('/settings', function(req,res){
   var s = [];
-  debugger;
+  ;
   var Settings = req.app.get("settings");
   for (setting in Settings.permissions) {
     if (req.can(Settings.permissions[setting])) {

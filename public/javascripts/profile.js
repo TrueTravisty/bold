@@ -8,14 +8,14 @@ $(function() {
     $('#addStatus').html('<img src="/images/icons/wait.GIF"/>')
     var key = $("#apiKey").val();
     var ver = $('#apiVerification').val();
-    $.post('/validateApi',
+    $.post('/api/validate',
       {
         apiKey: key,
         apiVerification: ver
       }, function(data) {
         if (data == "OK") {
           $('#addStatus').html('<img src="/images/icons/ok.png"/>')
-          $.post('/newapi',
+          $.post('/api',
           {
             apiKey: key,
             apiVerification: ver
@@ -24,6 +24,7 @@ $(function() {
               $("#apiKey").val('');
               $('#apiVerification').val('');
               loadApis();
+              $.growl.notice({message:"Added new API"});
             }
           })
         }
@@ -36,7 +37,7 @@ $(function() {
 });
 
 function loadApis() {
-  $.get('/apiList', function(data) {
+  $.get('/api', function(data) {
     $('#api-list').html(data);
     $('.deleteApi').click(deleteApiCall);
 
@@ -44,16 +45,18 @@ function loadApis() {
 }
 
 function deleteApiCall() {
-  alert("Delete " + $(this).attr('value') + '!');
+  $("body").css("cursor", "progress");
   $.ajax({
-    url: '/deleteApi/' + $(this).attr('value'),
+    url: '/api/delete/' + $(this).attr('value'),
     type: 'DELETE',
     success: function(result) {
         loadApis();
-        $.growl.notify("Removed API");
+        $.growl.notice({message:"Removed API"});
+        $("body").css("cursor", "default");
     },
     error: function(result, string) {
-      $.growl.warning("Could not remove API");
+      $.growl.warning({message:"Could not remove API"});
+      $("body").css("cursor", "default");
     }
   });
 }

@@ -9,6 +9,7 @@ var User = require('./model/User');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var apiRoute = require('./routes/api');
 var buyback = require('./routes/buyback');
 var admin = require('./routes/admin');
 
@@ -27,7 +28,7 @@ var Character = require('./model/Character');
 
 
 
-debugger;
+;
 // use static authenticate method of model in LocalStrategy
 passport.use(User.createStrategy());
 
@@ -108,6 +109,7 @@ app.use(function(req,res,next) {
 
 app.use('/', routes); // THIS MUST BE FIRST
 app.use('/', users);
+app.use('/api/', apiRoute);
 app.use('/', buyback);
 app.use('/admin/', admin);
 
