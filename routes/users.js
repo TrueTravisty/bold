@@ -7,9 +7,9 @@ var Character = require('../model/Character');
 var Api = require('../model/Api');
 var eveApi = require('../lib/eveApi');
 
-router.get('/login', function(req, res) {
+router.get('/loginlocal', function(req, res) {
   if (req.isAuthenticated()) {
-    res.redirect('/');
+    res.redirect('/loginredirect');
     return;
   }
   res.render('login.jade', {
@@ -50,7 +50,7 @@ router.post('/login', passport.authenticate('local', { successRedirect: '/loginr
 
 
 
-router.get('/loginsso', evesso.authorize());
+router.get('/login', evesso.authorize());
 
 router.get('/evecb', function(req, res, next) {
   evesso.authenticate(req, function(err, tokenData){
@@ -64,78 +64,35 @@ router.get('/evecb', function(req, res, next) {
 });
 
 function characterLoggedIn(req,res,next,characterData) {
-  Character.find({CharacterID: characterData.CharacterID}).populate('User').exec(function(err, result) {
-    ;
+  User.findOne({CharacterID: characterData.CharacterID}, function(err, user){
     if (err) return next(err);
-    if (result.length > 0) {
-      var savedCharacter = result[0];
-      //savedCharacter.populate("User");
-      if (savedCharacter.Validated) {
-        req.login(savedCharacter.User, function(err) {
+    if (!user) {
+      User.register(new User({ username: characterData.CharacterName }), randomstring(12), function(err, user) {
+        if (err) return next(err);
+        req.login(user, function(err) {
           if (err) return next(err);
           return res.redirect('/loginredirect');
         });
-      } else {
-        req.session.savedCharacter = savedCharacter;
-        return res.redirect('/connectaccounts');
-      }
+      });
     } else {
-      req.session.characterData = characterData;
-      return res.redirect('/connectaccounts');
-    }
-  });
-
-  //res.end(JSON.stringify(characterData));
-}
-
-router.get('/connectaccounts', function(req,res,next) {
-  ;
-  var savedCharacter = req.session.savedCharacter;
-  var characterData = req.session.characterData;
-  req.session.characterData = null;
-  req.session.savedCharacter = null;
-
-  if (savedCharacter) {
-    // Character known, but not validated
-    if (req.isAuthenticated()) {
-      if (savedCharacter.User.username == req.user.username) {
-        // Character known for logged in user - validate
-        return validateCharacter(savedCharacter, req, res, next);
-      } else {
-        // Character known, but on a different user
-        req.session.savedCharacter = savedCharacter;
-        return res.redirect('/user/' + req.user.username + '/merge');
-      }
-    }
-  } else if (characterData) {
-    if (req.isAuthenticated()) {
-      var char = new Character({
-        CharacterID: characterData.CharacterID,
-        Validated: true,
-        CharacterName: characterData.CharacterName,
-        CharacterOwnerHash: characterData.CharacterOwnerHash,
-        User: req.user._id
-      });
-      char.save(function(err) {
+      req.login(user, function(err) {
         if (err) return next(err);
-        return res.redirect('/user/' + req.user.username);
+        return res.redirect('/loginredirect');
       });
     }
-  } else {
-    var err = new Error("No character or user found");
-    err.status = 404;
-    next(err);
-  }
-});
-
-function validateCharacter(savedCharacter, req, res, next) {
-  savedCharacter.Validated = true;
-  savedCharacter.save(function(err) {
-    if (err) return next(err);
-    res.redirect('/user/' + req.user.username);
   });
 }
 
+function randomstring(count)
+{
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for( var i=0; i < count; i++ )
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
 
 
 router.get('/loginredirect', function(req,res) {

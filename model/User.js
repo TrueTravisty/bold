@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     passportLocalMongoose = require('passport-local-mongoose');
-    
+
 
 
 var User = new Schema({
@@ -9,7 +9,7 @@ var User = new Schema({
   displayname: String,
   email: String,
   verified: Boolean,
-  characters: [String],
+  characterID: String,
   APIs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Api'}]
 });
 
