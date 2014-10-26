@@ -97,6 +97,11 @@ app.use(function(req,res,next) {
       var i;
       var roles = permissions[verb];
       for (var i = 0; i < roles.length; i++) {
+        if (roles[i] === "corp") {
+          var s = req.app.get("settings");
+          return req.session.corpid == s.settings['corp-id'];
+        }
+
         if (req.user.roles.indexOf(roles[i]) >= 0) return true;
       }
     }

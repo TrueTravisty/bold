@@ -64,14 +64,18 @@ router.get('/evecb', function(req, res, next) {
 });
 
 function characterLoggedIn(req,res,next,characterData) {
-  User.findOne({CharacterID: characterData.CharacterID}, function(err, user){
+  User.findOne({characterID: characterData.CharacterID}, function(err, user){
     if (err) return next(err);
     if (!user) {
       User.register(new User({ username: characterData.CharacterName }), randomstring(12), function(err, user) {
         if (err) return next(err);
-        req.login(user, function(err) {
+        user.characterID = characterData.CharacterID;
+        user.save(function(err) {
           if (err) return next(err);
-          return res.redirect('/loginredirect');
+          req.login(user, function(err) {
+            if (err) return next(err);
+            return res.redirect('/loginredirect');
+          });
         });
       });
     } else {
@@ -98,11 +102,16 @@ function randomstring(count)
 router.get('/loginredirect', function(req,res) {
   var redirect = req.session.loginredirect;
   req.flash("info", "Logged in as " + req.user.username);
-  if (redirect) {
-    req.session.loginredirect = false;
-    return res.redirect(redirect);
-  }
-  res.redirect("/");
+  eveApi.getCorpId(req.user.characterID, function(err, id){
+    if (!err) req.session.corpid = id;
+    else req.session.corpid ="";
+    if (redirect) {
+      req.session.loginredirect = false;
+      return res.redirect(redirect);
+    }
+    res.redirect("/");
+  });
+
 });
 
 router.param('user', function(req, res, next, id){

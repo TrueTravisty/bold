@@ -35,6 +35,14 @@ router.use(function(req,res,next) {
       }
     ];
 
+  if (req.can('submitsrp')) {
+    res.locals.mainpages.push({
+      path: '/srp',
+      name: 'srp',
+      displayname: 'SRP'
+    })
+  }
+
   res.locals.flash = {
     errors: [],
     warnings: [],

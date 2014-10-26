@@ -5,11 +5,11 @@
     },
     "sso-secret" : {
         "permission": "managesso",
-        "defaultvalue": ""    
+        "defaultvalue": ""
     },
     "sso-callback" : {
         "permission": "managesso",
-        "defaultvalue": ""   
+        "defaultvalue": ""
     },
     "sso-provider" : {
         "permission": "managesso",
@@ -18,5 +18,9 @@
     "test" : {
         "permission": "admin",
         "defaultvalue": "test"
+    },
+    "corp-id" : {
+        "permission": "admin",
+        "defaultvalue": "98276273"
     }
 }
