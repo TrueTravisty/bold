@@ -27,6 +27,8 @@ var passport = require('passport'),
 var Settings = require('./model/SettingsStore');
 var Character = require('./model/Character');
 
+var schedule = require('node-schedule');
+var zkbApi = require('./lib/zkbApi');
 
 
 ;
@@ -149,6 +151,22 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
+});
+
+app.set('startZkillBoardSchedule', function registerZbkScheduler() {
+  var rule = new schedule.RecurrenceRule();
+  var now = new Date;
+  rule.minute = (now.getMinutes() + 2)%60;
+
+  console.log("Setting scheduler to run every " + rule.minute + " past the hour");
+
+  var j = schedule.scheduleJob(rule, function(){
+      console.log("Fetching zKillBoard data")
+      zkbApi.fetchData(Settings.settings, function(err) {
+        if (err) return console.log ('Error while fetching zKillBoard data: ' + err)
+        console.log("Fetched data");
+      });
+  });
 });
 
 

@@ -24,6 +24,7 @@
     "passport-oauth": "~1.0.0",
     "xml2js": "~0.4.4",
     "jade": "~1.7.0",
-    "request": "~2.47.0"
+    "request": "~2.47.0",
+    "node-schedule": "~0.1.13"
   }
 }

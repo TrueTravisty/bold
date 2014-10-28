@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var InvGroup = new Schema({
-  groupID: Number,
+  groupID: {type: Number, index: true},
   categoryID: Number,
   groupName: String,
   description: String,

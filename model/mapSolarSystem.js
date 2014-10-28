@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var MapSolarSystem = new Schema({
   regionID: Number,
   constellationID: Number,
-  solarSystemID: Number,
+  solarSystemID: {type: Number, index:true},
   solarSystemName: String,
   x: Number,
   y: Number,

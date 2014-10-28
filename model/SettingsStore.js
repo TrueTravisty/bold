@@ -1,7 +1,7 @@
 var defaultSettings = require("./settings.json");
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;   
+    Schema = mongoose.Schema;
 
 
 var SettingsStoreSchema = new Schema({
@@ -39,7 +39,7 @@ function populateSettings (callback) {
     if (err) {callback(err);}
     for (var i = 0; i < result.length; i++) {
       settings[result[i].name] = result[i].value;
-    }  
+    }
     callback(null, settings);
   });
 }
