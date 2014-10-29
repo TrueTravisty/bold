@@ -106,7 +106,7 @@ router.get('/loginredirect', function(req,res) {
     if (!err) req.session.corpid = id;
     else req.session.corpid ="";
     if (redirect) {
-      req.session.loginredirect = false;
+      req.session.loginredirect = null;
       return res.redirect(redirect);
     }
     res.redirect("/");

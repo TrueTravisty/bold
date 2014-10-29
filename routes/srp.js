@@ -1,4 +1,3 @@
-var losses = require('../losses.json');
 var express = require('express');
 var router = express.Router();
 var User = require('../model/User');
@@ -6,13 +5,31 @@ var eveApi = require('../lib/eveApi');
 var invType = require('../model/invType');
 var invGroup = require('../model/invGroup');
 var mapSolarSystems = require('../model/mapSolarSystem');
+var zkbApi = require('../lib/zkbApi');
+
+router.use(function(req, res, next) {
+  if (!req.isAuthenticated()) {
+    req.session.loginredirect = req.originalUrl;
+    return res.redirect('/login');
+  } else {
+    if (!req.can('submitsrp')) {
+      var err = new Error('SRP only available for corp members');
+      err.status = 401;
+      next(err);
+    }
+  }
+  next();
+});
 
 router.get('/losses', function(req, res, next) {
-  getDbInfo(losses, function(err, losses) {
+  zkbApi.getZbkKillsForCharacter(req.user.characterID, 50, function(err, losses) {
     if (err) return next(err);
-    res.render('includes/losslist', {
-      losses:losses
-    })
+    getDbInfo(losses, function(err, losses) {
+      if (err) return next(err);
+      res.render('includes/losslist', {
+        losses:losses
+      })
+    });
   });
 });
 
