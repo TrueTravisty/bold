@@ -1,7 +1,7 @@
 extends ./layout.jade
 
 append bodyscripts
-    script(type="text/javascript", src="/javascripts/jquery.nivo.slider.pack.js")
+    script(type="text/javascript", src="/javascripts/jquery.nivo.slider.js")
 
 block endofbody
   script
@@ -11,14 +11,14 @@ block content
   #header
     #wrapper
       #slider-wrapper
-        #slider
+        #slider.nivoSlider
           each photo in photos
             img(
               src="/images/slideshow/" + photo.path,
               alt=photo.caption,
               title="#" + photo.path.replace('.','') + "_caption")
         each photo in photos
-          div.nivo-html-caption(id=photo.path.replace('.','') + "_caption" class="nivo-html-caption")
+          div.nivo-html-caption(id=photo.path.replace('.','') + "_caption")
             = photo.caption
 
   #column_box

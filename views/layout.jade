@@ -20,11 +20,6 @@ html
       link(rel="shortcut icon", href="bundles/boldhome/images/bold.ico", type="image/x-icon")
 
   body
-    block bodyscripts
-      script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
-      script(type="text/javascript", src="/javascripts/jquery.growl.js")
-      script(type="text/javascript", src="/javascripts/bold.js")
-
     #bg2
     #wrapper1
       include ./includes/top_bar.jade
@@ -51,5 +46,10 @@ html
           each notice in flash.notices
             .info
               = notice
+
+    block bodyscripts
+      script(type="text/javascript", src="/javascripts/jquery-1.11.1.js")
+      script(type="text/javascript", src="/javascripts/jquery.growl.js")
+      script(type="text/javascript", src="/javascripts/bold.js")
 
     block endofbody
