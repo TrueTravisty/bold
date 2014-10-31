@@ -7,7 +7,9 @@ var invGroup = require('../model/invGroup');
 var mapSolarSystems = require('../model/mapSolarSystem');
 var zkbApi = require('../lib/zkbApi');
 
-router.use(function(req, res, next) {
+router.use(validateSrp);
+
+function validateSrp(req, res, next) {
   if (!req.isAuthenticated()) {
     req.session.loginredirect = req.originalUrl;
     return res.redirect('/login');
@@ -15,11 +17,14 @@ router.use(function(req, res, next) {
     if (!req.can('submitsrp')) {
       var err = new Error('SRP only available for corp members');
       err.status = 401;
-      next(err);
+      return next(err);
     }
   }
   next();
-});
+}
+
+router.validateSrp = validateSrp;
+
 
 router.get('/losses', function(req, res, next) {
   zkbApi.getZbkKillsForCharacter(req.user.characterID, 50, function(err, losses) {

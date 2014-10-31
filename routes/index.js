@@ -7,6 +7,7 @@ var imgcache = require('./../lib/imagecache');
 var Slideshow = require('../model/index_slideshow');
 var flash = require('connect-flash');
 var passport = require('passport');
+var srp = require('./srp');
 
 
 
@@ -104,17 +105,6 @@ router.get('/info/newtobold', function(req, res) {
   });
 });
 
-router.get('/submitsrp', function(req, res, next) {
-  if (!req.can('srp')){
-    var error = new Error("SRP only for logged in members of corp");
-    error.status = 401;
-    next(error);
-  }
-  res.render('submitsrp', {
-    title: 'SRP',
-    current: 'srp'
-  });
-})
 
 
 router.param('eve_id', function (req, res, next, id) {
@@ -153,6 +143,13 @@ router.get('/team', function(req, res) {
     }
   });
 });
+
+router.get('/submitsrp', srp.validateSrp, function(req, res, next) {
+  res.render('submitsrp', {
+    title: 'SRP',
+    current: 'srp'
+  });
+})
 
 function compareManagers(a, b) {
   var cmp =  a.title.localeCompare(b.title);
