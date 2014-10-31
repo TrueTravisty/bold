@@ -649,4 +649,26 @@ form div ul li {
   vertical-align: middle;
 }
 
+#srpinfo {
+  background-color: rgba(10,10,10,0.8);
+  margin: 10px;
+  padding: 15px;
+  border-style: solid;
+  border-width: thin;
+}
+
+#srpinfo ol li {
+  margin: 0px 20px;
+}
+
+h4 {
+  font-size: 16px;
+  color: #0870d7;
+}
+
+h5 {
+  font-size: 14px;
+  margin: 4px 0px;
+}
+
 /*
