@@ -8,6 +8,7 @@
     { "name": "Lefty Leftfield", "ID": "93070225", "title": "Officer", "function": "" },
     { "name": "Asmodean Shepherd", "ID": "1703625820", "title": "CEO", "function": "" },
     { "name": "Victor Atusid", "ID": "93130360", "title": "Officer", "function": "Low Sec Manager, Recruitment" },
-    { "name": "Tierdar", "ID": "1217760776", "title": "Officer", "function": "Recruitment"},
-    { "name": "Elcirith Atreides", "ID": "92085304", "title": "Officer", "function": "Recruitment"}
+    { "name": "Tierdar", "ID": "1217760776", "title": "Officer", "function": "SRP"},
+    { "name": "Elcirith Atreides", "ID": "92085304", "title": "Officer", "function": "Recruitment"},
+    { "name": "Yaldo Asanari", "ID": "94314126", "title": "Officer", "function": "IT"}
     ]
