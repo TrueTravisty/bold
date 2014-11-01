@@ -373,7 +373,7 @@ column_box
 */
 
 #footer_bot{
-	padding: 25px;
+	padding: 50px;
 	text-align: center;
 }
 
@@ -590,7 +590,7 @@ form div ul li {
 }
 
 #user_info, #adminlink, #logoutlink{
-	width: 265px;
+	width: 292px;
 	float: left;
 }
 #submit {
