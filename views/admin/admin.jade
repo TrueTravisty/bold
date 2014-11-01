@@ -7,4 +7,6 @@ block content
     li: a(href="/admin/slides/upload") Manage front page slideshow
   if canusers
     li: a(href="/admin/users") Manage users
-    li: a(href="/admin/settings") Site settings
+  li: a(href="/admin/settings") Site settings
+  if canroles
+    li: a(href="/admin/roles") Manage roles

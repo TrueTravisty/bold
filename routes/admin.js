@@ -35,7 +35,8 @@ router.get('/', function(req,res) {
   res.render('admin/admin.jade', {
     current: 'admin',
     canusers: req.can('manageusers'),
-    canupdate: req.can('updatesite')
+    canupdate: req.can('updatesite'),
+    canroles: req.can('manageroles')
   });
 });
 
@@ -59,6 +60,39 @@ router.get('/users', function(req,res) {
       canroles:   req.can('manageroles')
     });
   });
+});
+
+router.post('/togglerole', function(req,res,next) {
+  if (!req.can('manageroles')) {
+    var err = new Error('Cannot manage roles');
+    err.status = 401;
+    return next(err);
+  }
+  User.findOne({username: req.body.user}).select('username roles').exec(function(err, user){
+    if (err) return next(err);
+    if (!user) {
+      var err = "User not found";
+      err.status = 404;
+      return next(err);
+    }
+    var roles = user.roles;
+    var role = req.body.role;
+    var ind = roles.indexOf(role);
+    var result = '';
+    if (ind < 0) {
+      roles.push(role);
+      result = 'hasrole';
+    } else {
+      roles.splice(ind, 1);
+      result = 'missingrole';
+    }
+    user.roles = roles;
+    user.save(function(err) {
+      if (err) return next(err);
+      return res.end(result);
+    });
+  })
+
 });
 
 router.get('/roles', function(req,res,next) {
