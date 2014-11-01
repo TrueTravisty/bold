@@ -90,7 +90,6 @@ app.use(function(req,res,next) {
   return next();
 });
 
-
 app.use('/', utilities); // THIS MUST BE BEFORE OTHER ROUTES
 app.use('/', routes);
 app.use('/', users);

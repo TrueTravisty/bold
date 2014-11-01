@@ -1,46 +1,44 @@
 var express = require('express');
 var router = express.Router();
-
+var permissions = require('../model/permissions.json');
 
 router.use(function(req,res,next) {
-  var permissions = require('../model/permissions.json');
-
-  app.use(function(req,res,next) {
-    req.getRoles = function() {
-      var u = {};
-      var roles = [];
-      for (var perm in permissions) {
-        for (var i = 0; i < perm.length; i++) {
-          if (u.hasOwnProperty(perm[i]) || perm[i] === 'corp') continue;
-          u[perm[i]] = 1;
-          roles.push(perm[i]);
-        }
+  req.getRoles = function() {
+    var u = {};
+    var uniqueroles = [];
+    for (var perm in permissions) {
+      roles = permissions[perm];
+      for (var i = 0; i < roles.length; i++) {
+        if (u.hasOwnProperty(roles[i]) || roles[i] === 'corp') continue;
+        u[roles[i]] = 1;
+        uniqueroles.push(roles[i]);
       }
-      return roles;
-    };
+    }
+    return uniqueroles;
+  };
 
-    req.can = function(verb) {
-
-      if (!req.isAuthenticated()) return false;
-      if (req.user.username=='superadmin') return true;
-      if (verb in permissions) {
-        var i;
-        var roles = permissions[verb];
-        for (var i = 0; i < roles.length; i++) {
-          if (roles[i] === "corp") {
-            var s = req.app.get("settings");
-            return req.session.corpid == s.settings['corp-id'];
-          }
-
-          if (req.user.roles.indexOf(roles[i]) >= 0) return true;
+  req.can = function(verb) {
+    if (!req.isAuthenticated()) return false;
+    if (req.user.username=='superadmin') return true;
+    if (verb in permissions) {
+      var i;
+      var roles = permissions[verb];
+      for (var i = 0; i < roles.length; i++) {
+        if (roles[i] === "corp") {
+          var s = req.app.get("settings");
+          return req.session.corpid == s.settings['corp-id'];
         }
+
+        if (req.user.roles.indexOf(roles[i]) >= 0) return true;
       }
-      if (req.user.roles.indexOf('superadmin') >= 0) return true; // superadmin can do all
-      return false;
-    };
-    res.locals.canadmin = req.can('administrate');
-    next();
-  });
+    }
+    if (req.user.roles.indexOf('superadmin') >= 0) return true; // superadmin can do all
+    return false;
+  };
+
+  res.locals.canadmin = req.can('administrate');
+  next();
+
 });
 
 router.use(function(req,res,next) {

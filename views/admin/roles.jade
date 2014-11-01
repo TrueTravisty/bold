@@ -2,4 +2,19 @@ extends ../layout.jade
 
 block content
   h2 Manage Roles
-  
+  table.roles
+    thead
+      tr
+        th User
+        each role in available_roles
+          th #{role}
+    tbody
+      each user in users
+        - var uroles = user.roles;
+        - if(user.username == 'superadmin') uroles = available_roles;
+        tr
+          td #{user.username}
+          each role in available_roles
+            td
+              - var rclass = (uroles.indexOf(role) >= 0) ? 'hasrole' : 'missingrole'
+              button(class=rclass value=role) #{rclass}

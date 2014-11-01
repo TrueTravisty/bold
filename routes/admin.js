@@ -68,9 +68,10 @@ router.get('/roles', function(req,res,next) {
     return next(err);
   }
   User.find({}).select('username roles').sort('username').exec(function(err, users) {
+    available_roles = req.getRoles();
     res.render('admin/roles', {
       users: users,
-      roles: req.getRoles()
+      available_roles: available_roles
     });
   });
 

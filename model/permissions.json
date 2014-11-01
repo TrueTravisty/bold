@@ -6,5 +6,6 @@
     "deleteusers": ["superadmin"],
     "administrate" : ["admin"],
     "managesso" : ["superadmin"],
-    "submitsrp" : ["corp"]
+    "submitsrp" : ["corp"],
+    "managesrp" : ["srpmanager"]
 }
