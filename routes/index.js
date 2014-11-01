@@ -149,7 +149,15 @@ router.get('/submitsrp', srp.validateSrp, function(req, res, next) {
     title: 'SRP',
     current: 'srp'
   });
-})
+});
+
+router.get('/terms', function(req, res, next) {
+  res.render('terms');
+});
+
+router.get('/privacy', function(req, res, next) {
+  res.render('privacy');
+});
 
 function compareManagers(a, b) {
   var cmp =  a.title.localeCompare(b.title);
