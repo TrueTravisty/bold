@@ -61,6 +61,21 @@ router.get('/users', function(req,res) {
   });
 });
 
+router.get('/roles', function(req,res,next) {
+  if (!req.can('manageroles')) {
+    var err = new Error('No permission');
+    err.status=401;
+    return next(err);
+  }
+  User.find({}).select('username roles').sort('username').exec(function(err, users) {
+    res.render('admin/roles', {
+      users: users,
+      roles: req.getRoles()
+    });
+  });
+
+});
+
 router.param('user', function(req, res, next, id){
   User.find({username:id}, function(err, user){
     if (err) {
@@ -75,10 +90,6 @@ router.param('user', function(req, res, next, id){
       req.ruser.displayname="";
     if (!req.ruser.email)
       req.ruser.email="";
-    if (!req.ruser.api)
-      req.ruser.api="";
-    if (!req.ruser.apiVer)
-      req.ruser.apiVer="";
     next();
   });
 });
@@ -98,7 +109,7 @@ router.get('/users/:user', function(req,res, next) {
      }
    }
    ;
-   res.render('admin/user.jade', {
+   res.render('admin/user', {
      edituser:req.ruser,
      roles:roles,
      canroles:req.can('manageroles'),
@@ -112,6 +123,7 @@ router.post('/users/:user', function(req,res,next) {
     err.status = 401;
     return next(err);
   }
+
 });
 
 router.param('setting', function(req, res, next, setting){

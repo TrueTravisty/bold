@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var User = require('./model/User');
 
+var utilities = require('./routes/utilities');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var apiRoute = require('./routes/api');
@@ -89,33 +90,9 @@ app.use(function(req,res,next) {
   return next();
 });
 
-var permissions = require('./model/permissions.json');
 
-app.use(function(req,res,next) {
-  req.can = function(verb) {
-
-    if (!req.isAuthenticated()) return false;
-    if (req.user.username=='superadmin') return true;
-    if (verb in permissions) {
-      var i;
-      var roles = permissions[verb];
-      for (var i = 0; i < roles.length; i++) {
-        if (roles[i] === "corp") {
-          var s = req.app.get("settings");
-          return req.session.corpid == s.settings['corp-id'];
-        }
-
-        if (req.user.roles.indexOf(roles[i]) >= 0) return true;
-      }
-    }
-    if (req.user.roles.indexOf('superadmin') >= 0) return true; // superadmin can do all
-    return false;
-  };
-  res.locals.canadmin = req.can('administrate');
-  next();
-});
-
-app.use('/', routes); // THIS MUST BE FIRST
+app.use('/', utilities); // THIS MUST BE BEFORE OTHER ROUTES
+app.use('/', routes);
 app.use('/', users);
 app.use('/api/', apiRoute);
 app.use('/', buyback);
