@@ -559,11 +559,6 @@ table.team th, table.structure th {
 	display: inline
 }
 
-.message {
-	background: darkgreen;
-	text: white;
-}
-
 form {
 	display: table;
 	border-color: white;
