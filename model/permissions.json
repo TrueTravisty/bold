@@ -9,5 +9,6 @@
     "submitsrp" : ["corp"],
     "managesrp" : ["srpmanager"],
     "managesubreddit" : ["superadmin"],
-    "addreddituser" : ["corp"]
+    "addreddituser" : ["corp"],
+    "seecorppage" : ["corp"]
 }

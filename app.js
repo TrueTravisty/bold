@@ -138,9 +138,13 @@ app.set('startZkillBoardSchedule', function registerZbkScheduler() {
 
   var j = schedule.scheduleJob(rule, function(){
       console.log("Fetching zKillBoard data")
-      zkbApi.fetchData(Settings.settings, function(err) {
+      zkbApi.fetchData(Settings.settings, false, function(err) {
         if (err) return console.log ('Error while fetching zKillBoard data: ' + err)
-        console.log("Fetched data");
+        console.log("Fetched lossmails");
+        zkbApi.fetchData(Settings.settings, true, function(err) {
+          if (err) return console.log ('Error while fetching zKillBoard data: ' + err)
+          console.log("Fetched killmails");
+        });
       });
   });
 });

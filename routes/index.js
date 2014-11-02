@@ -13,14 +13,19 @@ var srp = require('./srp');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  Slideshow.find({}, function(err, photos) {
-    ;
-      res.render('index', {
-        title: 'Home',
-        current: 'home',
-        photos: photos
-         });
-   });
+  if (req.can('seecorppage')) {
+    res.render('index-member');
+  }
+  else {
+    Slideshow.find({}, function(err, photos) {
+      ;
+        res.render('index', {
+          title: 'Home',
+          current: 'home',
+          photos: photos
+           });
+    });
+  }
 });
 
 router.get('/buyback', function(req, res) {

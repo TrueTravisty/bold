@@ -27,7 +27,7 @@ router.validateSrp = validateSrp;
 
 
 router.get('/losses', function(req, res, next) {
-  zkbApi.getZbkKillsForCharacter(req.user.characterID, 50, function(err, losses) {
+  zkbApi.getZbkLossesForCharacter(req.user.characterID, 50, function(err, losses) {
     if (err) return next(err);
     getDbInfo(losses, function(err, losses) {
       if (err) return next(err);
