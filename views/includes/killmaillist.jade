@@ -8,6 +8,8 @@ each killmail in killmails
       = killmail.victim.shipType
     .class
       = killmail.victim.shipClass
-    .value #{killmail.zkb.totalValue} isk
+    .value
+    if killmail.zkb
+      = killmail.zkb.totalValue + ' ISK'
     .system #{killmail.solarSystemName}
     .time #{killmail.killTime}

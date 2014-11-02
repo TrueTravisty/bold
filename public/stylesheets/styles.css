@@ -312,6 +312,8 @@ column_box
 	float: left;
 }
 
+
+
 .footer_text{
 	background: url(/images/footer_top_border.png) no-repeat top left;
 	padding: 10px 0px 10px 20px;
@@ -664,6 +666,20 @@ h4 {
 h5 {
   font-size: 14px;
   margin: 4px 0px;
+}
+
+#kills, #losses, #reddit{
+  width: 265px;
+  float: left;
+}
+
+#losses {
+  padding: 0px 38px 0px 31px;
+}
+
+#content_bottom {
+  width: 900px;
+  float:left;
 }
 
 /*
