@@ -1,12 +1,15 @@
 extends ./layout.jade
 
+append bodyscripts
+  script(type="text/javascript", src="/javascripts/bold.js")
+
 block content
   #kills
     h3 Latest Kills
-      #latestkills
+    #latestkills
   #losses
     h3 Latest Losses
-      #latestlosses
+    #latestlosses
   #reddit
     h3 Latest from reddit
-      #latestreddit
+    #latestreddit

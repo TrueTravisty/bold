@@ -8,6 +8,7 @@ var Slideshow = require('../model/index_slideshow');
 var flash = require('connect-flash');
 var passport = require('passport');
 var srp = require('./srp');
+var zkb = require('./../lib/zkbApi');
 
 
 
@@ -96,6 +97,39 @@ router.get('/terms', function(req, res, next) {
 router.get('/privacy', function(req, res, next) {
   res.render('privacy');
 });
+
+router.get('/corpkills', requireCorp, function(req, res, next) {
+  zkb.getLatestKills(25, function(err, lossmails) {
+    if (err) return next(err);
+    res.render('includes/killmaillist', {
+      killmails: lossmails
+    });
+  });
+});
+
+router.get('/corplosses', requireCorp, function(req, res, next) {
+  zkb.getLatestLosses(25, function(err, lossmails) {
+    if (err) return next(err);
+    res.render('includes/killmaillist', {
+      killmails: lossmails
+    });
+  });
+
+});
+
+router.get('/redditnews', requireCorp, function(req, res, next) {
+  res.render('includes/latestreddit');
+});
+
+
+function requireCorp(req, res, next) {
+  if (!req.can('seecorppage')) {
+    var err = new Error("This page is only for members of corp");
+    err.status=403;
+    return next(err);
+  }
+  next();
+}
 
 function compareManagers(a, b) {
   var cmp =  a.title.localeCompare(b.title);

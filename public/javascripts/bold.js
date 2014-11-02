@@ -1,10 +1,10 @@
-$(document).ready(function() {
+$(function() {
   $("#contractvalue_input").focus(function() {
        $(this).select();
   });
 });
 
-$(document).ready(function() {
+$(function() {
   $("#messagebox .error").each(function() {
     $.growl.error({message: $(this).text(), static: true});
   });
@@ -15,4 +15,18 @@ $(document).ready(function() {
     $.growl.notice({message: $(this).text(), duration: 5000});
   });
 
+});
+
+$(function() {
+  $.get('/corpkills', function(data) {
+    $('#latestkills').html(data);
+  });
+
+  $.get('/corplosses', function(data) {
+    $('#latestlosses').html(data);
+  })
+
+  $.get('/redditnews', function(data) {
+    $('#latestreddit').html(data);
+  })
 });
