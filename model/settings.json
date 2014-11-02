@@ -22,5 +22,21 @@
     "corp-id" : {
         "permission": "admin",
         "defaultvalue": "98276273"
+    },
+    "reddit-modhash" : {
+        "permission": "managesubreddit",
+        "defaultvalue": ""
+    },
+    "reddit-cookie" : {
+        "permission": "managesubreddit",
+        "defaultvalue": ""
+    },
+    "reddit-subredditfullname" : {
+      "permission": "managesubreddit",
+      "defaultvalue": "t5_31b8o"
+    },
+    "reddit-subreddit" : {
+      "permission": "managesubreddit",
+      "defaultvalue": "braveoperations"
     }
 }

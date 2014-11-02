@@ -46,13 +46,10 @@ block content
         button#apiSubmit(type="submit") Register
       #addStatus
 
-  h2 EVE Characters:
-  if characters
-    #characters
-      each character in characters
-        .character
-          img(src="/eveimages/" + character.id, height="100", width="100")
-          name character.name
-          corp character.corp
-          validated
-            = character.validated ? "yes" : "no"
+  form#reddit(method="POST" action="/reddit")
+    #reddit-form
+      div
+        label Reddit username:
+        input#redditName(type="text", name="redditUser", value=user.redditUser)
+      div
+        button#redditSubmit(type="submit") Register

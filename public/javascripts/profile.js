@@ -34,6 +34,22 @@ $(function() {
     });
     return false;
   });
+
+  $('#reddit').submit(function(event) {
+    event.preventDefault();
+    var redditName = $('#redditName').val();
+    if (!redditName) return;
+
+    $.post('/reddit',
+      { redditUser: redditName },
+      function(data) {
+        $.growl.notice({message: data});
+      },
+      function(err) {
+        $.growl.warning({message: "Could not add reddit user"});
+      }
+    );
+  })
 });
 
 function loadApis() {

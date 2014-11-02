@@ -10,7 +10,8 @@ var User = new Schema({
   email: String,
   verified: Boolean,
   characterID: String,
-  APIs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Api'}]
+  APIs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Api'}],
+  redditUser: String
 });
 
 User.plugin(passportLocalMongoose);

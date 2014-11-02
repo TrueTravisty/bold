@@ -7,5 +7,7 @@
     "administrate" : ["admin"],
     "managesso" : ["superadmin"],
     "submitsrp" : ["corp"],
-    "managesrp" : ["srpmanager"]
+    "managesrp" : ["srpmanager"],
+    "managesubreddit" : ["superadmin"],
+    "addreddituser" : ["corp"]
 }

@@ -6,6 +6,7 @@ var evesso = require('../lib/evesso');
 var Character = require('../model/Character');
 var Api = require('../model/Api');
 var eveApi = require('../lib/eveApi');
+var reddit = require('../lib/reddit');
 
 router.get('/loginlocal', function(req, res) {
   if (req.isAuthenticated()) {
@@ -136,6 +137,8 @@ router.param('user', function(req, res, next, id){
       req.ruser.api="";
     if (!req.ruser.apiVer)
       req.ruser.apiVer="";
+    if (!req.ruser.redditUser)
+      req.ruser.redditUser="";
     next();
   });
 });
@@ -167,6 +170,27 @@ router.post('/user/:user', function(req,res,next) {
     res.render('user', {user:req.ruser, message:"Data saved successfully!"});
   });
 });
+
+router.post('/reddit', function(req, res, next){
+  if (!req.can('addreddituser')) {
+    var error = new Error("Not logged in as corp member");
+    error.status = 403;
+    return next(error);
+  }
+  if (req.user.redditUser == req.body.redditUser) {
+    return res.end("User already registered");
+  }
+  req.user.redditUser = req.body.redditUser;
+  req.user.save(function(err) {
+    if (err) return next(err);
+    var Settings = req.app.get("settings");
+    reddit.addUser(Settings.settings, req.body.redditUser, function(err) {
+      if (err) return next(err);
+      return res.end("Reddit user added OK");
+    })
+  })
+
+})
 
 router.get('/currentuser',
   function(req, res) {
