@@ -119,6 +119,17 @@ if (app.get('env') === 'development') {
     });
 }
 
+var numeral = require('numeral');
+
+app.locals.iskify = function(number) {
+  return numeral(number).format('0,0.00') + ' ISK';
+}
+
+app.locals.iskifya = function(number) {
+  return numeral(number).format('0.0a') + ' ISK';
+}
+
+
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {

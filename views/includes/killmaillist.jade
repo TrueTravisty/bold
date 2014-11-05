@@ -1,6 +1,6 @@
-ul.killmails
+.killmails
 each killmail in killmails
-  li.killmail
+  .killmail
     .killid: a(href="https://zkillboard.com/kill/" + killmail.killID + "/") zKillBoard
     .ship
       img(src='/images/Types/' + killmail.victim.shipTypeID + '_64.png')
@@ -10,6 +10,9 @@ each killmail in killmails
       = killmail.victim.shipClass
     .value
     if killmail.zkb
-      = killmail.zkb.totalValue + ' ISK'
+      - var val = killmail.zkb.totalValue;
+      = iskify(val)
+      if val > 1000000
+        = ' (' + iskifya(val) + ')'
     .system #{killmail.solarSystemName}
     .time #{killmail.killTime}
