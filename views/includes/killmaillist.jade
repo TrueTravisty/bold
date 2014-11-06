@@ -5,7 +5,7 @@ each killmail in killmails
     .ship
       img(src='/images/Types/' + killmail.victim.shipTypeID + '_64.png')
     .shipName
-      = killmail.victim.shipType
+      = killmail.victim.characterName + "'s " + killmail.victim.shipType
     .class
       = killmail.victim.shipClass
     .value
