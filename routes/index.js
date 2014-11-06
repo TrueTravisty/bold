@@ -107,6 +107,35 @@ router.get('/corpkills', requireCorp, function(req, res, next) {
   });
 });
 
+router.param('days', function(req, res, next, days) {
+  req.days = days;
+  next();
+});
+
+router.param('count', function(req, res, next, count) {
+  req.count = count;
+  next();
+})
+
+router.get('/corpkills/top/:days/:count', function(req, res, next) {
+  zkb.getToppKillList(req.count, req.days, true, function(err, killmails){
+    if(err) return next(err);
+    res.render('includes/killmaillist', {
+      killmails: killmails
+    })
+  });
+});
+
+
+router.get('/corplosses/top/:days/:count', function(req, res, next) {
+  zkb.getToppKillList(req.count, req.days, false, function(err, killmails){
+    if(err) return next(err);
+    res.render('includes/killmaillist', {
+      killmails: killmails
+    })
+  });
+});
+
 router.get('/corplosses', requireCorp, function(req, res, next) {
   zkb.getLatestLosses(25, function(err, lossmails) {
     if (err) return next(err);
@@ -114,7 +143,6 @@ router.get('/corplosses', requireCorp, function(req, res, next) {
       killmails: lossmails
     });
   });
-
 });
 
 router.get('/redditnews', requireCorp, function(req, res, next) {
