@@ -50,9 +50,6 @@ passport.deserializeUser(User.deserializeUser());
 
 var app = express();
 
-
-zkbApi.updateAll();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
