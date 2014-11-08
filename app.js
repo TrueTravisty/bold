@@ -143,9 +143,10 @@ app.use(function(err, req, res, next) {
 app.set('startZkillBoardSchedule', function registerZbkScheduler() {
   var rule = new schedule.RecurrenceRule();
   var now = new Date;
-  rule.minute = (now.getMinutes() + 2)%60;
+  rule.minute = [(now.getMinutes() + 2)%60, (now.getMinutes() + 12)%60,(now.getMinutes() + 22)%60,
+  (now.getMinutes() + 32)%60,(now.getMinutes() + 42)%60,(now.getMinutes() + 52)%60];
 
-  console.log("Setting scheduler to run every " + rule.minute + " past the hour");
+  console.log("Setting scheduler to run every 10 minutes");
 
   var j = schedule.scheduleJob(rule, function(){
       console.log("Fetching zKillBoard data")

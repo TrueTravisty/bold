@@ -101,9 +101,7 @@ router.get('/privacy', function(req, res, next) {
 router.get('/corpkills', requireCorp, function(req, res, next) {
   zkb.getLatestKills(25, function(err, lossmails) {
     if (err) return next(err);
-    res.render('includes/killmaillist', {
-      killmails: lossmails
-    });
+    res.end(JSON.stringify(killmails));
   });
 });
 
@@ -120,9 +118,7 @@ router.param('count', function(req, res, next, count) {
 router.get('/corpkills/top/:days/:count', function(req, res, next) {
   zkb.getToppKillList(req.count, req.days, true, function(err, killmails){
     if(err) return next(err);
-    res.render('includes/killmaillist', {
-      killmails: killmails
-    })
+    res.end(JSON.stringify(killmails));
   });
 });
 
@@ -130,18 +126,14 @@ router.get('/corpkills/top/:days/:count', function(req, res, next) {
 router.get('/corplosses/top/:days/:count', function(req, res, next) {
   zkb.getToppKillList(req.count, req.days, false, function(err, killmails){
     if(err) return next(err);
-    res.render('includes/killmaillist', {
-      killmails: killmails
-    })
+    res.end(JSON.stringify(killmails));
   });
 });
 
 router.get('/corplosses', requireCorp, function(req, res, next) {
   zkb.getLatestLosses(25, function(err, lossmails) {
     if (err) return next(err);
-    res.render('includes/killmaillist', {
-      killmails: lossmails
-    });
+    res.end(JSON.stringify(killmails));
   });
 });
 
