@@ -18,12 +18,12 @@ $(function() {
 });
 
 $(function() {
-  $.get('/corpkills/10', function(data) {
+  $.get('/corpkills/15', function(data) {
 
     $('#latestkills').html(data);
   });
 
-  $.get('/corplosses/10', function(data) {
+  $.get('/corplosses/15', function(data) {
     $('#latestlosses').html(data);
   })
 
