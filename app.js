@@ -126,7 +126,7 @@ app.locals.iskify = function(number) {
 }
 
 app.locals.iskifya = function(number) {
-  return numeral(number).format('0.0a') + ' ISK';
+  return numeral(number).format('0.0a');
 }
 
 

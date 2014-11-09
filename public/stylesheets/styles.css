@@ -668,14 +668,22 @@ h5 {
   margin: 4px 0px;
 }
 
-#kills, #losses, #reddit{
-  width: 265px;
-  float: left;
+.contentsection h3
+{
+
+  background: none;
+  font: 20px Arial, Helvetica, sans-serif;
+  color: #0870d7;
+  height: 24px;
+  width: 800px;
+  text-align: left;
+  line-height: 24px;
+  font-weight: normal;
+  padding: 10px 0px 10px 0px;
 }
 
-#losses {
-  padding: 0px 38px 0px 31px;
-}
+
+
 
 #content_bottom {
   width: 900px;
@@ -689,6 +697,18 @@ a.zkblink {
    background-image: url(/images/icons/wreck.png);
    text-indent: -9999px;
    overflow: hidden;
+}
+
+.killmails img {
+  max-height: 40px;
+}
+
+.killmails th {
+  text-align: left;
+}
+
+.killmails tr:nth-child(even) {
+  background-color: black;
 }
 
 /*

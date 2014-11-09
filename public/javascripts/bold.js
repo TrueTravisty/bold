@@ -18,15 +18,13 @@ $(function() {
 });
 
 $(function() {
-  $.get('/corpkills', function(data) {
-    kills = JSON.parse(data);
+  $.get('/corpkills/10', function(data) {
 
-    $('#latestkills').html("").append(listKills(kills));
+    $('#latestkills').html(data);
   });
 
-  $.get('/corplosses', function(data) {
-    kills = JSON.parse(data);
-    $('#latestlosses').html("").append(listKills(kills));
+  $.get('/corplosses/10', function(data) {
+    $('#latestlosses').html(data);
   })
 
   $.get('/redditnews', function(data) {
