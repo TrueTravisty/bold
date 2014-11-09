@@ -45,10 +45,12 @@ function listKills(kills) {
     victim.append('<div class="character">'+kills[i].victim.characterName+'</div>');
     victim.append('<div class="ship">' + kills[i].victim.shipType + '</div>')
     kill.append(victim);
-    var value = parseFloat(kills[i].zkb.totalValue);
-    kill.append('<div class="value">'
-                + JsNumberFormatter.formatNumber(value, nfOptions, true)
-                + ' ISK </div>');
+    if (kills[i].zkb) {
+      var value = parseFloat(kills[i].zkb.totalValue);
+      kill.append('<div class="value">'
+                  + JsNumberFormatter.formatNumber(value, nfOptions, true)
+                    + ' ISK </div>');
+    }
     result.append(kill);
 
   }
