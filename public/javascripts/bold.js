@@ -19,14 +19,38 @@ $(function() {
 
 $(function() {
   $.get('/corpkills', function(data) {
-    $('#latestkills').html(data);
+    kills = JSON.parse(data);
+
+    $('#latestkills').html("").append(listKills(kills));
   });
 
   $.get('/corplosses', function(data) {
-    $('#latestlosses').html(data);
+    kills = JSON.parse(data);
+    $('#latestlosses').html("").append(listKills(kills));
   })
 
   $.get('/redditnews', function(data) {
-    $('#latestreddit').html(data);
+    kills = JSON.parse(data);
+    $('#latestreddit').append(listKills(kills));
   })
 });
+
+function listKills(kills) {
+  var result = $('<div class=killmails>');
+  var nfOptions = new JsNumberFormatter.formatNumberOptions().specifyDecimalMask('00');
+  for (var i = 0, l = kills.length; i<l; ++i) {
+    var kill = $("<div>").addClass('kill');
+    kill.append('<a class="zkblink" href="https://zkillboard.com/kill/' + kills[i].killID + '">zKillBoard</a>');
+    var victim = $('<div class="victim"></div>');
+    victim.append('<div class="character">'+kills[i].victim.characterName+'</div>');
+    victim.append('<div class="ship">' + kills[i].victim.shipType + '</div>')
+    kill.append(victim);
+    var value = parseFloat(kills[i].zkb.totalValue);
+    kill.append('<div class="value">'
+                + JsNumberFormatter.formatNumber(value, nfOptions, true)
+                + ' ISK </div>');
+    result.append(kill);
+
+  }
+  return result;
+}

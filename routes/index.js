@@ -99,7 +99,7 @@ router.get('/privacy', function(req, res, next) {
 });
 
 router.get('/corpkills', requireCorp, function(req, res, next) {
-  zkb.getLatestKills(25, function(err, lossmails) {
+  zkb.getLatestKills(25, function(err, killmails) {
     if (err) return next(err);
     res.end(JSON.stringify(killmails));
   });
@@ -131,7 +131,7 @@ router.get('/corplosses/top/:days/:count', function(req, res, next) {
 });
 
 router.get('/corplosses', requireCorp, function(req, res, next) {
-  zkb.getLatestLosses(25, function(err, lossmails) {
+  zkb.getLatestLosses(25, function(err, killmails) {
     if (err) return next(err);
     res.end(JSON.stringify(killmails));
   });

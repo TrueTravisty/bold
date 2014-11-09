@@ -682,4 +682,13 @@ h5 {
   float:left;
 }
 
+a.zkblink {
+   display: block;
+   height: 16px;
+   width: 16px;
+   background-image: url(/images/icons/wreck.png);
+   text-indent: -9999px;
+   overflow: hidden;
+}
+
 /*
