@@ -18,19 +18,27 @@ $(function() {
 });
 
 $(function() {
-  $.get('/corpkills/15', function(data) {
+  $.get('/corpkills/5', function(data) {
 
     $('#latestkills').html(data);
   });
 
-  $.get('/corplosses/15', function(data) {
+  $.get('/corplosses/5', function(data) {
     $('#latestlosses').html(data);
-  })
+  });
+
+  $.get('/corplosses/top/14/5', function(data) {
+    $('#toplosslist').html(data);
+  });
+
+  $.get('/corpkills/top/14/5', function(data) {
+    $('#topkilllist').html(data);
+  });
 
   $.get('/redditnews', function(data) {
     kills = JSON.parse(data);
-    $('#latestreddit').append(listKills(kills));
-  })
+    $('#latestreddit').html(data);
+  });
 });
 
 function listKills(kills) {

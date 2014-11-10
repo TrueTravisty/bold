@@ -19,7 +19,11 @@
               = curdate.toDateString()
         tr
           td
-            = kd.getUTCHours() + ":" + kd.getUTCMinutes()
+            - h = kd.getUTCHours()
+            - if (h < 10) h = "0" + h;
+            - m = kd.getUTCMinutes()
+            - if (m < 10) m = "0" + m;
+            = h + ":" + m
             if killmail.zkb
               br
               a(href="https://zkillboard.com/kill/" + killmail.killID + "/")
@@ -33,5 +37,5 @@
             img(src="/eveimages/" + killmail.victim.characterID)
           td.victim
             span.victimname #{killmail.victim.characterName}
-            &nbsp;
+            = ' '
             span.victimship (#{killmail.victim.shipType})

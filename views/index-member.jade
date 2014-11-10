@@ -4,13 +4,22 @@ append bodyscripts
   script(type="text/javascript", src="/javascripts/bold.js")
 
 block content
-  #kills.contentsection
-    h3 Latest Kills
-    #latestkills
-  #losses.contentsection
-    h3 Latest Losses
-    #latestlosses
-  #reddit.contentsection
-    h3 Latest from reddit
-    #latestreddit
+  div
+    #kills.contentsection
+      h3 Latest Kills
+      #latestkills
+    #losses.contentsection
+      h3 Latest Losses
+      #latestlosses
+  div
+    #topkills.contentsection
+      h3 Biggest kills last 14 days
+      #topkilllist
+    #toploss.contentsection
+      h3 Biggest losses last 14 days
+      #toplosslist
+  div
+    #reddit.contentsection
+      h3 Latest from reddit
+      #latestreddit
   #content_bottom

@@ -673,12 +673,12 @@ h5 {
 
   background: none;
   font: 20px Arial, Helvetica, sans-serif;
-  color: #0870d7;
+  color: white;
   height: 24px;
   width: 800px;
   text-align: left;
   line-height: 24px;
-  font-weight: normal;
+  font-weight: bold;
   padding: 10px 0px 10px 0px;
 }
 
@@ -711,16 +711,52 @@ a.zkblink {
   background-color: black;
 }
 
+.killmails table {
+  width: 400px;
+}
+.killmails td, .killmails th {
+  padding: 1px 4px;
+}
+
 .dateline {
   color: lightgray;
   font-weight: normal;
   font-style: italic;
+  height: 20px;
+}
 
+.contentsection{
+  width: 400px;
+  float: left;
+  background-color: rgba(8,112,215,.25);
+  padding: 5px;
+  margin-top: 6px;
 }
 
 #kills, #losses {
   width: 400px;
   float: left;
+  background-color: rgba(8,112,215,.25);
+  padding: 5px;
+
+}
+
+#losses,#toploss {
+  margin-left: 30px
+}
+
+.victimname {
+  font-weight: bold;
+}
+
+.victimship {
+  font-weight: thin;
+  font-style: italic;
+  color: lightgray;
+}
+
+td.ship, td.victimimg {
+  background-color: black;
 }
 
 /*
