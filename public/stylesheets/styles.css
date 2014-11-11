@@ -727,22 +727,25 @@ a.zkblink {
 
 .contentsection{
   width: 400px;
-  float: left;
   background-color: rgba(8,112,215,.25);
   padding: 5px;
   margin-top: 6px;
 }
 
-#kills, #losses {
+.leftcolumn, .rightcolumn {
   width: 400px;
   float: left;
+}
+
+.rightcolumn {
+  margin-left: 30px;
+}
+
+#kills, #losses {
+  width: 400px;
   background-color: rgba(8,112,215,.25);
   padding: 5px;
 
-}
-
-#losses,#toploss {
-  margin-left: 30px
 }
 
 .victimname {
@@ -764,7 +767,7 @@ td.ship, td.victimimg {
 }
 
 .dropdown > h3 {
-  
+
 }
 
 .dropdown > h3.dropped {
