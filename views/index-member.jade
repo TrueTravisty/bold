@@ -1,25 +1,22 @@
 extends ./layout.jade
 
-append bodyscripts
-  script(type="text/javascript", src="/javascripts/bold.js")
 
 block content
-  div
-    #kills.contentsection
+  .leftcolumn
+    #kills.contentsection.dropdown
       h3 Latest Kills
-      #latestkills
-    #losses.contentsection
+      #latestkills.hidable
+    #losses.contentsection.dropdown
       h3 Latest Losses
-      #latestlosses
-  div
-    #topkills.contentsection
-      h3 Biggest kills last 14 days
-      #topkilllist
-    #toploss.contentsection
-      h3 Biggest losses last 14 days
-      #toplosslist
-  div
-    #reddit.contentsection
+      #latestlosses.hidable
+    #reddit.contentsection.dropdown
       h3 Latest from reddit
-      #latestreddit
-  #content_bottom
+      #latestreddit.hidable
+
+  .rightcolumn
+    #topkills.contentsection.dropdown
+      h3 Biggest kills last 14 days
+      #topkilllist.hidable
+    #toploss.contentsection.dropdown
+      h3 Biggest losses last 14 days
+      #toplosslist.hidable

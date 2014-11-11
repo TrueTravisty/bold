@@ -759,4 +759,16 @@ td.ship, td.victimimg {
   background-color: black;
 }
 
+.hidable {
+  display: none;
+}
+
+.dropdown > h3 {
+  
+}
+
+.dropdown > h3.dropped {
+
+}
+
 /*

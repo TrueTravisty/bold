@@ -18,6 +18,7 @@ $(function() {
 });
 
 $(function() {
+
   $.get('/corpkills/5', function(data) {
 
     $('#latestkills').html(data);
@@ -38,6 +39,12 @@ $(function() {
   $.get('/redditnews', function(data) {
     kills = JSON.parse(data);
     $('#latestreddit').html(data);
+  });
+
+  $('.dropdown > h3').click(function() {
+    $(this).toggleClass('dropped');
+    var parent = $(this).parent();
+    $(".hidable", parent).slideToggle();
   });
 });
 
