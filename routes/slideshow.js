@@ -36,7 +36,7 @@ router.get('/slides/delete', function(req,res, next){
 
 router.post('/slides/upload', function(req, res, next) {
   var form = new formidable.IncomingForm();
-  
+
   form.keepExtensions = true;
   form.parse(req, function(err, fields, files){
     if (err) return next(err);
@@ -50,14 +50,14 @@ router.post('/slides/upload', function(req, res, next) {
 
 router.post('/slides/upload', function(req, res, next) {
   ;
-  
+
   var img = req.upload.file;
   var name = img.name;
   var caption = req.upload.caption || '';
   var path = getFilePath(name);
   fs.rename(img.path, path, function(err){
     if (err) return next(err);
-      
+
     Slideshow.create({
       caption: caption,
       path: img.name
@@ -66,7 +66,7 @@ router.post('/slides/upload', function(req, res, next) {
       res.redirect('upload');
     })
   })
-  
+
 });
 
 module.exports = router;

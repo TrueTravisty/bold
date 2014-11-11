@@ -40,6 +40,10 @@ $(function() {
     $('#latestreddit').html(data);
   });
 
+  $.get('/bnireddit', function(data) {
+    $('#latestredditbni').html(data);
+  })
+
   $('.dropdown > h3').click(function() {
     $('.droparrow', this).toggleClass('up');
     var parent = $(this).parent();

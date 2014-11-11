@@ -168,8 +168,17 @@ router.get('/redditnews', requireCorp, function(req, res, next) {
       threads: threads
     });
   });
-
 });
+
+router.get('/bnireddit', requireCorp, function(req, res, next) {
+  var settings = req.app.get("settings").settings;
+  reddit.getBniThreads(settings, 10, function(err, threads) {
+    if (err) return next(err);
+    res.render('includes/latestreddit', {
+      threads: threads
+    });
+  });
+})
 
 
 function requireCorp(req, res, next) {

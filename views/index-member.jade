@@ -2,27 +2,41 @@ extends ./layout.jade
 
 
 block content
-  .leftcolumn
-    #kills.contentsection.dropdown
-      h3 Latest Kills
-        .droparrow
-      #latestkills.hidable
-    #losses.contentsection.dropdown
-      h3 Latest Losses
-        .droparrow
-      #latestlosses.hidable
-    #reddit.contentsection.dropdown
-      h3 Latest from reddit
-        .droparrow
-      #latestreddit.hidable
 
-  .rightcolumn
-    #topkills.contentsection.dropdown
-      h3 Biggest kills last 14 days
-        .droparrow
-      #topkilllist.hidable
-    #toploss.contentsection.dropdown
-      h3 Biggest losses last 14 days
-        .droparrow
-      #toplosslist.hidable
-  .clear
+  #usercontent
+    h1 Welcome #{user.username}!
+
+    p.
+      Below you find some recent information about the corp
+
+
+  #databoxes
+    .leftcolumn
+      .contentsection.dropdown
+        h3 Latest Kills
+          .droparrow
+        #latestkills.hidable
+      .contentsection.dropdown
+        h3 Latest Losses
+          .droparrow
+        #latestlosses.hidable
+      .contentsection.dropdown
+        h3 Latest from our subreddit
+          .droparrow
+        #latestreddit.hidable
+
+
+    .rightcolumn
+      .contentsection.dropdown
+        h3 Biggest kills last 14 days
+          .droparrow
+        #topkilllist.hidable
+      .contentsection.dropdown
+        h3 Biggest losses last 14 days
+          .droparrow
+        #toplosslist.hidable
+      .contentsection.dropdown
+        h3 Latest from BNI subreddit
+          .droparrow
+        #latestredditbni.hidable
+    .clear
