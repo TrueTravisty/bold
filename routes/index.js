@@ -9,6 +9,7 @@ var flash = require('connect-flash');
 var passport = require('passport');
 var srp = require('./srp');
 var zkb = require('./../lib/zkbApi');
+var reddit = require('../lib/reddit');
 
 
 
@@ -122,7 +123,7 @@ router.param('kmid', function(req, res, next, id) {
   next();
 });
 
-router.get('/corpkills/top/:days/:count', function(req, res, next) {
+router.get('/corpkills/top/:days/:count',requireCorp, function(req, res, next) {
   zkb.getToppKillList(req.count, req.days, true, function(err, killmails){
     if(err) return next(err);
     res.render('includes/killmaillist', {
@@ -132,7 +133,7 @@ router.get('/corpkills/top/:days/:count', function(req, res, next) {
 });
 
 
-router.get('/corplosses/top/:days/:count', function(req, res, next) {
+router.get('/corplosses/top/:days/:count', requireCorp, function(req, res, next) {
   zkb.getToppKillList(req.count, req.days, false, function(err, killmails){
     if(err) return next(err);
     res.render('includes/killmaillist', {
@@ -141,7 +142,7 @@ router.get('/corplosses/top/:days/:count', function(req, res, next) {
   });
 });
 
-router.get('/killmail/:kmid', function(req, res, next) {
+router.get('/killmail/:kmid', requireCorp, function(req, res, next) {
   zkb.getKillMail(req.kmid, function(err, killmail) {
     if(err) return next(err);
     res.render('includes/killmaillist', {
@@ -160,7 +161,14 @@ router.get('/corplosses/:count', requireCorp, function(req, res, next) {
 });
 
 router.get('/redditnews', requireCorp, function(req, res, next) {
-  res.render('includes/latestreddit');
+  var settings = req.app.get("settings").settings;
+  reddit.getThreads(settings, 10, function(err, threads) {
+    if (err) return next(err);
+    res.render('includes/latestreddit', {
+      threads: threads
+    });
+  });
+
 });
 
 

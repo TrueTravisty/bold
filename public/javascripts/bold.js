@@ -37,7 +37,6 @@ $(function() {
   });
 
   $.get('/redditnews', function(data) {
-    kills = JSON.parse(data);
     $('#latestreddit').html(data);
   });
 
