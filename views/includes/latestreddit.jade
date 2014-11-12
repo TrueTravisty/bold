@@ -2,6 +2,5 @@ each thread in threads
   .redditthread
     a.redditlink(href=thread.data.url)
       !=thread.data.title
-    if !thread.data.is_self
-      = ' '
-      a.redditcomment(href=thread.data.permalink) Comments
+    = ' '
+    a.redditcomment(href=thread.data.permalink) #{thread.data.num_comments} comment#{thread.data.num_comments != 1 ? 's' : ''}
