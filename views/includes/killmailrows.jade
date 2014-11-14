@@ -1,0 +1,31 @@
+- var curdate
+each killmail in killmails
+  - var kd = new Date(killmail.killTime)
+  - var d = new Date(kd.getUTCFullYear(), kd.getUTCMonth(), kd.getUTCDate(), 0, 0, 0, 0)
+  if !curdate || d.getDate() != curdate.getDate() || d.getMonth() != curdate.getMonth()
+    - curdate = d
+    tr
+      th.dateline(colspan=5)
+        = curdate.toDateString()
+  tr.kill(data-id=killmail.killID)
+    td
+      - h = kd.getUTCHours()
+      - if (h < 10) h = "0" + h;
+      - m = kd.getUTCMinutes()
+      - if (m < 10) m = "0" + m;
+      = h + ":" + m
+      if killmail.zkb
+        br
+        a(href="https://zkillboard.com/kill/" + killmail.killID + "/")
+          = iskifya(killmail.zkb.totalValue)
+    td.ship
+      img.ship(src='/images/Types/' + killmail.victim.shipTypeID + '_64.png')
+    td.place
+      a(href="http://evemaps.dotlan.net/system/" + killmail.solarSystemName)
+        = killmail.solarSystemName
+    td.victimimg
+      img(src="/eveimages/" + killmail.victim.characterID)
+    td.victim
+      span.victimname #{killmail.victim.characterName}
+      = ' '
+      span.victimship (#{killmail.victim.shipType})
