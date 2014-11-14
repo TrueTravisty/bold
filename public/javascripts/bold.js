@@ -76,7 +76,7 @@ function ammendKillmails(data) {
   var rows = d.find('tr.kill');
   if (rows.length == 0)
     rows = d.filter('tr.kill');
-  rows.append($('<td><button class="SRP">SRP</button></td>'));
+  rows.append($('<td><button class="SRP">Request SRP</button></td>'));
   var date = d.find('.dateline');
   date.attr('colspan', 6);
   var buttons = d.find('.SRP');
@@ -86,7 +86,13 @@ function ammendKillmails(data) {
 
 function srpRequest() {
   var kill = $(this).parents('.kill').attr('data-id');
-  alert('SRP ' + kill);
+  $.get('/srprequested/' + kill, function(data) {
+    var submitted = JSON.parse(data);
+    if (submitted) {
+      return $.growl.error({message: "SRP already requested for this kill!"});
+    }
+    $.growl.notice({message: "Requesting SRP for kill " + kill});
+  })
 }
 
 function listKills(kills) {

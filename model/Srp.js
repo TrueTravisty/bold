@@ -2,8 +2,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var Srp = new Schema({
-  User: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  zkillboard: String,
+  username: String,
+  zkbID: {type: Number, index: {unique: true, dropDups: true}},
   ship: String,
   class: String,
   lost: Number,
@@ -12,4 +12,4 @@ var Srp = new Schema({
   paid_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
-module.exports = mongoose.model('Api', Api);
+module.exports = mongoose.model('Srp', Srp);

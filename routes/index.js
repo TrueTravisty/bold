@@ -7,9 +7,9 @@ var imgcache = require('./../lib/imagecache');
 var Slideshow = require('../model/index_slideshow');
 var flash = require('connect-flash');
 var passport = require('passport');
-var srp = require('./srp');
 var zkb = require('./../lib/zkbApi');
 var reddit = require('../lib/reddit');
+var Srp = require('../model/Srp')
 
 
 
@@ -84,11 +84,18 @@ router.get('/team', function(req, res) {
   });
 });
 
-router.get('/submitsrp', srp.validateSrp, function(req, res, next) {
+
+
+router.get('/submitsrp', requireCorp, function(req, res, next) {
   res.render('submitsrp', {
     title: 'SRP',
     current: 'srp'
   });
+});
+
+router.param('days', function(req, res, next, days) {
+  req.days = days;
+  next();
 });
 
 router.get('/terms', function(req, res, next) {
@@ -127,6 +134,15 @@ router.param('page', function(req, res, next, page) {
   req.page = page;
   next();
 })
+
+
+router.get('/srprequested/:kmid', function(req, res, next) {
+  var km = req.kmid;
+  Srp.count({zkbID: km, username: req.user.username}, function(err, c) {
+    if (err) next(err);
+    return res.end(c ? 'true' : 'false');
+  })
+});
 
 router.get('/corpkills/top/:days/:count',requireCorp, function(req, res, next) {
   zkb.getToppKillList(req.count, req.days, true, function(err, killmails){
