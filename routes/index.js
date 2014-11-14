@@ -123,6 +123,11 @@ router.param('kmid', function(req, res, next, id) {
   next();
 });
 
+router.param('page', function(req, res, next, page) {
+  req.page = page;
+  next();
+})
+
 router.get('/corpkills/top/:days/:count',requireCorp, function(req, res, next) {
   zkb.getToppKillList(req.count, req.days, true, function(err, killmails){
     if(err) return next(err);
@@ -132,6 +137,18 @@ router.get('/corpkills/top/:days/:count',requireCorp, function(req, res, next) {
   });
 });
 
+router.get('/charloss/:count/:page', requireCorp, function(req, res, next) {
+  if (!req.user.characterID) return res.end('');
+  var count = req.count;
+  var page = req.page;
+  zkb.getCharLosses(req.user.characterID, count, count*(page-1),function(err, killmails) {
+    if (err) return next(err);
+    var tmpl = page == 1 ? 'killmaillist' : 'killmailrows';
+    res.render('includes/' + tmpl, {
+      killmails: killmails
+    });
+  });
+});
 
 router.get('/corplosses/top/:days/:count', requireCorp, function(req, res, next) {
   zkb.getToppKillList(req.count, req.days, false, function(err, killmails){

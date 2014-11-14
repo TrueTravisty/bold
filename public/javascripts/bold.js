@@ -18,31 +18,35 @@ $(function() {
 });
 
 $(function() {
+  if ($('#latestkills').length > 0) {
+    $.get('/corpkills/5', function(data) {
 
-  $.get('/corpkills/5', function(data) {
+      $('#latestkills').html(data);
+    });
 
-    $('#latestkills').html(data);
-  });
+    $.get('/corplosses/5', function(data) {
+      $('#latestlosses').html(data);
+    });
 
-  $.get('/corplosses/5', function(data) {
-    $('#latestlosses').html(data);
-  });
+    $.get('/corplosses/top/14/5', function(data) {
+      $('#toplosslist').html(data);
+    });
 
-  $.get('/corplosses/top/14/5', function(data) {
-    $('#toplosslist').html(data);
-  });
+    $.get('/corpkills/top/14/5', function(data) {
+      $('#topkilllist').html(data);
+    });
+  }
 
-  $.get('/corpkills/top/14/5', function(data) {
-    $('#topkilllist').html(data);
-  });
+  if ($('#latestreddit').length > 0) {
+    $.get('/redditnews', function(data) {
+      $('#latestreddit').html(data);
+    });
 
-  $.get('/redditnews', function(data) {
-    $('#latestreddit').html(data);
-  });
 
-  $.get('/bnireddit', function(data) {
-    $('#latestredditbni').html(data);
-  })
+    $.get('/bnireddit', function(data) {
+      $('#latestredditbni').html(data);
+    })
+  }
 
   $('.dropdown > h3').click(function() {
     $('.droparrow', this).toggleClass('up');
@@ -50,6 +54,40 @@ $(function() {
     $(".hidable", parent).slideToggle();
   });
 });
+
+$(function() {
+  if ($('#mylosses').length > 0) {
+    $.get('/charloss/5/1', function(data) {
+      ammendKillmails(data).appendTo($('#mylosses'));
+      $('.more').attr('data-page', 1);
+    });
+    $('.more').click(function() {
+      var page = parseInt($(this).attr('data-page')) + 1;
+      $.get('/charloss/5/' + page, function(data) {
+        ammendKillmails(data).appendTo($('tbody', '#mylosses'));
+        $('.more').attr('data-page', page);
+      });
+    })
+  }
+});
+
+function ammendKillmails(data) {
+  var d = $(data);
+  var rows = d.find('tr.kill');
+  if (rows.length == 0)
+    rows = d.filter('tr.kill');
+  rows.append($('<td><button class="SRP">SRP</button></td>'));
+  var date = d.find('.dateline');
+  date.attr('colspan', 6);
+  var buttons = d.find('.SRP');
+  buttons.click(srpRequest);
+  return d;
+}
+
+function srpRequest() {
+  var kill = $(this).parents('.kill').attr('data-id');
+  alert('SRP ' + kill);
+}
 
 function listKills(kills) {
   var result = $('<div class=killmails>');
