@@ -11,7 +11,9 @@ block content
     and it will put out in the bottom how much you should make the contract out for
   div
     form(id="buybackcalculator", method="POST")
-      textarea(id="raw_textarea")
+      textarea(id="raw_textarea",
+        placeholder="CTRL-C in the game in a list, CTRL-V in this box, press the calculate button, "
+        + "and it will put out in the bottom how much you should make the contract out for")
       button(id="result_submit", type="submit") Calculate
     hr
     .contractvalue_section
