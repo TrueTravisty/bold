@@ -59,13 +59,13 @@ $(function() {
   if ($('#mylosses').length > 0) {
     $.get('/charloss/5/1', function(data) {
       ammendKillmails(data).appendTo($('#mylosses'));
-      $('.more').attr('data-page', 1);
+      $('.more').data('page', 1);
     });
     $('.more').click(function() {
-      var page = parseInt($(this).attr('data-page')) + 1;
+      var page = $(this).data('page') + 1;
       $.get('/charloss/5/' + page, function(data) {
         ammendKillmails(data).appendTo($('tbody', '#mylosses'));
-        $('.more').attr('data-page', page);
+        $('.more').data('page', page);
       });
     })
   }
@@ -85,7 +85,7 @@ function ammendKillmails(data) {
 }
 
 function srpRequest() {
-  var kill = $(this).parents('.kill').attr('data-id');
+  var kill = $(this).parents('.kill').data('id');
   $.get('/srprequested/' + kill, function(data) {
     var submitted = JSON.parse(data);
     if (submitted) {

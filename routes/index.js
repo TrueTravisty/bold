@@ -138,7 +138,7 @@ router.param('page', function(req, res, next, page) {
 
 router.get('/srprequested/:kmid', function(req, res, next) {
   var km = req.kmid;
-  Srp.count({zkbID: km, username: req.user.username}, function(err, c) {
+  Srp.find({zkbID: km, username: req.user.username}, function(err, c) {
     if (err) next(err);
     return res.end(c ? 'true' : 'false');
   })
