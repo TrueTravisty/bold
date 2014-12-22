@@ -76,12 +76,32 @@ function ammendKillmails(data) {
   var rows = d.find('tr.kill');
   if (rows.length == 0)
     rows = d.filter('tr.kill');
-  rows.append($('<td><button class="SRP">Request SRP</button></td>'));
+  rows.append($('<td><button class="SRPButton">Request SRP</button></td>'));
   var date = d.find('.dateline');
   date.attr('colspan', 6);
-  var buttons = d.find('.SRP');
+  var buttons = d.find('.SRPButton');
+  checkSrpStatus(buttons);
   buttons.click(srpRequest);
   return d;
+}
+
+function checkSrpStatus(buttons) {
+  var l = buttons.length;
+  for (var i = 0; i < l; ++i) {
+    var button = buttons[i];
+    checkSrpStatusSingle($(button));
+  }
+}
+
+function checkSrpStatusSingle(button) {
+  var kill = button.parents('.kill').data('id');
+  $.get('/srprequested/' + kill, function(data) {
+    var submitted = JSON.parse(data);
+    if (submitted) {
+      button.text("SRP Requested");
+      button.addClass('srprequested');
+    }
+  })
 }
 
 function srpRequest() {

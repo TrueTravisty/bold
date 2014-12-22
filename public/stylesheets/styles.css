@@ -796,4 +796,12 @@ body {
   font-weight: normal;
   font-style: italic;
 }
+
+.SRPButton {
+
+}
+
+.SRPButton.srprequested {
+  color: red;
+}
 /*
