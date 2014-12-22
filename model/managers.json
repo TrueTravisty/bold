@@ -1,14 +1,10 @@
 
     [
     { "name": "Thalonia", "ID": "758027032", "title": "Director", "function": "Logistics" },
-    { "name": "Gavakz Moliko", "ID": "91196290", "title": "Officer", "function": "Military Director/PvP" },
-    { "name": "Robby Rolfe", "ID": "92158673", "title": "Director", "function": "Security" },
-    { "name": "Nick Cornax", "ID": "92918679", "title": "Officer", "function": "Diplo/HR/Recruitment" },
-    { "name": "Lacks Pants", "ID": "94449671", "title": "Officer", "function": "PvP/HR" },
     { "name": "Lefty Leftfield", "ID": "93070225", "title": "Officer", "function": "" },
     { "name": "Asmodean Shepherd", "ID": "1703625820", "title": "CEO", "function": "" },
-    { "name": "Kiremer", "ID": "93547355", "title": "Officer", "function": "" },
-    { "name": "Tierdar", "ID": "1217760776", "title": "Officer", "function": "SRP"},
-    { "name": "Elcirith Atreides", "ID": "92085304", "title": "Officer", "function": "Recruitment"},
-    { "name": "Yaldo Asanari", "ID": "94314126", "title": "Officer", "function": "IT"}
+    { "name": "Kirema", "ID": "93931174", "title": "Officer", "function": "" },
+    { "name": "Tierdar", "ID": "1217760776", "title": "Officer", "function": "Security, SRP"},
+    { "name": "Yaldo Asanari", "ID": "94314126", "title": "Officer", "function": "IT"},
+    { "name": "Aznwithbeard", "ID": "1253509070", "title": "Officer", "function": "Millitary"}
     ]
