@@ -136,11 +136,11 @@ router.param('page', function(req, res, next, page) {
 })
 
 
-router.get('/srprequested/:kmid', function(req, res, next) {
+router.get('/srprequested/:kmid',requireCorp, function(req, res, next) {
   var km = req.kmid;
   Srp.find({zkbID: km, username: req.user.username}, function(err, c) {
     if (err) next(err);
-    return res.end(c ? 'true' : 'false');
+    return res.end(c.length > 0 ? 'true' : 'false');
   })
 });
 
