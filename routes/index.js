@@ -144,6 +144,39 @@ router.get('/srprequested/:kmid',requireCorp, function(req, res, next) {
   })
 });
 
+router.get('/requestsrp/:kmid',requireCorp, function(req, res, next) {
+  var km = req.kmid;
+  Srp.find({zkbID: km, username: req.user.username}, function(err, c) {
+    if (err) return next(err);
+    if (c.length > 0) {
+      var error = new Error("SRP already requested for kill " + km);
+      error.status = 403;
+      return next(error);
+    }
+    zkb.getLoss(km, function(err, loss) {
+      if (err) return next(err);
+      if (req.user.characterID != loss.user) {
+        var error = new Error("You can only request SRP for your own losses");
+        error.status = 403;
+        return next(error);
+      }
+      var lossmail = loss.killmail;
+
+      var srpRequest = {
+        username: req.user.username,
+        zkbID: km,
+        ship: lossmail.victim.shipType,
+        class: lossmail.victim.shipClass,
+        lost: lossmail.totalValue
+      };
+      Srp.create(srpRequest, function(err) {
+        if (err) return next(err);
+        return res.end("Success");
+      })
+    });
+  });
+})
+
 router.get('/corpkills/top/:days/:count',requireCorp, function(req, res, next) {
   zkb.getToppKillList(req.count, req.days, true, function(err, killmails){
     if(err) return next(err);

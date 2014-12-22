@@ -105,13 +105,20 @@ function checkSrpStatusSingle(button) {
 }
 
 function srpRequest() {
-  var kill = $(this).parents('.kill').data('id');
+  var button = $(this);
+  var kill = button.parents('.kill').data('id');
   $.get('/srprequested/' + kill, function(data) {
     var submitted = JSON.parse(data);
     if (submitted) {
-      return $.growl.error({message: "SRP already requested for this kill!"});
+      return $.growl.error({message: "SRP already requested for this loss!"});
     }
-    $.growl.notice({message: "Requesting SRP for kill " + kill});
+    $.get('/requestsrp/' + kill, function(data) {
+      button.addClass('srprequested').text("SRP Requested");
+
+      return $.growl.notice({message: "SRP request submitted"});
+    }).fail(function(data) {
+      return $.growl.error({message: "SRP request failed!"});
+    });
   })
 }
 
