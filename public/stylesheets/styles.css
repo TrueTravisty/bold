@@ -504,6 +504,7 @@ table.team th, table.structure th {
   width: 126px;
   margin-right: 20px;
   margin-bottom: 15px;
+  min-height: 164px;
 }
 .personblock .person img {
   margin: 0 20px 10px 20px;

@@ -1,9 +1,9 @@
 
     [
     { "name": "Thalonia", "ID": "758027032", "title": "Director", "function": "Logistics" },
-    { "name": "Lefty Leftfield", "ID": "93070225", "title": "Officer", "function": "" },
     { "name": "Asmodean Shepherd", "ID": "1703625820", "title": "CEO", "function": "" },
-    { "name": "Kiremer", "ID": "93547355", "title": "Officer", "function": "" },
+    { "name": "Kirema", "ID": "93931174", "title": "Officer", "function": "" },
     { "name": "Tierdar", "ID": "1217760776", "title": "Officer", "function": "SRP"},
-    { "name": "Yaldo Asanari", "ID": "94314126", "title": "Officer", "function": "IT"}
+    { "name": "Yaldo Asanari", "ID": "94314126", "title": "Officer", "function": "IT"},
+    { "name": "Aznwithbeard", "ID": "1253509070", "title": "Officer", "function": "Military"}
     ]
