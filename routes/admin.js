@@ -32,13 +32,19 @@ router.use(function(req,res,next) {
 });
 
 router.get('/', function(req,res) {
-  res.render('admin/admin.jade', {
-    current: 'admin',
+  var data = getCapabilities(req);
+  data.current = 'admin'
+  res.render('admin/admin.jade', data );
+});
+
+function getCapabilities(req) {
+  return {
     canusers: req.can('manageusers'),
     canupdate: req.can('updatesite'),
-    canroles: req.can('manageroles')
-  });
-});
+    canroles: req.can('manageroles'),
+    cansrp:     req.can('managesrp')
+  }
+}
 
 router.get('/users', requireRole('manageusers'), function(req,res) {
   User.find({}, function(err, users){
@@ -48,13 +54,10 @@ router.get('/users', requireRole('manageusers'), function(req,res) {
     else if (!users) {
       return next(new Error('failed to load users'));
     }
-    res.render('admin/users.jade', {
-      current:    'users',
-      users:      users,
-      canedit:    req.can('manageusers'),
-      candelete:  req.can('deleteuser'),
-      canroles:   req.can('manageroles')
-    });
+    var data = getCapabilities(req);
+    data.current = 'users';
+    data.users = users;
+    res.render('admin/users.jade', data);
   });
 });
 
