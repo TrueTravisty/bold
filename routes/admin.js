@@ -40,11 +40,7 @@ router.get('/', function(req,res) {
   });
 });
 
-router.get('/users', function(req,res) {
-  if (!req.can('manageusers')) {
-    return res.redirect("/admin");
-  }
-
+router.get('/users', requireRole('manageusers'), function(req,res) {
   User.find({}, function(err, users){
     if (err) {
       return next(err);
@@ -62,12 +58,7 @@ router.get('/users', function(req,res) {
   });
 });
 
-router.post('/togglerole', function(req,res,next) {
-  if (!req.can('manageroles')) {
-    var err = new Error('Cannot manage roles');
-    err.status = 401;
-    return next(err);
-  }
+router.post('/togglerole', requireRole('manageroles'), function(req,res,next) {
   User.findOne({username: req.body.user}).select('username roles').exec(function(err, user){
     if (err) return next(err);
     if (!user) {
@@ -95,12 +86,18 @@ router.post('/togglerole', function(req,res,next) {
 
 });
 
-router.get('/roles', function(req,res,next) {
-  if (!req.can('manageroles')) {
-    var err = new Error('No permission');
-    err.status=401;
-    return next(err);
+function requireRole(role) {
+  return function(req, res, next) {
+    if (!req.can(role)) {
+      var err = new Error('No permission');
+      err.status = 401;
+      return next(err);
+    }
+    return next();
   }
+}
+
+router.get('/roles', requireRole('manageroles'), function(req,res,next) {
   User.find({}).select('username roles').sort('username').exec(function(err, users) {
     available_roles = req.getRoles();
     res.render('admin/roles', {
@@ -129,12 +126,7 @@ router.param('user', function(req, res, next, id){
   });
 });
 
-router.get('/users/:user', function(req,res, next) {
-   if (!req.can('manageusers')) {
-     var err = new Error("Not authorized!");
-     err.status = 401;
-     return next(err);
-   }
+router.get('/users/:user', requireRole('manageusers'), function(req,res, next) {
    if (req.param('delete', 'no') == 'yes' && req.can('deleteuser')){
      if (req.ruser.username != "superadmin"){
        return User.remove({ username: req.ruser.username}, function(err){
@@ -152,12 +144,7 @@ router.get('/users/:user', function(req,res, next) {
    })
 });
 
-router.post('/users/:user', function(req,res,next) {
-  if (!req.can('manageusers')) {
-    var err = new Error("Not authorized!");
-    err.status = 401;
-    return next(err);
-  }
+router.post('/users/:user', requireRole('manageusers'), function(req,res,next) {
 
 });
 
@@ -208,6 +195,10 @@ router.post('/settings/:setting', function(req,res,next){
   } else {
     res.end("Unchanged");
   }
+});
+
+router.get('/srp', requireRole('managesrp'), function(req, res, next) {
+  res.render('admin/srp.jade');
 });
 
 /* Other routes mapped to admin */
