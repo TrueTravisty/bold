@@ -9,7 +9,6 @@ var flash = require('connect-flash');
 var passport = require('passport');
 var zkb = require('./../lib/zkbApi');
 var reddit = require('../lib/reddit');
-var Srp = require('../model/Srp')
 
 
 
@@ -136,44 +135,43 @@ router.param('page', function(req, res, next, page) {
 })
 
 
-router.get('/srprequested/:kmid',requireCorp, function(req, res, next) {
+router.get('/srpstatus/:kmid',requireCorp, function(req, res, next) {
   var km = req.kmid;
-  Srp.find({zkbID: km, username: req.user.username}, function(err, c) {
+  zkb.getLoss(km, function (err, loss) {
     if (err) next(err);
-    return res.end(c.length > 0 ? 'true' : 'false');
-  })
+    var data = {srpinfo : null};
+    if (loss) {
+      data.srpinfo = {
+        requested: loss.requested,
+        denied: loss.denied,
+        paid: loss.paid
+      }
+    };
+    return res.end(JSON.stringify(data));
+  });
 });
 
 router.get('/requestsrp/:kmid',requireCorp, function(req, res, next) {
   var km = req.kmid;
-  Srp.find({zkbID: km, username: req.user.username}, function(err, c) {
+  zkb.getLoss(km, function(err, loss) {
     if (err) return next(err);
-    if (c.length > 0) {
+    if (req.user.characterID != loss.user) {
+      var error = new Error("You can only request SRP for your own losses");
+      error.status = 403;
+      return next(error);
+    }
+    if (loss.requested) {
       var error = new Error("SRP already requested for kill " + km);
       error.status = 403;
       return next(error);
     }
-    zkb.getLoss(km, function(err, loss) {
-      if (err) return next(err);
-      if (req.user.characterID != loss.user) {
-        var error = new Error("You can only request SRP for your own losses");
-        error.status = 403;
-        return next(error);
-      }
-      var lossmail = loss.killmail;
 
-      var srpRequest = {
-        username: req.user.username,
-        zkbID: km,
-        ship: lossmail.victim.shipType,
-        class: lossmail.victim.shipClass,
-        lost: lossmail.totalValue
-      };
-      Srp.create(srpRequest, function(err) {
-        if (err) return next(err);
-        return res.end("Success");
-      })
+    loss.requested = true;
+    loss.save(function(err) {
+      if (err) return next(err);
+      return res.end("Success");
     });
+
   });
 })
 

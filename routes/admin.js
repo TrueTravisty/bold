@@ -4,6 +4,7 @@ var User = require('../model/User');
 var passport = require('passport');
 var slideshow = require('./slideshow');
 var permissions = require('../model/permissions.json');
+var zkb = require('./../lib/zkbApi');
 
 var roles = [];
 var unique = {};
@@ -185,6 +186,12 @@ router.get('/settings/:setting', function(req,res,next){
   var setting = req.settingName;
   var Settings = req.app.get("settings");
   res.end(Settings.settings[setting]);
+});
+
+router.get('/srp/pilotlist', requireRole('managesrp'), function(req, res, next) {
+  res.render('includes/srpunapproved', {
+
+  })
 });
 
 router.post('/settings/:setting', function(req,res,next){

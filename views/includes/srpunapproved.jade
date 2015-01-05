@@ -1,0 +1,18 @@
+table(id=srpPilotTable)
+  thead
+    tr
+      th Pilot
+      th Requests
+      th Total losses
+      th Payouts
+  tbody
+    each user in users
+      tr
+        td
+          =user.name
+        td
+          =user.requests
+        td
+          =user.losses
+        td
+          =user.payout

@@ -1,5 +1,12 @@
 extends ../layout.jade
 
+append bodyscripts
+    script(type="text/javascript" src="/javascripts/srpmanagement.js")
+
 block content
   h1 Ship Replacement Program Management
-  
+  h2 Unapproved SRP Requests
+  #unapproved
+
+  h2 SRP Statistics
+  #srpstats

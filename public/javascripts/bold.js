@@ -95,11 +95,22 @@ function checkSrpStatus(buttons) {
 
 function checkSrpStatusSingle(button) {
   var kill = button.parents('.kill').data('id');
-  $.get('/srprequested/' + kill, function(data) {
-    var submitted = JSON.parse(data);
-    if (submitted) {
+  $.get('/srpstatus/' + kill, function(data) {
+    var data = JSON.parse(data);
+    srpinfo = data.srpinfo;
+    if (!srpinfo) {
+      button.text="Kill not found!"
+      return;
+    }
+    if (srpinfo.requested) {
       button.text("SRP Requested");
       button.addClass('srprequested');
+    }
+    if (srpinfo.denied) {
+      button.text('SRP Denied!');
+    }
+    if (srpinfo.paid && srpinfo.paid > 0) {
+      button.text('Paid out ' + srpinfo.paid + ' isk');
     }
   })
 }
@@ -107,9 +118,12 @@ function checkSrpStatusSingle(button) {
 function srpRequest() {
   var button = $(this);
   var kill = button.parents('.kill').data('id');
-  $.get('/srprequested/' + kill, function(data) {
-    var submitted = JSON.parse(data);
-    if (submitted) {
+  $.get('/srpstatus/' + kill, function(data) {
+    var srpinfo = JSON.parse(data).srpinfo;
+    if (!srpinfo) {
+      return;
+    }
+    if (srpinfo.requested){
       return $.growl.error({message: "SRP already requested for this loss!"});
     }
     $.get('/requestsrp/' + kill, function(data) {
