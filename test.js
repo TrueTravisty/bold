@@ -1,50 +1,88 @@
-/*var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/boldsite_test');
 
 
 
 var api = require('./lib/zkbApi');
+var model = require('./lib/zkbApi/model').Losses;
 
+model.remove({}, function(err) {
 
-api.fetchData({'corp-id': 98276273}, true, function(err) {
-  if (err) console.log("Failed: " + err);
-  console.log("Populated data!");
+  var testData = [
+    {
+      kmId: 0,
+      time: new Date(),
+      user: 0,
+      requested: false
+    },
+    {
+      kmId: 1,
+      time: new Date(),
+      user: 0,
+      requested: true
+    },
+    {
+      kmId: 2,
+      time: new Date(),
+      user: 0,
+      requested: true,
+      denied: true
+    },
+    {
+      kmId: 3,
+      time: new Date(),
+      user: 0,
+      requested: true,
+      denied: true,
+      paid: 4
+    },
+    {
+      kmId: 4,
+      time: new Date(),
+      user: 0,
+      requested: true,
+      denied:false,
+      paid:0
+    },
+    {
+      kmId: 5,
+      time: new Date(),
+      user: 0,
+      requested: true,
+      paid: 0
+    },
+    {
+      kmId: 6,
+      time: new Date(),
+      user: 0,
+      requested: true,
+      denied: false,
+      paid: 49
+    },
+    {
+      kmId: 7,
+      time: new Date(),
+      user: 0,
+      requested: true,
+      paid: 392
+    },
+    {
+      kmId: 8,
+      time: new Date(),
+      user: 0,
+      requested: false
+    }
+  ];
+
+  model.create(testData, function(err) {
+    if (err) return console.log("Error: " + err);
+    api.getUnhandledSrpRequests(function (err, result){
+      if (err) return console.log("Error: " + err);
+      console.log("Found " + result.length + " requests: ");
+      for (var i = 0; i < result.length; i++) {
+        console.log(JSON.stringify(result[i]));
+      }
+    });
+  });
+
 });
-*/
-
-function addOrUpdate(killMails, callback) {
-  var allIds = [];
-  killMails.map(function(km){allIds.push(km.kmId)});
-  callback (allIds);
-}
-
-var kms = [
-  {
-    kmId: 1,
-    sif: 'a'
-  },
-  {
-    kmId: 2,
-    sif: 'b'
-  },
-  {
-    kmId: 3,
-    sif: 'ac'
-  },
-  {
-    kmId: 4,
-    sif: 'ad'
-  },
-  {
-    kmId: 5,
-    sif: 'ae'
-  },
-  {
-    kmId: 6,
-    sif: 'af'
-  }
-]
-
-addOrUpdate(kms, function(ids){
-  console.log(ids);
-})
