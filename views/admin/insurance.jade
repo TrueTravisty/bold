@@ -1,0 +1,32 @@
+extends ../layout.jade
+
+append bodyscripts
+    script(type="text/javascript" src="/javascripts/srpmanagement.js") 
+
+block content
+  h1 SRP Insurance Values
+  List of insurance values for ships. Check the insurance value in game (on sisi if needed) and update here.
+  SRPs can not be paid for ships which don't have insurance value listed here.
+
+  form#insuranceValueForm(action="/admin/srp/insurance", method="POST", name="insuranceform")
+    table#insuranceValues
+      thead
+        tr
+          th Ship
+          th Image
+          th Insurance
+          th Set by
+          th Set at
+      tbody
+        for ship in insurancelist
+          tr
+            td.ship
+              = ship.shipname
+            td.image
+              img.ship(src='/images/Types/' + ship.shipid + '_64.png')
+            td.insurance
+              input(type="text", name = ship.shipid, value=ship.insurance)
+            td.setby
+              = ship.setBy
+            td.setat
+              = ship.setAt

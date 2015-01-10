@@ -1,18 +1,21 @@
-table(id=srpPilotTable)
+table(id="srpPilotTable")
   thead
     tr
-      th Pilot
+      th(colspan=2) Pilot
       th Requests
       th Total losses
       th Payouts
   tbody
     each user in users
+      - killmail = user.losslist[0].killmail;
       tr
-        td
-          =user.name
-        td
+        td.victimimg
+          img(src="/eveimages/" + killmail.victim.characterID, width=50)
+        td.victim
+          span.victimname #{user.name}
+        td.requests
           =user.requests
-        td
+        td.totalLoss
           =user.losses
-        td
+        td.amount
           =user.payout

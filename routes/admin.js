@@ -5,6 +5,7 @@ var passport = require('passport');
 var slideshow = require('./slideshow');
 var permissions = require('../model/permissions.json');
 var zkb = require('./../lib/zkbApi');
+var Insurance = require('../model/Insurance');
 
 var roles = [];
 var unique = {};
@@ -188,10 +189,106 @@ router.get('/settings/:setting', function(req,res,next){
   res.end(Settings.settings[setting]);
 });
 
-router.get('/srp/pilotlist', requireRole('managesrp'), function(req, res, next) {
-  res.render('includes/srpunapproved', {
+router.get('/srp/shiplist', requireRole('managesrp'), function(req, res, next) {
+  zkb.getUnhandledSrpRequest(function(err, result) {
+    if (err) res.end("Failed");
+    var ships = {};
 
+  });
+});
+
+router.get('/srp/pilotlist', requireRole('managesrp'), function(req, res, next) {
+  zkb.getUnhandledSrpRequests(function(err, result) {
+    if (err) res.end("Failed");
+    var pilots = {};
+    for (var i = 0, l = result.length; i < l; ++i) {
+      var loss = result[i];
+      var userId = loss.user;
+      var pilot;
+      if (pilots[userId]) {
+        pilot = pilots[userId];
+      } else {
+        pilot = {
+          name: loss.killmail.victim.characterName,
+          id: userId,
+          requests: 0,
+          losses: 0,
+          payout: 0,
+          losslist: []
+        };
+        pilots[userId] = pilot;
+      }
+      pilot.losslist.push(loss);
+      pilot.requests = pilot.requests + 1;
+      pilot.losses = pilot.losses + loss.value;
+    }
+    res.render('includes/srpunapproved', {
+      users: pilots
+    })
+  });
+
+});
+
+router.get('/srp/insurance', requireRole('managesrp'), function(req, res, next) {
+  res.render('admin/insurance', {
+    insurancelist: [ {shipid: 621, shipname: "Scythe Fleet Issue", insurance: 3924} ]
   })
+});
+
+router.param('ship', function(req, res, next, id) {
+  Insurance.findOne({shipid:id}, function(err, ship){
+    if(err) return next(err);
+    if (ship) {
+      req.ship = ship;
+      return next();
+    } else {
+      zkb.getTypeName(id, function(err, typeName) {
+        if (err) return next (err);
+        req.ship = {
+          shipid: id,
+          shipname: typeName
+        }
+        return next();
+      });
+    }
+  })
+});
+
+function returnInsuranceJson(ship, res) {
+  var result = {
+    shipid: ship.shipid,
+    shipname: ship.shipname,
+    insurance: ship.insurance,
+    setAt: ship.setAt,
+    setBy: ship.setBy
+  }
+  res.end(JSON.stringify(result));
+}
+
+router.get('/srp/insurance/:ship', requireRole('managesrp'), function(req, res, next) {
+  returnInsuranceJson(req.ship, res);
+});
+
+router.post('/srp/insurance/:ship', requireRole('managesrp'), function(req, res, next) {
+  var ship = req.ship;
+  var indb = setAt in ship;
+  if (req.body.insurance != ship.insurance) {
+    ship.insurance = req.body.insurance;
+    ship.setAt = new Date();
+    ship.setBy = req.user._id;
+    var cb = new function(err) {
+      if (err) return next(err);
+      returnInsuranceJson(ship, res);
+    }
+    if (indb) {
+      Insurance.create(ship, cb);
+    } else {
+      ship.save(cb);
+    }
+  } else {
+    res.end("Unchanged");
+  }
+
 });
 
 router.post('/settings/:setting', function(req,res,next){
