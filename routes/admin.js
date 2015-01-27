@@ -235,8 +235,58 @@ router.get('/srp/insurance', requireRole('managesrp'), function(req, res, next) 
   })
 });
 
+router.get('/srp/insurance/all', requireRole('managesrp'), function(req, res, next) {
+  Insurance.find({}).populate('setBy').exec(function(err, dbresult) {
+    if (err) {
+      return res.status(500).end();
+    }
+
+    zkb.getUnhandledSrpRequests(function(err, requests){
+      if (err) return res.end(JSON.stringify(result));
+
+      var registeredShips = {};
+      var unregisteredShips = {};
+
+      var result = [];
+      // populate simple list of registered ships
+      for (var i = 0, l = dbresult.length; i < l; ++i) {
+        registeredShips[dbresult[i].shipid] = 1;
+
+        // populate results
+        result.push({
+          shipid: dbresult[i].shipid,
+          insurance: dbresult[i].insurance,
+          shipname: dbresult[i].shipname,
+          setBy: dbresult[i].setBy.username,
+          setAt: dbresult[i].setAt
+        });
+      }
+
+      // extend results with unique registered ships
+      for (var j = 0, ll = requests.length; j < ll; ++j) {
+        var victim = requests[j].victim;
+        var shipTypeID = victim.shipTypeID;
+        if (!registeredShips[shipTypeID] && !unregisteredShips[shipTypeID]){
+          unregisteredShips[shipTypeID] = 1;
+          result.push({
+            shipid: shipTypeID,
+            shipname: victim.shipType
+          });
+        }
+      }
+
+      // return results
+      res.type('json');
+      res.end(JSON.stringify(result));
+    })
+
+
+
+  });
+});
+
 router.param('ship', function(req, res, next, id) {
-  Insurance.findOne({shipid:id}, function(err, ship){
+  Insurance.findOne({shipid:id}).populate('setBy').exec(function(err, ship){
     if(err) return next(err);
     if (ship) {
       req.ship = ship;
@@ -260,8 +310,9 @@ function returnInsuranceJson(ship, res) {
     shipname: ship.shipname,
     insurance: ship.insurance,
     setAt: ship.setAt,
-    setBy: ship.setBy
+    setBy: ship.setBy.username
   }
+  res.type('json');
   res.end(JSON.stringify(result));
 }
 
@@ -271,24 +322,25 @@ router.get('/srp/insurance/:ship', requireRole('managesrp'), function(req, res, 
 
 router.post('/srp/insurance/:ship', requireRole('managesrp'), function(req, res, next) {
   var ship = req.ship;
-  var indb = setAt in ship;
+  var indb = "setAt" in ship;
   if (req.body.insurance != ship.insurance) {
     ship.insurance = req.body.insurance;
     ship.setAt = new Date();
     ship.setBy = req.user._id;
     var cb = new function(err) {
       if (err) return next(err);
-      returnInsuranceJson(ship, res);
+      return res.end("OK");
     }
-    if (indb) {
+    if (!indb) {
       Insurance.create(ship, cb);
     } else {
       ship.save(cb);
     }
   } else {
-    res.end("Unchanged");
+    return res.end("Unchanged");
   }
-
+}, function(err, req, res, next) {
+  res.end("ERROR: " + JSON.stringify(err));
 });
 
 router.post('/settings/:setting', function(req,res,next){
