@@ -5,8 +5,10 @@ append bodyscripts
 
 block content
   h1 SRP Insurance Values
-  |List of insurance values for ships. Check the insurance value in game (on sisi if needed) and update here.
-  |SRPs can not be paid for ships which don't have insurance value listed here.
+  ul: li: a(href="/admin/srp/") Manage SRP requests
+  p
+    |List of insurance values for ships. Check the insurance value in game (on sisi if needed) and update here.
+    |SRPs can not be paid for ships which don't have insurance value listed here.
 
   form#insuranceValueForm(action="/admin/srp/insurance", method="POST", name="insuranceform")
     #insuranceValues
