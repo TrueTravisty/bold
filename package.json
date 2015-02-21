@@ -29,5 +29,8 @@
     "static-favicon": "~1.0.0",
     "underscore": "^1.7.0",
     "xml2js": "~0.4.4"
+  },
+  "devDependencies": {
+    "qunitjs": "^1.17.1"
   }
 }

@@ -309,6 +309,7 @@ function returnInsuranceJson(ship, res) {
     shipid: ship.shipid,
     shipname: ship.shipname,
     insurance: ship.insurance,
+    srpFactor: ship.srpFactor,
     setAt: ship.setAt,
     setBy: ship.setBy.username
   }
@@ -323,8 +324,11 @@ router.get('/srp/insurance/:ship', requireRole('managesrp'), function(req, res, 
 router.post('/srp/insurance/:ship', requireRole('managesrp'), function(req, res, next) {
   var ship = req.ship;
   var indb = "setAt" in ship;
-  if (req.body.insurance != ship.insurance) {
-    ship.insurance = req.body.insurance;
+  var sendtInsurance = Number(req.body.insurance);
+  var sendtSrpFactor = Number(req.body.srpFactor);
+  if (sendtInsurance != ship.insurance || sendtSrpFactor != ship.srpFactor) {
+    ship.insurance = sendtInsurance;
+    ship.srpFactor = sendtSrpFactor;
     ship.setAt = new Date();
     ship.setBy = req.user._id;
     var cb = new function(err) {

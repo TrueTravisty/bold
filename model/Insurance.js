@@ -6,7 +6,8 @@ var Insurance = new Schema({
   shipname: String,
   insurance: Number,
   setAt: { type: Date, default: Date.now },
-  setBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  setBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  srpFactor: { type: Number, default: 0.9 }
 });
 
 module.exports = mongoose.model('Insurance', Insurance);
