@@ -1,0 +1,11 @@
+extends ../layout.jade
+
+append bodyscripts
+    script(type="text/javascript" src="/javascripts/angular.js")
+    script(type="text/javascript" src="/javascripts/angular-route.js")
+    script(type="text/javascript" src="/javascripts/srpmanagementapp.js")
+    script(type="text/javascript" src="/javascripts/srpmanagementcontrollers.js")
+
+block content
+  div(ng-app="srpmanagementApp")
+    div(ng-view)

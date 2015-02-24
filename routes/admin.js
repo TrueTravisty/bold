@@ -361,7 +361,7 @@ router.post('/settings/:setting', function(req,res,next){
 });
 
 router.get('/srp', requireRole('managesrp'), function(req, res, next) {
-  res.render('admin/srp.jade');
+  res.render('admin/srpang.jade');
 });
 
 /* Other routes mapped to admin */

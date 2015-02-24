@@ -61,9 +61,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
-app.use(cookieParser('aløsjd fløaøljk os fpae afø ølsjf aø se ds'));
+var sessionSecret = 'aløsjd fløaøljk os fpae afø ølsjf aø se ds';
+
+app.use(cookieParser(sessionSecret));
 app.use(session({
-    secret: 'aløsjd fløaøljk os fpae afø ølsjf aø se ds',
+    secret: sessionSecret,
     saveUninitialized: true,
     resave: true,
     store: new MongoStore({
