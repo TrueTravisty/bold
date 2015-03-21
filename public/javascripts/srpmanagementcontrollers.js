@@ -16,9 +16,7 @@ srpmanagementControllers.controller('SrpRequestCtrl', ['$scope', '$http',
       for (var i = 0, l = $scope.ships.length; i < l; ++i) {
         var ship = $scope.ships[i];
         if (!ship.srpFactor) ship.srpFactor = 0.9;
-      }
-      $scope.iskify = function(number) {
-        return numeral(number).format('0,0.00') + ' ISK';
+        ship.insuranceIsk = numeral()
       }
     });
   }]);
