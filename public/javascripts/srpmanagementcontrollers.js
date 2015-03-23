@@ -9,7 +9,7 @@ srpmanagementControllers.controller('SrpRequestCtrl', ['$scope', '$http',
 
   }]);
 
-  srpmanagementControllers.controller('ShipListCtrl', ['$scope', '$http',
+srpmanagementControllers.controller('ShipListCtrl', ['$scope', '$http',
   function($scope, $http){
     $http.get('/admin/srp/insurance/all').success(function(data) {
       $scope.ships = data;
@@ -19,4 +19,15 @@ srpmanagementControllers.controller('SrpRequestCtrl', ['$scope', '$http',
         ship.insuranceIsk = numeral()
       }
     });
-  }]);
+  }
+]);
+
+srpmanagementControllers.controller('ShipInfoCtrl', ['$scope', '$http', '$routeParams',
+  function($scope, $http,$routeParams) {
+    $http.get('/admin/srp/insurance/' + $routeParams.shipid).success(function(data) {
+      $scope.ship = data;
+    })
+
+
+  }
+]);

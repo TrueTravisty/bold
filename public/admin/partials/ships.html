@@ -9,7 +9,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="ship in ships">
-        <td class="ship">{{ship.shipname}}</td>
+        <td class="ship"><a href="#/ship/{{ship.shipid}}">{{ship.shipname}}</a></td>
         <td class="image"><img ng-src="{{'/images/Types/' + ship.shipid + '_64.png'}}"/></td>
         <td class="insurance">{{ship.insurance | currency:"isk "}}</td>
         <td class="srpFactor">{{ship.srpFactor}}</td>

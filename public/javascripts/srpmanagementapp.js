@@ -18,6 +18,10 @@ srpmanagementApp.config(['$routeProvider',
           templateUrl: 'partials/ships.html',
           controller: 'ShipListCtrl'
         }).
+        when('/ship/:shipid', {
+          templateUrl: 'partials/ship.html',
+          controller: 'ShipInfoCtrl'
+        }).
         otherwise({
           redirectTo: '/requests'
         });
