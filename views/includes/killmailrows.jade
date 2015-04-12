@@ -7,7 +7,7 @@ each killmail in killmails
     tr
       th.dateline(colspan=5)
         = curdate.toDateString()
-  tr.kill(data-id=killmail.killID)
+  tr.kill(data-id=killmail.killID data-km=killmail)
     td
       - h = kd.getUTCHours()
       - if (h < 10) h = "0" + h;

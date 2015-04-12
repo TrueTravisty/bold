@@ -117,7 +117,25 @@ function checkSrpStatusSingle(button) {
 
 function srpRequest() {
   var button = $(this);
-  var kill = button.parents('.kill').data('id');
+  var kill = button.parents('.kill').data('km');
+  var name = kill.victim.characterName.replace(" ", "+");
+  var zkill = 'https://zkillboard.com/kill/' + kill.killID;
+  var ship = kill.victim.shipType;
+  var sclass = kill.victim.shipClass;
+  var isk = kill.zkb.totalValue;
+  var system = kill.solarSystemName;
+
+
+  var url="https://docs.google.com/forms/d/1mCuTFEOlPEV0bVrGllzvdoHMGVbu2rm89YTQTEVQgGQ/viewform?entry.9614536="+name+
+    "&entry.1850675988="+zkill+
+    "&entry.884950497="+ship+
+    "&entry.334392335="+sclass+
+    "&entry.808596200="+isk+
+    "&entry.1843731024="+system;
+
+  window.open(url, '_blank');
+
+  return;
   $.get('/srpstatus/' + kill, function(data) {
     var srpinfo = JSON.parse(data).srpinfo;
     if (!srpinfo) {
