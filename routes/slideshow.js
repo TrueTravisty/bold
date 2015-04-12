@@ -55,7 +55,7 @@ router.post('/slides/upload', function(req, res, next) {
   var name = img.name;
   var caption = req.upload.caption || '';
   var path = getFilePath(name);
-  fs.rename(img.path, path, function(err){
+  moveFile(img.path, path, function(err){
     if (err) return next(err);
 
     Slideshow.create({
@@ -68,5 +68,16 @@ router.post('/slides/upload', function(req, res, next) {
   })
 
 });
+
+function moveFile(source, dest, callback) {
+  var is = fs.createReadStream(source);
+  var os = fs.createWriteStream(dest);
+
+  is.pipe(os);
+  is.on('end',function() {
+      fs.unlinkSync(source);
+      callback();
+  });
+}
 
 module.exports = router;
