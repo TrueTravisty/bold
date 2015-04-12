@@ -105,6 +105,10 @@ router.get('/privacy', function(req, res, next) {
   res.render('privacy');
 });
 
+router.get('/instructions', function(req,res,next) {
+  res.render('instructions');
+});
+
 router.get('/corpkills/:count', requireCorp, function(req, res, next) {
   zkb.getLatestKills(req.count, function(err, killmails) {
     if (err) return next(err);
