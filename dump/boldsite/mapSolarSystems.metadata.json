@@ -1,0 +1,1 @@
+{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "name" : "_id_", "ns" : "boldsite.mapSolarSystems" }, { "v" : 1, "key" : { "solarSystemID" : 1 }, "name" : "solarSystemID_1", "ns" : "boldsite.mapSolarSystems", "background" : true, "safe" : null } ] }
