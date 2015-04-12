@@ -15,11 +15,12 @@ deploy :
 
 start_app :
 	sudo start  --no-wait -q bold || (sudo stop bold ; sudo start --no-wait -q bold)
-	
+
 install_dev :
 	sudo mkdir -p $(app_dir_dev)
 	sudo cp ./app.js $(app_dir_dev)/app.js
 	sudo cp ./package.json $(app_dir_dev)/package.json
+	sudo cp ./losses.json $(app_dir_dev)/losses.json
 	sudo cp -r ./bin ./lib ./public ./routes ./node_modules ./views ./model $(app_dir_dev)
 	sudo cp ./bold_dev.conf /etc/init/bold_dev.conf
 

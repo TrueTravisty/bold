@@ -1,0 +1,23 @@
+extends ../layout.jade
+
+append bodyscripts
+  script(type="text/javascript" src="/javascripts/rolemanagement.js")
+
+block content
+  h2 Manage Roles
+  table#roles
+    thead
+      tr
+        th User
+        each role in available_roles
+          th #{role}
+    tbody
+      each user in users
+        - var uroles = user.roles;
+        - if(user.username == 'superadmin') uroles = available_roles;
+        tr
+          td #{user.username}
+          each role in available_roles
+            td
+              - var status = (uroles.indexOf(role) >= 0) ? 'hasrole' : 'missingrole'
+              button.togglerole(data-role=role data-user=user.username value=status) #{status}

@@ -1,0 +1,6 @@
+if apis
+  each api in apis
+    .api
+      .apikey #{api.key}
+      .verification #{api.code}
+      button.deleteApi(type="delete", value=api.key)

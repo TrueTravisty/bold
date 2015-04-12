@@ -1,0 +1,14 @@
+{
+    "manageusers" : ["admin"],
+    "updatesite": ["admin"],
+    "updatenews": ["admin","contentprovider"],
+    "manageroles": ["superadmin"],
+    "deleteusers": ["superadmin"],
+    "administrate" : ["admin"],
+    "managesso" : ["superadmin"],
+    "submitsrp" : ["corp"],
+    "managesrp" : ["srpmanager"],
+    "managesubreddit" : ["superadmin"],
+    "addreddituser" : ["corp"],
+    "seecorppage" : ["corp"]
+}

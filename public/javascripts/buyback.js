@@ -1,9 +1,5 @@
-/**
- * @author Tor Livar Flugsrud
- */
-
 $(function() {
-  
+
   $("#buybackcalculator").submit(function(event) {
     event.preventDefault();
     var result = $("#raw_textarea").val();
@@ -16,7 +12,7 @@ $(function() {
         $('#contractvalue_input').focus();
      }
   ).error(function() {
-   alert("Error"); 
+   alert("Error");
   });
   return false;
   });

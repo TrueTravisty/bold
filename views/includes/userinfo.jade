@@ -1,0 +1,15 @@
+#user_bar
+  #user_info
+    if username
+      | Logged in as 
+      a(href="/user/" + username)
+        = username
+    else
+      a(href="/login") Log in
+  if username
+    #logoutlink
+      a(href="/logout") Log out
+
+  if canadmin
+    #adminlink
+      a(href="/admin") Admin

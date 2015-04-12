@@ -1,0 +1,57 @@
+doctype transitional
+html(xmlns="http://www.w3.org/1999/xhtml")
+  head
+    block meta
+      meta(http-equiv="content-type",content="text/html; charset=utf-8")
+      meta(name="keywords", content="eve, eve corporation, mmo, eve online")
+      meta(name="description", content="Brave Operations - Lollipop Division is the permier small gang PVP divisin within the BRAVE collective")
+
+    title
+      | Brave Operations - Lollipop Division
+      - if (title) {
+          |  - #{title}
+      - }
+
+    block links
+      link(rel="stylesheet", href="/stylesheets/nivo-slider.css", type="text/css", media="screen")
+      link(rel="stylesheet", href="/stylesheets/jquery.growl.css", type="text/css", media="screen")
+      link(href="/stylesheets/styles.css", rel="stylesheet", type="text/css", media="screen")
+      link(rel="icon", href="images/bold.ico", type="image/x-icon")
+      link(rel="shortcut icon", href="bundles/boldhome/images/bold.ico", type="image/x-icon")
+
+  body
+    #bg2
+    #wrapper1
+      include ./includes/top_bar.jade
+
+      #content_bg_top
+      #content_box
+        block content
+
+        include ./includes/bottom_bar.jade
+
+      #content_bg_bot
+
+      #footer_bot
+        include ./includes/notices.jade
+
+      #messagebox
+        block messages
+          each error in flash.errors
+            .error
+              = error
+          each warning in flash.warnings
+            .warning
+              = warning
+          each notice in flash.notices
+            .info
+              = notice
+
+    block bodyscripts
+      script(type="text/javascript", src="/javascripts/jquery-1.11.1.js")
+      script(type="text/javascript", src="/javascripts/jquery.growl.js")
+      script(type="text/javascript", src="/javascripts/jsnumberformatter.js")
+      script(type="text/javascript", src="http://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.js")
+      script(type="text/javascript", src="/javascripts/bold.js")
+
+    block endofbody

@@ -1,0 +1,47 @@
+extends ./layout.jade
+
+
+block content
+
+  #usercontent
+    h1 Welcome #{user.username}!
+
+    p
+      a(href="/submitsrp") BO-LD Ship Replacement Program
+
+    p.
+      Below you find some recent information about the corp
+
+
+  #databoxes
+    .leftcolumn
+      .contentsection.dropdown
+        h3 Latest Kills
+          .droparrow
+        #latestkills.hidable
+      .contentsection.dropdown
+        h3 Latest Losses
+          .droparrow
+        #latestlosses.hidable
+      .contentsection.dropdown
+        h3 Latest from&nbsp;
+          a(href='http://www.reddit.com/r/braveoperations') our subreddit
+          .droparrow
+        #latestreddit.hidable
+
+
+    .rightcolumn
+      .contentsection.dropdown
+        h3 Biggest kills last 14 days
+          .droparrow
+        #topkilllist.hidable
+      .contentsection.dropdown
+        h3 Biggest losses last 14 days
+          .droparrow
+        #toplosslist.hidable
+      .contentsection.dropdown
+        h3 Latest from&nbsp;
+          a(href='http://www.reddit.com/r/Bravenewbies/') BNI subreddit
+          .droparrow
+        #latestredditbni.hidable
+    .clear

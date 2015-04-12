@@ -1,0 +1,21 @@
+<h1>Ships</h1>
+<ul><li><a href="#/requests">Manage SRP requests</a></li></ul>
+<p>List of insurance values for ships. Check the insurance value in game (on sisi if needed) and update here.</p>
+<p>SRPs can not be paid for ships which don't have insurance value listed here.</p>
+<ul class="ships">
+  <table id="insuranceTable">
+    <thead>
+      <tr><th>Ship</th><th>Image</th><th>Insurance</th><th>SRP Factor</th><th>Set by</th><th>Set at</th></tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="ship in ships">
+        <td class="ship"><a href="#/ship/{{ship.shipid}}">{{ship.shipname}}</a></td>
+        <td class="image"><img ng-src="{{'/images/Types/' + ship.shipid + '_64.png'}}"/></td>
+        <td class="insurance">{{ship.insurance | currency:"isk "}}</td>
+        <td class="srpFactor">{{ship.srpFactor}}</td>
+        <td class="setBy">{{ship.setBy}}</td>
+        <td class="setAt">{{ship.setAt | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+      </tr>
+    </tbody>
+  </table>
+</ul>

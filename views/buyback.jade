@@ -1,0 +1,51 @@
+extends ./layout.jade
+
+append bodyscripts
+  script(type="text/javascript", src="/javascripts/buyback.js")
+
+block content
+  h2 Buyback program
+  h4 Calculator
+  p: i.
+    CTRL-C in the game in a list, CTRL-V in the box below, press the calculate button,
+    and it will put out in the bottom how much you should make the contract out for
+  div
+    form(id="buybackcalculator", method="POST")
+      textarea(id="raw_textarea",
+        placeholder="CTRL-C in the game in a list, CTRL-V in this box, press the calculate button, "
+        + "and it will put out in the bottom how much you should make the contract out for")
+      button(id="result_submit", type="submit") Calculate
+    hr
+    .contractvalue_section
+      table.contractvalue
+        thead: tr: th Contract Information
+        tr
+          th Type:
+          td Item Exchange
+        tr
+          th Availablity:
+          td Private
+        tr
+          th Name:
+          td Bold Buyback
+        tr
+          th I will pay:
+          td 0.0
+        tr
+          th I will receive:
+          td: input#contractvalue_input(name="value", value="0")
+  hr
+  ul
+    li.
+      The buyback program is run personally by <i>Thalonia</i>. If you have any questions about the buyback program, please
+      direct all questions toward Thalonia. The BO-LD officers will not be able to help you sort out problems with the buyback program.
+    li.
+      The program normally buys anything which is re-sellable on the market at 85% Jita buy. The calculator above already
+      takes the 15% discount into account when calculating buyback values. You don't need to subtract anything from the contract value!
+    li.
+      Contracts made out for too high values will be rejected.
+    li.
+      Buyback is available in all stations in Catch held by the H.E.R.O. Coalition.
+    li.
+      If you have large quantities of something (&gt;500M), especially minerals or salvage, please contact <i>Thalonia</i>
+      for the possibility of better conditions.

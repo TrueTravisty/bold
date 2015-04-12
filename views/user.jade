@@ -1,0 +1,55 @@
+extends ./layout.jade
+
+append bodyscripts
+  script(type="text/javascript", src="/javascripts/profile.js")
+
+block content
+  h2 User information
+
+  form(method="POST")
+    div
+      label Username:
+      input.username(type="text", name="username", value=user.username, readonly)
+
+    div
+      label Displayname:
+      input(type="text", name="displayname", value=user.displayname)
+
+    div
+      label E-mail:
+      input(type="text", name="email", value = user.email)
+
+    div
+      div
+      div
+        input(type="submit", value="Submit")
+
+  h2 Registered EVE APIs:
+  - var apis = [{key: 12345, verification: 'abcde'},{key: 23456, verfication: 'bcdef'}]
+  #api-list
+    if apis
+      each api in apis
+        .api
+          .apikey #{api.key}
+          .verification #{api.verification}
+          button.deleteApi(type="delete", value=api.key)
+
+  form#addApi(method="POST")
+    #api-form
+      div
+        label Key:
+        input#apiKey(type="text", name="apiKey")
+      div
+        label Verification code:
+        input#apiVerification(type="text", name="apiVerification")
+      div
+        button#apiSubmit(type="submit") Register
+      #addStatus
+
+  form#reddit(method="POST" action="/reddit")
+    #reddit-form
+      div
+        label Reddit username:
+        input#redditName(type="text", name="redditUser", value=user.redditUser)
+      div
+        button#redditSubmit(type="submit") Register

@@ -1,0 +1,19 @@
+extends ../layout.jade
+
+block content
+  h1
+    = title
+
+  p Upload a photo to the front page slideshow below.
+  form(method='post', enctype='multipart/form-data')
+    p: input(type='text', name='photo[caption]', placeholder='Caption')
+    p: input(type='file', name='photo[image]')
+    p: input(type='submit', value='Upload')
+
+  #photolist
+    each photo in photos
+      .photo
+        h2
+          =photo.caption
+        img(src='/images/slideshow/' + photo.path)
+        a(href="delete?image=" + photo.path) Delete

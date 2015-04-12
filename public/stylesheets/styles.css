@@ -43,16 +43,16 @@ h3{
 	text-align: center;
 	line-height: 43px;
 	font-weight: normal;
-	
+
 }
 
-body{	
+body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     line-height: 18px;
     color: #ffffff;
     background: #000000 url(/images/bg.jpg) no-repeat center 87px fixed;
-	
+
 }
 
 #bg2 {
@@ -69,11 +69,11 @@ body{
 }
 
 .clear{
-	clear: both;	
+	clear: both;
 }
 
 .contractvalue_section {
-	display: none;	
+	display: none;
 }
 
 /*
@@ -119,6 +119,18 @@ body{
 	background: url(/images/hover.png) no-repeat center;
 }
 
+#messagebox{
+  width: 900px;
+  text-align: center;
+  color: red;
+  font-size: 18px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  z-index: 100;
+  background: yellow;
+  display: none;
+}
+
 
 /*logo*/
 
@@ -128,7 +140,7 @@ body{
 	height: 140px;
 	padding-top: 105px;
 	padding-left: 60px;
-	
+
 }
 
 #logo h1 {
@@ -182,7 +194,7 @@ download_box
 	background:url(/images/download_box.png) no-repeat top left;
 	width: 876px;
 	height: 112px;
-	
+
 }
 
 #download_box p {
@@ -194,7 +206,7 @@ download_box
 	color: #303030;
 	font: 12px Arial, Helvetica, sans-serif;
 	font-weight: bold;
-	
+
 }
 #download_box p a:hover {
 	color: #0870d7;
@@ -259,7 +271,7 @@ column_box
 }
 
 .column img {
- float: left; 
+ float: left;
  padding-right: 20px;
 }
 
@@ -273,7 +285,7 @@ column_box
 
 
 #footer_top{
-	padding-top: 35px;	
+	padding-top: 35px;
 }
 
 
@@ -299,6 +311,8 @@ column_box
 	width: 265px;
 	float: left;
 }
+
+
 
 .footer_text{
 	background: url(/images/footer_top_border.png) no-repeat top left;
@@ -361,7 +375,7 @@ column_box
 */
 
 #footer_bot{
-	padding: 25px;
+	padding: 50px;
 	text-align: center;
 }
 
@@ -456,7 +470,7 @@ a.nivo-prevNav {
     text-shadow:none;
     font-family: Helvetica, Arial, sans-serif;
 }
-.nivo-caption a { 
+.nivo-caption a {
     color:#efe9d1;
     text-decoration:underline;
 }
@@ -525,3 +539,270 @@ table.team th, table.structure th {
   text-align: right;
   font-size: 120%;
 }
+
+.formerror {
+	display: inline;
+	color: red;
+	margin-left: 3px;
+}
+
+#usertable th,
+#usertable td {
+  border: solid thin;
+  padding: 0.5rem 0.5rem;
+}
+
+#usertable td {
+	white-space: nowrap;
+	text-align: left;
+}
+
+.edituser,
+.deleteuser {
+	display: inline
+}
+
+form {
+	display: table;
+	border-color: white;
+	border-style: solid;
+	padding: 10px;
+}
+form div {
+	display: table-row;
+
+}
+form div label {
+	display: table-cell;
+	text-align: right;
+	padding: 5px;
+}
+form div input {
+	display: table-cell;
+}
+form div div {
+	display: table-cell;
+}
+form div ul {
+	display: table-cell;
+	text-align: left;
+}
+form div ul li {
+	list-style-type: none;
+	text-align: left;
+}
+
+#user_info, #adminlink, #logoutlink{
+	width: 292px;
+	float: left;
+}
+#submit {
+	text-align: right;
+}
+
+#adminlink {
+	text-align: right;
+}
+#logoutlink {
+	text-align: center;
+}
+#buybackcalculator {
+	border-style: none;
+}
+
+.api-list {
+  display: table;
+}
+
+.api {
+  display: table-row;
+  height: 26px;
+  font-size: 16px;
+  font-family: monospace;
+  border: thin;
+  border-style: solid;
+  border-color: white;
+}
+
+.apikey {
+  display: table-cell;
+  vertical-align: middle;
+
+}
+
+.verification {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 12px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.deleteApi {
+  background: url(/images/icons/edit-delete.png);
+  background-size: 12px 12px;
+  height: 16px;
+  width: 16px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#srpinfo {
+  background-color: rgba(10,10,10,0.8);
+  margin: 10px;
+  padding: 15px;
+  border-style: solid;
+  border-width: thin;
+}
+
+#srpinfo ol li {
+  margin: 0px 20px;
+}
+
+h4 {
+  font-size: 16px;
+  color: #0870d7;
+}
+
+h5 {
+  font-size: 14px;
+  margin: 4px 0px;
+}
+
+.contentsection h3
+{
+
+  background: none;
+  font: 20px Arial, Helvetica, sans-serif;
+  color: white;
+  height: 24px;
+  width: 800px;
+  text-align: left;
+  line-height: 24px;
+  font-weight: bold;
+  padding: 10px 0px 10px 0px;
+}
+
+
+
+
+#content_bottom {
+  width: 900px;
+  float:left;
+}
+
+a.zkblink {
+   display: block;
+   height: 16px;
+   width: 16px;
+   background-image: url(/images/icons/wreck.png);
+   text-indent: -9999px;
+   overflow: hidden;
+}
+
+.killmails img {
+  max-height: 40px;
+}
+
+.killmails th {
+  text-align: left;
+}
+
+.killmails tr:nth-child(even) {
+  background-color: black;
+}
+
+.killmails table {
+  width: 400px;
+}
+.killmails td, .killmails th {
+  padding: 1px 4px;
+}
+
+.dateline {
+  color: lightgray;
+  font-weight: normal;
+  font-style: italic;
+  height: 20px;
+}
+
+.contentsection{
+  background-color: rgba(8,112,215,.25);
+  padding: 5px;
+  margin-top: 6px;
+}
+
+.leftcolumn, .rightcolumn {
+  width: 415px;
+  float: left;
+}
+
+.rightcolumn {
+  margin-left: 30px;
+}
+
+#kills, #losses {
+
+  background-color: rgba(8,112,215,.25);
+  padding: 5px;
+
+}
+
+.victimname {
+  font-weight: bold;
+}
+
+.victimship {
+  font-weight: thin;
+  font-style: italic;
+  color: lightgray;
+}
+
+td.ship, td.victimimg {
+  background-color: black;
+}
+
+.hidable {
+  display: none;
+}
+
+.dropdown > h3 {
+
+}
+
+.dropdown > h3.dropped {
+
+}
+
+body {
+    padding: 20px;
+}
+
+.droparrow {
+   height: 0;
+   width: 0;
+   margin-left: 390px;
+   margin-top: -18px;
+   border: 8px solid transparent;
+   border-top-color: #9D9D9D;
+}
+.droparrow.up {
+   border-top: transparent;
+
+   border-bottom-color: #9D9D9D;
+}
+
+.redditcomment {
+  color: lightgray;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.SRPButton {
+
+}
+
+.SRPButton.srprequested {
+  color: red;
+}
+/*

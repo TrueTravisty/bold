@@ -1,0 +1,35 @@
+extends ../layout.jade
+
+block content
+  h2 Users
+  table#usertable
+    thead
+      tr
+        th Username
+        th Displayname
+        th Character names
+        if canroles
+          th Roles
+        th Actions
+    tbody
+      each u in users
+        tr
+          td #{u.username}
+          td #{u.displayname}
+          td
+            if u.characternames
+              each character in u.characternames
+                .charactername
+                  character
+          if canroles
+            td
+              if u.roles
+                each role in u.roles
+                  .role #{role}
+          td
+            if canedit
+              .edituser
+                a(href='/admin/users/' + u.username) Edit
+            if candelete
+              .deleteuser
+                a(href='/admin/users/' + u.username + 'delete=yes') Delete
