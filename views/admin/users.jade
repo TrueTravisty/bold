@@ -2,6 +2,7 @@ extends ../layout.jade
 
 block content
   h2 Users
+  div #{users.length} users:
   table#usertable
     thead
       tr
@@ -10,7 +11,6 @@ block content
         th Character names
         if canroles
           th Roles
-        th Actions
     tbody
       each u in users
         tr
@@ -26,10 +26,3 @@ block content
               if u.roles
                 each role in u.roles
                   .role #{role}
-          td
-            if canedit
-              .edituser
-                a(href='/admin/users/' + u.username) Edit
-            if candelete
-              .deleteuser
-                a(href='/admin/users/' + u.username + 'delete=yes') Delete
