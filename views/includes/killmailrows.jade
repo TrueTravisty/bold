@@ -9,9 +9,9 @@ each killmail in killmails
         = curdate.toDateString()
   tr.kill(data-id=killmail.killID data-km=killmail)
     td
-      - h = kd.getUTCHours()
+      - h = kd.getHours()
       - if (h < 10) h = "0" + h;
-      - m = kd.getUTCMinutes()
+      - m = kd.getMinutes()
       - if (m < 10) m = "0" + m;
       = h + ":" + m
       if killmail.zkb
