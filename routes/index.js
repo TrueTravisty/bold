@@ -249,8 +249,8 @@ router.get('/bnireddit', requireCorp, function(req, res, next) {
 })
 
 router.get('/fireside201504', requireCorp, function(req,res,next) {
-  var filePath = path.join (__dirname, '..','fireside201504.mp3');
-  var stat = fs.statSync(filePath);
+  var filePath = path.join (__dirname, '..','files','fireside201504.mp3');
+  var stat = fs.statSync(filePath);  
 
   res.writeHead(200, {
     'Content-Type': 'audio/mpeg',

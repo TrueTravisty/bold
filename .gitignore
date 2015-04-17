@@ -1,5 +1,6 @@
 # Ignore slideshow folder (populated on site)
 public/images/slideshow/**
+files/**
 .metadata/**
 
 # Ignore local debug log
