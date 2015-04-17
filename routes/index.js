@@ -250,7 +250,7 @@ router.get('/bnireddit', requireCorp, function(req, res, next) {
 
 router.get('/fireside201504', requireCorp, function(req,res,next) {
   var filePath = path.join (__dirname, '..','files','fireside201504.mp3');
-  var stat = fs.statSync(filePath);  
+  var stat = fs.statSync(filePath);
 
   res.writeHead(200, {
     'Content-Type': 'audio/mpeg',
@@ -263,6 +263,10 @@ router.get('/fireside201504', requireCorp, function(req,res,next) {
 
 
 function requireCorp(req, res, next) {
+  if (!req.isAuthenticated()) {
+    req.session.loginredirect = req.originalUrl;
+    return res.redirect('/login');
+  }
   if (!req.can('seecorppage')) {
     var err = new Error("This page is only for members of corp");
     err.status=403;
