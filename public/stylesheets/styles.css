@@ -818,10 +818,6 @@ a#loginlink {
   text-indent: -9999px;
   overflow: hidden;
   margin-top: 3px;
-  position: absolute;
-  top: 39px;
-  left: 706px;
-  z-index: 100;
-
+  margin-left: -11px;
 }
 /*
