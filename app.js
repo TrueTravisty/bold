@@ -159,6 +159,21 @@ app.set('startZkillBoardSchedule', function registerZbkScheduler() {
         });
       });
   });
+
+  var daily = new schedule.RecurrenceRule();
+  daily.hour = [now.getHours(), (now.getHours() + 12)%24];
+  daily.minute = (now.getMinutes() + 8) % 60;
+  var k = schedule.scheduleJob(daily, function() {
+    console.log("Running bi-daily catchup of last 48 hours");
+    zkbApi.dailyCatchup(Settings.settings, false, function(err) {
+      if (err) return console.log ('Error while fetching zKillBoard data: ' + err)
+      console.log("Fetched lossmails (daily)");
+      zkbApi.dailyCatchup(Settings.settings, true, function(err){
+          if(err) return console.log ('Error while fetching zKillBoard data: ' + err)
+          console.log("Fetched killmails (daily)")
+      });
+    });
+  });
 });
 
 
