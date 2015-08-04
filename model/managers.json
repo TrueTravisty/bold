@@ -5,10 +5,10 @@
     { "name": "Trueno Crux", "ID": "94439685", "title": "Officer", "function": "" },
     { "name": "Tierdar", "ID": "1217760776", "title": "Officer", "function": "Security, SRP"},
     { "name": "Yaldo Asanari", "ID": "94314126", "title": "Officer", "function": "IT"},
-    { "name": "Aznwithbeard", "ID": "1253509070", "title": "Officer", "function": "Millitary"},
     { "name": "Jasper Madullier", "ID": "94284621", "title": "Officer", "function": "Recruitment, Logistics"},
     { "name": "MSpamQ OfTheEnts", "ID": "93630773", "title": "Officer", "function": "Recruitment, Logistics"},
-    { "name": "Lenny Kravitz2", "ID": "628327755", "title": "Officer", "function": "Diplo"},
+    { "name": "Lenny Kravitz2", "ID": "628327755", "title": "Director", "function": "Diplo"},
     { "name": "Marauder84", "ID": "1800752466", "title": "Officer", "function": ""},
-    { "name": "Elcirith Atreides", "ID": "92085304", "title": "Officer", "function": ""}
+    { "name": "Elcirith Atreides", "ID": "92085304", "title": "Officer", "function": ""},
+    { "name": "Scythian Painspike", "ID": "110914152", "title": "Officer", "function": "Millitary"}
     ]
