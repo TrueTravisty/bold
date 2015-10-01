@@ -38,5 +38,14 @@
     "reddit-subreddit" : {
       "permission": "managesubreddit",
       "defaultvalue": "braveoperations"
+    },
+    "slack-api" : {
+      "permission": "manageslack",
+      "defaultvalue": ""
+    },
+    "slack-domain" : {
+      "permission": "manageslack",
+      "defaultvalue": ""
     }
+
 }
