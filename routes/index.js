@@ -9,6 +9,7 @@ var flash = require('connect-flash');
 var passport = require('passport');
 var zkb = require('./../lib/zkbApi');
 var reddit = require('../lib/reddit');
+var slack = require('../lib/slackApi');
 
 
 
@@ -35,7 +36,6 @@ router.get('/buyback', function(req, res) {
     current: 'buyback',
   });
 });
-
 
 router.get('/info/newtobold', function(req, res) {
   res.render('newtocorp', {
@@ -261,6 +261,21 @@ router.get('/fireside201504', requireCorp, function(req,res,next) {
   readStream.pipe(res);
 });
 
+router.get('/slack', requireCorp, function(req,res,next) {
+  res.render('joinslack');
+});
+
+router.post('/slack', requireCorp, function(req, res, next) {
+  var settings = req.app.get("settings").settings;
+  var member = {
+    email: req.body.email,
+    name: res.locals.username
+  }
+  slack.inviteMember(settings, member, function(err, result) {
+    if (err) return res.end("ERROR");
+    else return res.end(result);
+  })
+});
 
 function requireCorp(req, res, next) {
   if (!req.isAuthenticated()) {

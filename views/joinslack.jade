@@ -1,0 +1,17 @@
+extends ./layout.jade
+
+append bodyscripts
+  script(type="text/javascript", src="/javascripts/slack.js")
+
+block content
+  h2 Join us on Slack
+  div.
+    Slack is the application we use to chat outside of the Eve client.
+    You can join us by entering an email address here and click join.
+    An invite will be sent to the email address you enter.
+
+  div
+    form(id="slackform", method="POST")
+      label E-mail address:&nbsp;
+      input(id="email")
+      button(id="slack_submit", type="submit") Get Invite
