@@ -20,19 +20,19 @@ to import:
 
 
 
-to export from mySql:
-  (SELECT 'typeID','groupID','typeName','description','mass','volume',
-  'capacity','portionSize','raceID','basePrice','published','marketGroupID','chanceOfDuplicating')
+to export from mySql: (do a select * to find fields, but remove description)
+  (SELECT 'typeID','groupID','typeName','mass','volume',
+  'capacity','portionSize','raceID','basePrice','published','marketGroupID','iconID','soundID')
   union
-  (SELECT * FROM tiamat.invTypes
+  (SELECT typeID,groupID,typeName,mass,volume,
+  capacity,portionSize,raceID,basePrice,published,marketGroupID,iconID,soundID FROM vanguard.invTypes
   INTO OUTFILE '/Users/torlivar/dbdata/invTypes.csv'
   FIELDS ENCLOSED BY '"' TERMINATED BY ';'
   LINES TERMINATED BY '\n');
 
-  (SELECT 'groupID', 'categoryID','groupName','description','iconID','useBasePrice','allowManufacture',
-  'allowRecycler', 'anchored','anchorable','fittableNonSingleton','published')
+  (SELECT 'groupID', 'categoryID','groupName','iconID','useBasePrice','anchored','anchorable','fittableNonSingleton','published')
   union
-  (SELECT * FROM tiamat.invGroups
+  (SELECT * FROM vanguard.invGroups
   INTO OUTFILE '/Users/torlivar/dbdata/invGroups.csv'
   FIELDS ENCLOSED BY '"' TERMINATED BY ';'
   LINES TERMINATED BY '\n');
