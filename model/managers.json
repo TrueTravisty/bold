@@ -10,5 +10,7 @@
     { "name": "Lenny Kravitz2", "ID": "628327755", "title": "Director", "function": "Diplo"},
     { "name": "Marauder84", "ID": "1800752466", "title": "Officer", "function": ""},
     { "name": "Elcirith Atreides", "ID": "92085304", "title": "Officer", "function": ""},
-    { "name": "Scythian Painspike", "ID": "110914152", "title": "Officer", "function": "Millitary"}
+    { "name": "Scythian Painspike", "ID": "110914152", "title": "Officer", "function": "Millitary"},
+    { "name": "Nammo", "ID": "822515395", "title": "Officer", "function": "Millitary (EU)" },
+    { "name": "Edwarde Teache", "ID": "93687264", "title": "Officer", "function": "Millitary (US)"}
     ]
