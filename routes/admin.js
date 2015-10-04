@@ -6,6 +6,7 @@ var slideshow = require('./slideshow');
 var permissions = require('../model/permissions.json');
 var zkb = require('./../lib/zkbApi');
 var Insurance = require('../model/Insurance');
+var slack = require('../lib/slackApi');
 
 var roles = [];
 var unique = {};
@@ -187,6 +188,17 @@ router.get('/settings/:setting', function(req,res,next){
   var setting = req.settingName;
   var Settings = req.app.get("settings");
   res.end(Settings.settings[setting]);
+});
+
+router.get('/slack', function(req,res,next) {
+  var settings = req.app.get("settings").settings;
+  ;
+  slack.getMemberList(settings, function(err, members) {
+    var active = members.filter(function(item, index, array) {return !item.deleted});
+    var disabled = members.filter(function(item, index, array) {return item.deleted});
+    if (err) return next(err);
+    res.render('admin/slack', {members: active, disabled: disabled});
+  });
 });
 
 router.get('/srp/shiplist', requireRole('managesrp'), function(req, res, next) {

@@ -1,0 +1,22 @@
+extends ../layout.jade
+
+block content
+  h2 Slack members
+  table
+    thead
+      tr
+        th Name
+    tbody
+      each member in members
+        tr
+          td= member.profile.real_name_normalized
+
+  h2 Disabled members:
+  table
+    thead
+      tr
+        th Name
+    tbody
+      each member in disabled
+        tr
+          td= member.profile.real_name_normalized
