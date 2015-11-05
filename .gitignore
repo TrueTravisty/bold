@@ -5,3 +5,7 @@ files/**
 
 # Ignore local debug log
 npm-debug.log
+
+# Local files on server
+log/
+pid/
