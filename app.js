@@ -30,6 +30,19 @@ var Character = require('./model/Character');
 var schedule = require('node-schedule');
 var zkbApi = require('./lib/zkbApi');
 
+var env = null;
+
+try{
+    if(fs.statSync('env.json').isFile()){    
+      var env = JSON.parse(fs.readFileSync('env.json', 'utf8'));
+      if (env) {
+        console.log(JSON.stringify(env, null, 2));
+        for (var attrname in env) { process.env[attrname] = env[attrname] }
+      }  
+    }
+} catch (e) {
+  console.log("Could not read env.json")
+}
 
 ;
 // use static authenticate method of model in LocalStrategy
