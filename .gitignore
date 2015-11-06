@@ -9,3 +9,7 @@ npm-debug.log
 # Local files on server
 log/
 pid/
+
+# Ignore env for things not going into SCC
+env.json
+

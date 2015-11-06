@@ -1,3 +1,34 @@
+var fs = require('fs');
+var env = null;
+
+try{
+    if(fs.statSync('env.json').isFile()){    
+      var env = JSON.parse(fs.readFileSync('env.json', 'utf8'));
+      if (env) {
+        for (var attrname in env) { process.env[attrname] = env[attrname] }
+      }  
+    }
+} catch (e) {
+  console.log("Could not read env")
+}
+
+
+
+var seatdb = require('./lib/seatdb');
+
+seatdb.getMembers(98276273, function(err, characters) {
+  if (err) return console.log(err);
+  for (var id in characters) {
+    console.log(characters[id].name + " " + characters[id].isOk + " " + characters[id].startDateTime);
+  }
+  console.log("Count: " + characters.length);
+  process.exit();
+});
+
+
+/*
+
+
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/boldsite_test');
 
@@ -86,3 +117,4 @@ model.remove({}, function(err) {
   });
 
 });
+*/

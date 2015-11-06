@@ -10,5 +10,6 @@
     "managesrp" : ["srpmanager"],
     "managesubreddit" : ["superadmin"],
     "addreddituser" : ["corp"],
-    "seecorppage" : ["corp"]
+    "seecorppage" : ["corp"],
+    "roster" : ["officer"]
 }
