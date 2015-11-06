@@ -114,7 +114,7 @@ app.use('/', routes);
 app.use('/', users);
 app.use('/api/', apiRoute);
 app.use('/', buyback);
-app.use('/', roster);
+app.use('/roster/', roster);
 app.use('/admin/', admin);
 
 
