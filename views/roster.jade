@@ -1,35 +1,41 @@
 extends ./layout.jade
 
+append bodyscripts
+    script(type="text/javascript", src="/javascripts/jquery.tablesorter.js")
+    script(type="text/javascript", src="/javascripts/roster.js")
+    
+    
+
 block content
-	table.roster
-		thead
-			th Name
-			th Joined
-			th Last Logon
-			th Last Logoff
-			th Location
-			th Ship
-			th
-		tbody
-			each member in members 
-				tr
-					td 
-						= member.name
-					td 
-						= member.startDateTime
-					td
-						= member.logonDateTime
-					td
-						= member.logoffDateTime
-					td
-						= member.Location
-					td
-						= member.shipType
-					td
-						if member.isOk
-							div.keyok Key Ok
-						else
-							div.keynotok Key not Ok
-						
-						
-					
+    table#rosterTable.tablesorter
+        thead
+            th Name
+            th Joined
+            th Last Logon
+            th Last Logoff
+            th Location
+            th Ship
+            th
+        tbody
+            each member in members 
+                tr
+                    td 
+                        = member.name
+                    td 
+                        = member.startDateTime.toISOString().substr(0,10)
+                    td
+                        = member.logonDateTime.toISOString().substr(0,10)
+                    td
+                        = member.logoffDateTime.toISOString().substr(0,10)
+                    td
+                        = member.location
+                    td
+                        = member.shipType
+                    td
+                        if member.isOk
+                            div.keyok Key Ok
+                        else
+                            div.keynotok Key not Ok
+                        
+                        
+                    
