@@ -1,3 +1,17 @@
+var fs = require('fs');
+try{
+    if(fs.statSync('env.json').isFile()){    
+      var env = JSON.parse(fs.readFileSync('env.json', 'utf8'));
+      if (env) {
+        for (var attrname in env) { process.env[attrname] = env[attrname] }
+      }  
+    }
+} catch (e) {
+  console.log("Could not read env.json")
+}
+
+
+
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
@@ -13,6 +27,7 @@ var users = require('./routes/users');
 var apiRoute = require('./routes/api');
 var buyback = require('./routes/buyback');
 var admin = require('./routes/admin');
+var roster = require('./routes/roster');
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -32,17 +47,7 @@ var zkbApi = require('./lib/zkbApi');
 
 var env = null;
 
-try{
-    if(fs.statSync('env.json').isFile()){    
-      var env = JSON.parse(fs.readFileSync('env.json', 'utf8'));
-      if (env) {
-        console.log(JSON.stringify(env, null, 2));
-        for (var attrname in env) { process.env[attrname] = env[attrname] }
-      }  
-    }
-} catch (e) {
-  console.log("Could not read env.json")
-}
+
 
 ;
 // use static authenticate method of model in LocalStrategy
@@ -109,7 +114,9 @@ app.use('/', routes);
 app.use('/', users);
 app.use('/api/', apiRoute);
 app.use('/', buyback);
+app.use('/', roster);
 app.use('/admin/', admin);
+
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

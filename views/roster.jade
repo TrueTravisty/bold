@@ -1,0 +1,35 @@
+extends ./layout.jade
+
+block content
+	table.roster
+		thead
+			th Name
+			th Joined
+			th Last Logon
+			th Last Logoff
+			th Location
+			th Ship
+			th
+		tbody
+			each member in members 
+				tr
+					td 
+						= member.name
+					td 
+						= member.startDateTime
+					td
+						= member.logonDateTime
+					td
+						= member.logoffDateTime
+					td
+						= member.Location
+					td
+						= member.shipType
+					td
+						if member.isOk
+							div.keyok Key Ok
+						else
+							div.keynotok Key not Ok
+						
+						
+					
