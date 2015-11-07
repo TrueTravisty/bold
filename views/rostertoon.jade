@@ -6,7 +6,7 @@ append bodyscripts
 block content
     div#memberCard(class= member.isOk ? "memberapiok" : "memberapibad")
         h1
-            =member.name
+            =member.name ? member.name : member.characterName
         img.toonimage(src="/eveimages/" + member.characterID)
         
         if member.alts
@@ -27,6 +27,6 @@ block content
                             td
                                 = alt.corporationName
        
-        //- pre
-        //-    = JSON.stringify(member, null, 2)
+         //- pre
+         //-    = JSON.stringify(member, null, 2)
             
