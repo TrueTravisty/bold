@@ -868,3 +868,26 @@ background-color: #00B6FF;
 .keynotok {
     color: red;
 }
+
+#memberCard {
+    padding: 5px;
+    border-style: inset;
+}
+
+#memberCard img {
+    margin-top: 10px;
+}
+
+#memberCard.memberapibad img.toonimage {
+    border-style: solid;
+    border-color: red;
+    border-width: 2px;
+}
+
+.alttable img {
+    width: 50px;    
+}
+
+.alttable tr.main {
+    background-color: darkblue;
+}

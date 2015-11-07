@@ -1,0 +1,32 @@
+extends ./layout.jade
+
+append bodyscripts
+    
+
+block content
+    div#memberCard(class= member.isOk ? "memberapiok" : "memberapibad")
+        h1
+            =member.name
+        img.toonimage(src="/eveimages/" + member.characterID)
+        
+        if member.alts
+            h2 Known Alts
+            table.alttable
+                thead
+                    th
+                    th Name
+                    th Corportation
+                tbody
+                    each alt in member.alts
+                        tr(class=member.main.characterID == alt.characterID ? "main" : "alt")
+                            td
+                                img(src="/eveimages/" + alt.characterID)
+                            td
+                                a(href=alt.characterID)
+                                    = alt.characterName
+                            td
+                                = alt.corporationName
+       
+        //- pre
+        //-    = JSON.stringify(member, null, 2)
+            

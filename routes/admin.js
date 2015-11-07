@@ -26,11 +26,6 @@ router.use(function(req,res,next) {
     err.status = 401;
     return next(err);
   }
-  res.locals.mainpages.push({
-        path: '/admin',
-        name: 'admin',
-        displayname: 'Admin'
-      })
   return next();
 });
 

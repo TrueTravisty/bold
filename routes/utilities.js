@@ -73,6 +73,14 @@ router.use(function(req,res,next) {
       displayname: 'SRP'
     })
   }
+  
+  if (req.can('roster')) {
+      res.locals.mainpages.push({
+          path: '/roster',
+          name: 'roster',
+          displayname: 'Roster'
+      })
+  }
 
   res.locals.flash = {
     errors: [],

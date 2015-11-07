@@ -12,11 +12,7 @@ router.use(function(req,res,next) {
     err.status = 401;
     return next(err);
   }
-  res.locals.mainpages.push({
-        path: '/roster',
-        name: 'roster',
-        displayname: 'Roster'
-      })
+  
   return next();
 });
 
@@ -28,10 +24,26 @@ router.get('/', function(req, res, next) {
 		if (err) return next(err);
 		
 		res.render('roster',
-			{ members: members }		
+			{ members: members, current: 'roster' }		
 		);
 	});
 	
+});
+
+router.param('member', function(req, res, next, id) {
+   seat.getCharacterInfo(id, function(err, character) {
+       if (err) return next(err);
+       req.member = character;
+       return next();
+   });
+   
+});
+
+router.get('/:member', function(req, res, next) {
+   res.render('rostertoon', {
+       current: 'roster',
+       member: req.member
+   });
 });
 
 module.exports = router;

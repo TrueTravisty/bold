@@ -20,7 +20,8 @@ block content
             each member in members 
                 tr
                     td 
-                        = member.name
+                        a(href='/roster/' + member.characterID)
+                            = member.name
                     td 
                         = member.startDateTime.toISOString().substr(0,10)
                     td
