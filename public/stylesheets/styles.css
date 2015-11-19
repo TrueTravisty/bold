@@ -891,3 +891,46 @@ background-color: #00B6FF;
 .alttable tr.main {
     background-color: darkblue;
 }
+
+.Comments {
+    border-style: solid;
+}
+
+.Comment {
+    margin-bottom: 5px;
+    background-color: blue;
+}
+
+.commentheader {
+    background-color: blue;
+}
+
+.Comment .text {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: white;
+    color: black;
+}
+
+.Comment .action {
+    float: right;
+    padding-right: 4px;
+    
+    //margin-top: -20px;
+    
+}
+
+#newComment textarea {
+  width: 820px;
+  height: 75px;
+}
+
+#newComment button {
+  margin-top: 5px;
+  width: 150px;
+  height: 28px;
+  background-color: #0870D7;
+  color: white;
+  border-radius: 3px;
+  border: 1px black;
+}

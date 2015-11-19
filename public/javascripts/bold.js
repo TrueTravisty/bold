@@ -175,3 +175,54 @@ function listKills(kills) {
   }
   return result;
 }
+
+function ammendComments(data) {
+  var d = $(data);
+  var deletes = d.find('.actiondelete');
+  deletes.click(function(){
+        var comment = $(this).parents('.Comment');
+        var characterid = $('#RosterComments').data('id');
+        var id = comment.data('id');
+        $.ajax({
+            url: '/roster/' + characterid + '/comment/' + id ,
+            type: 'DELETE',
+            success: function(result) {
+                $.growl.notice({message: "Comment deleted"})
+                $.get('/roster/' + characterid + '/comments', function(data) {
+                        $('#existingComments').html(ammendComments(data));
+                });
+            }
+        }).fail(function(error) {
+            var msg = "";
+            if (error && error.responseText)
+                msg = ": " + error.responseText;
+            $.growl.error({message: "Could not delete comment" + msg })
+        });           
+    });
+  return d;
+}
+
+$(function(){
+    if ($('#RosterComments').length > 0) {
+        var id = $('#RosterComments').data('id');
+        $.get('/roster/' + id + '/comments', function(data) {
+            $('#existingComments').html(ammendComments(data));
+        });
+        
+         $("#newRosterComment").submit(function(event) {
+            event.preventDefault();
+            var text = $("#roster-comment-text").val();
+            $.post('/roster/' + id + '/comments',
+                {
+                    text: text
+                }, function(data) {
+                    $('#existingComments').html(ammendComments(data));
+                    $("#roster-comment-text").val("");
+                }
+            ).error(function() {
+                $.growl.error({message: "There was an error adding the comment."})
+            });
+            return false;
+        });        
+    }
+})
