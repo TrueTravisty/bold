@@ -1,0 +1,10 @@
+each comment in comments 
+    .Comment(data-id=comment.id)
+        .commentheader Comment by #{comment.user} at #{comment.updated_at}
+            if comment.editable
+                // .action
+                //     a.actionedit(href="#comments") edit
+                .action
+                    a.actiondelete(href="#comments") delete
+        .text 
+            = comment.text

@@ -26,7 +26,20 @@ block content
                                     = alt.characterName
                             td
                                 = alt.corporationName
+                                
+        a(name=comments)
+            h2 Comments
+        #RosterComments(data-id=member.characterID)
+            #existingComments
+                
+
+            #newComment
+                form#newRosterComment
+                    textarea#roster-comment-text(placeholder="Enter new comment here...")
+                    button#submitComment(type="submit") Submit comment
+                        
+                
        
-         //- pre
-         //-    = JSON.stringify(member, null, 2)
+        //  pre
+        //     = JSON.stringify(member, null, 2)
             
