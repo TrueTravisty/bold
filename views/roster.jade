@@ -14,7 +14,7 @@ block content
             th Last Logon
             th Last Logoff
             th Location
-            th Ship
+            th Notes
             th
         tbody
             each member in members 
@@ -31,7 +31,9 @@ block content
                     td
                         = member.location
                     td
-                        = member.shipType
+                        if member.comments
+                            a(href='/roster/' + member.characterID + '#comments')
+                                = member.comments
                     td
                         if member.isOk
                             div.keyok Key Ok
