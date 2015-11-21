@@ -35,10 +35,10 @@ block content
                             a(href='/roster/' + member.characterID + '#comments')
                                 = member.comments
                     td
-                        if member.isOk
-                            div.keyok Key Ok
+                        if member.isOk || member.exempt
+                            div.keyok Not missing
                         else
-                            div.keynotok Key not Ok
+                            div.keynotok Missing key
                         
                         
                     
