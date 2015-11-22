@@ -226,3 +226,58 @@ $(function(){
         });        
     }
 })
+
+function setExemptStatus(){
+    var id = $('#exemptStatus').data('id');
+    $.get('/roster/' + id + '/exemption', function(data) {
+        var exemptStatus = $('<div class=apiexempt></div>');
+        if (data) {                
+            exemptStatus.append($('<h2>API Exempt</h2>'));
+            exemptStatus.append($('<p>' + data + '</p>'));
+            var remove = $('<a href="#">Remove</a>');
+            remove.click(function() {
+                 $.ajax({
+                        url: '/roster/' + id + '/exemption',
+                        type: 'DELETE',
+                        success: function(result) {
+                            $.growl.notice({message: "API exemption removed"})
+                            $('#exemptStatus').html("");
+                            setExemptStatus();
+                        }
+                });
+            });     
+            exemptStatus.append(remove);                           
+        } else {
+            exemptStatus.append($('<h2>Not API Exempt</h2>'));
+            var exemptForm = $('<form id="exemptionForm"/>');
+            exemptForm.append($('<label>Reason for exemption:</label>'));
+            exemptForm.append($('<input id="exemption_reason"/>'));
+            exemptForm.append($('<button type="submit">Register exemption</button>'));
+            exemptForm.submit(function(event) {
+                event.preventDefault();
+                var reason = $("#exemption_reason").val();
+                if (reason.length > 0)
+                {
+                    $.post('/roster/' + id + '/exemption', { reason: reason}, 
+                    function(data) {
+                        $('#exemptStatus').html("");
+                        setExemptStatus();
+                    }).error(function() {
+                        $.growl.error({message: "There was an error adding the exemption"})
+                    })
+                } else {
+                    $.growl.warning({message: "Please provide a reason."})
+                }
+                return false;
+            });
+            exemptStatus.append(exemptForm);
+        }
+        $('#exemptStatus').append(exemptStatus);      
+    })
+}
+
+$(function(){
+    if ($('#exemptStatus').length > 0) {
+        setExemptStatus();
+    }
+})

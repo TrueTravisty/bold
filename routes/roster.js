@@ -38,7 +38,7 @@ router.param('member', function(req, res, next, id) {
                character.comments[i].editable = false && (req.can('administrate') || req.username == character.comments[i].user);
            }
        }
-       req.can('administrate')
+       
        req.member = character;
        return next();
    });
@@ -101,5 +101,43 @@ router.delete('/:member/comment/:comment', function(req,res,next) {
                     
     });        
 });
+
+router.get('/:member/exemption', function(req, res, next) {
+    if (!req.member) {
+        var err = Error("Member not found");
+        err.status(404);
+        return next(err);
+    }
+    //return res.send(JSON.stringify(req.member));
+    seat.hasExemption(req.member.characterID, function(err, exemption) {
+       if (err) return next (err);
+       if (exemption && exemption.length == 1 && exemption[0].reason) return res.send(exemption[0].reason);
+       return res.send("");  
+    });
+});
+
+router.post('/:member/exemption', function(req, res, next) {
+    if (!req.member) {
+        var err = Error("Member not found");
+        err.status(404);
+        return next(err);
+    }
+    seat.addExcemption(req.member.characterID, req.body.reason, function(err) {
+        if (err) return next (err);
+        res.status(201).send("");
+    })
+});
+
+router.delete('/:member/exemption', function(req, res, next) {
+   if (!req.member) {
+        var err = Error("Member not found");
+        err.status(404);
+        return next(err);
+    }
+    seat.addExcemption(req.member.characterID, "", function(err) { // empty reason will be treated as no exemption
+        if (err) return next (err);
+        res.status(201).send("");
+    })
+})
 
 module.exports = router;
