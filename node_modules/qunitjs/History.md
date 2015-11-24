@@ -1,3 +1,61 @@
+
+1.20.0 / 2015-10-27
+==================
+
+  * Assert: Exposes assert.raises() to the global scope
+  * Assert: Add a calls count parameter on assert.async
+  * Build: Improve grunt speed using grunt-concurrent
+  * Core: Implement QUnit.only
+  * Core: Support Symbol types on QUnit.equiv
+  * Core: QUnit.start fails if called with a non-numeric argument
+  * Core: Implement Nested modules
+  * Core: Equivalency for desdendants of null constructors
+  * HTML Reporter: Adds indicator for filtered test
+  * HTML Reporter: Collapse details for successive failed tests
+  * Test: Fix regression when a failing test canceled the module hooks
+  * Tests: Isolate and improve tests for Object equivalency
+  * Tests: Split browserstack runs on CI to avoid timeout errors
+
+1.19.0 / 2015-09-01
+==================
+
+  * Assert: Add support to ES6' Map and Set equiv objects
+  * Build: Enable IRC notifications for Travis CI
+  * Build: Add 'Readme' to commitplease components
+  * Build: Remove unintended QUnit global export on Node
+  * Build: Remove testSwarm job
+  * Core: Implement QUnit.stack
+  * Dump: Escape backslash when quoting strings
+  * HTML Reporter: Avoid readyState issue with PhantomJS
+  * HTML Reporter: HTML reporter enhancements for negative asserts
+  * HTML Reporter: Show diff only when it helps
+  * Tests: Avoid loosen errors on autostart test
+  * Tests: HTML Reporter tests are now isolated with reordering disabled
+  * Tests: Rename stack error tests
+  * Test: Release module hooks to avoid memory leaks
+  * Test: Don't pass Promise fulfillment value to QUnit.start
+  * Test: Source Displayed Even for Passed Test
+
+1.18.0 / 2015-04-03
+==================
+
+  * Assert: throws uses push method only
+  * Assert: Fix missing test on exported throws
+  * Assert: Implements notOk to assert falsy values
+  * Core: More graceful handling of AMD
+  * Core: Simplify stack trace methods
+  * Core: Expose Dump maxDepth property
+  * Core: Expose QUnit version as QUnit.version property
+  * Core: Handle multiple testId parameters
+  * Dump: Fix .name/.property doublettes
+  * HTML Reporter: New diff using Google's Diff-Patch-Match Library
+  * HTML Reporter: Make it more obvious why diff is suppressed.
+  * HTML Reporter: Change display text for bad tests
+  * HTML Reporter: Fix checkbox and select handling in IE <9
+  * HTML Reporter: Fix test filter without any module
+  * HTML Reporter: Retain failed tests numbers
+  * Test: lowercase the valid test filter before using it
+
 1.17.1 / 2015-01-20
 ==================
 
