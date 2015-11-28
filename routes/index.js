@@ -15,19 +15,11 @@ var slack = require('../lib/slackApi');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  if (req.can('seecorppage')) {
-    res.render('index-member');
-  }
-  else {
-    Slideshow.find({}, function(err, photos) {
-      ;
-        res.render('index', {
-          title: 'Home',
-          current: 'home',
-          photos: photos
-           });
-    });
-  }
+  var tmpl = req.can('seecorppage') ? 'index-member' : 'index';
+  res.render(tmpl, {
+            title: 'Home',
+            current: 'home'
+  });
 });
 
 router.get('/frontslides.json', function(req,res) {

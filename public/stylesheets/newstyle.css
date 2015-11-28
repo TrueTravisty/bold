@@ -1,0 +1,57 @@
+.column img {
+    float: left;
+    padding-right: 20px;
+}
+
+.container {
+    max-width: 900px;    
+}
+
+.container .content {
+    border-radius: 5px;
+    background-color: rgba(51,51,51,.8);
+    padding: 12px 12px 0 12px;
+}
+
+#header {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+#logoimage {
+    float: left;
+    margin-right: 15px;
+}
+
+#logo {
+    width: 1032px;
+    margin: 0 auto;
+    height: 140px;
+    padding-top: 60px;
+    padding-left: 60px;
+}
+
+#logo h1 {
+    margin-top: 25px;
+}
+
+#logo h1 a {
+    font: 28px Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    display:block;
+}
+
+#logo a small {
+    font: 12px Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+#column_box p {
+    color: #AAAAAA;
+    padding-top: 5px;
+    font-size: 12px;
+}
