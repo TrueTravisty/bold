@@ -30,6 +30,16 @@ router.get('/', function(req, res) {
   }
 });
 
+router.get('/frontslides.json', function(req,res) {
+    Slideshow.find({}, function(err, photos) {
+        var slides = [];
+        var path = '/images/slideshow/';
+        for (var i = 0; i < photos.length; i++)
+            slides.push({image: path + photos[i].path, text: photos[i].caption});
+        res.json(slides);
+    });
+})
+
 router.get('/buyback', function(req, res) {
   res.render('buyback', {
     title: 'Buyback program',
