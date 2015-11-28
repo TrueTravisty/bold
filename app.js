@@ -75,6 +75,9 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'bold.ico')));
 app.use(logger('dev'));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/javascripts/', express.static(path.join(__dirname, 'node_modules/angular')));
+app.use('/javascripts/', express.static(path.join(__dirname, 'node_modules/angular-route')));
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
