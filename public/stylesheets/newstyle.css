@@ -74,3 +74,22 @@
 .clear{
 	clear: both;
 }
+
+#footer_top {
+    background-color: #303030;
+    border-radius: 10px;
+    padding: 5px;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+a#loginlink {
+  display: block;
+  height: 30px;
+  width: 195px;
+  background-image: url("/images/EVE_SSO_Login_Buttons_Small_White.png");
+  text-indent: -9999px;
+  overflow: hidden;
+  margin-top: 3px;
+  margin-left: -5px;
+}
