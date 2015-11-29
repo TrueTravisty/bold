@@ -10,6 +10,7 @@ try{
   console.log("Could not read env.json")
 }
 
+var mongodb = process.env.DATABASE || 'boldsite';
 
 
 var express = require('express');
@@ -33,7 +34,7 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/boldsite');
+mongoose.connect('mongodb://localhost/' + mongodb);
 
 var passport = require('passport'),
   OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
@@ -84,13 +85,14 @@ app.use(bodyParser.urlencoded());
 
 var sessionSecret = 'aløsjd fløaøljk os fpae afø ølsjf aø se ds';
 
+
 app.use(cookieParser(sessionSecret));
 app.use(session({
     secret: sessionSecret,
     saveUninitialized: true,
     resave: true,
     store: new MongoStore({
-      db : 'boldsite',
+      db : mongodb,
     })
   }));
 
