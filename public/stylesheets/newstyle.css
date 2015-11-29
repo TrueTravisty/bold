@@ -61,3 +61,12 @@
     background-repeat: no-repeat;
     padding-left: 45px;
 }
+
+#footer {
+  font-size: 10px;
+  text-align: center;
+}
+
+#footer p {
+    font-size: x-small;
+}

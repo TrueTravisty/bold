@@ -2,9 +2,10 @@ doctype transitional
 html(xmlns="http://www.w3.org/1999/xhtml" ng-app="bold")
     head
         block meta
-            meta(http-equiv="content-type",content="text/html; charset=utf-8")
-            meta(name="keywords", content="eve, eve corporation, mmo, eve online")
-            meta(name="description", content="Brave Operations - Lollipop Division is the premiere small gang PVP division within I N F A M O U S <GLORY>")
+        meta(http-equiv="X-UA-Compatible",content="IE=edge")
+        meta(name="keywords", content="eve, eve corporation, mmo, eve online")
+        meta(name="description", content="Brave Operations - Lollipop Division is the premiere small gang PVP division within I N F A M O U S <GLORY>")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no")
     
         title
             | Brave Operations - Lollipop Division
@@ -19,7 +20,7 @@ html(xmlns="http://www.w3.org/1999/xhtml" ng-app="bold")
             link(rel="icon", href="images/bold.ico", type="image/x-icon")
             link(rel="shortcut icon", href="bundles/boldhome/images/bold.ico", type="image/x-icon")
 
-    body
+    body.ng-cloak(ng-controller="MainCtrl")
         include ./includes/top_bar_ang.jade
         
         .container
@@ -27,13 +28,20 @@ html(xmlns="http://www.w3.org/1999/xhtml" ng-app="bold")
                 #logoimage
                     a(href='/')
                         img(src="/images/bold.png", width="128", height="128", alt="Brave Operations - Lollipop Division")
-                h1
-                    a(href='/') Brave Operations - Lollipop Division
+                .hidden-xs
+                    h1
+                        a(href='/') Brave Operations - Lollipop Division
                     a(href='/')
                         small Big things come in small packages
+            .visible-xl
+            
 
   
             block content
+        
+        .container    
+            #footer
+                include ./includes/notices.jade
     
         block bodyscripts
             script(type="text/javascript", src="/javascripts/jquery-1.11.1.js")

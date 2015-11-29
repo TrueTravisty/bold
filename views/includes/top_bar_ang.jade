@@ -1,18 +1,27 @@
+- var path = lookuppath
 nav.navbar.navbar-default.navbar-fixed-top.navbar-inner    
     .container
         .navbar-header
-            button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bold-navbar-collapse-1" aria-expanded="false")
+            button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bold-navbar-collapse-1" aria-expanded="false" ng-click="isCollapsed = !isCollapsed")
                 span.sr-only Toggle navigation
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
-            a.navbar-brand(href="#") BO-LD
-        #bold-navbar-collapse-1.collapse.navbar-collapse
+            a.navbar-brand.visible-xs(href="/") BO-LD
+        nav.hidden-xs
             ul.nav.navbar-nav
-                li.active
-                    a(href="/") Home
+                a.navbar-brand(href="/") BO-LD
+                - for (var i = 0; i < mainpages.length; i++) {
+                li(class=((!current && i == 0) || current == mainpages[i].name) ? "active" : undefined)
+                    a(href=mainpages[i].path)  #{mainpages[i].displayname}
+                    if current == mainpages[i]
                         span.sr-only (current)
-                li
-                    a(href="/team") Team
+                - }                
+        nav.visible-xl(uib-collapse="!isCollapsed")
+            ul.nav.navbar-nav
+                - for (var i = 0; i < mainpages.length; i++) {
+                li(class=((!current && i == 0) || current == mainpages[i].name) ? "active" : undefined)
+                    a(href=mainpages[i].path, ng-click="isCollapsed = !isCollapsed")  #{mainpages[i].displayname}
+                - }                
                     
