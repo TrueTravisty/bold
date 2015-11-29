@@ -70,3 +70,7 @@
 #footer p {
     font-size: x-small;
 }
+
+.clear{
+	clear: both;
+}
