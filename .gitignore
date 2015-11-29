@@ -13,3 +13,5 @@ pid/
 # Ignore env for things not going into SCC
 env.json
 
+# Ignore Mac folder info file
+.DS_Store

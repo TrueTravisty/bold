@@ -30,6 +30,19 @@ router.get('/', function(req, res, next) {
 	
 });
 
+router.get('/ang', function(req, res, next) {
+	var settings = req.app.get("settings").settings;
+	var corpId = settings['corp-id'];
+	
+	seat.getMembers(corpId, function(err, members) {
+		if (err) return next(err);
+		
+		res.render('roster-ang',
+			{ members: members, current: 'roster' }		
+		);
+	});
+});
+
 router.param('member', function(req, res, next, id) {
    seat.getCharacterInfo(id, function(err, character) {
        if (err) return next(err);
@@ -139,5 +152,7 @@ router.delete('/:member/exemption', function(req, res, next) {
         res.status(201).send("");
     })
 })
+
+
 
 module.exports = router;
