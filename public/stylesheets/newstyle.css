@@ -79,6 +79,7 @@
     background-color: #303030;
     border-radius: 10px;
     padding: 5px;
+    padding-top: 0px;
     margin-left: -5px;
     margin-right: -5px;
 }
@@ -92,4 +93,25 @@ a#loginlink {
   overflow: hidden;
   margin-top: 3px;
   margin-left: -5px;
+}
+
+.foot_pad .link {
+    padding-left: 30px;
+    min-height: 18px;
+    padding-bottom: 10px;
+}
+
+.foot_pad .reddit {
+    background: url(/images/bookmark-reddit-logo.png) no-repeat 0px 2px;
+}
+
+.ls{
+    list-style: none;
+    padding-left: 0px;
+}
+
+.ls li{
+    background: url(/images/ls1.gif) no-repeat 0px 6px;
+    margin-bottom: 8px;
+    padding-left: 15px;
 }
