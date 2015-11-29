@@ -18,24 +18,23 @@
     margin-bottom: 40px;
 }
 
-#logoimage {
+.logoimage {
     float: left;
     margin-right: 15px;
 }
 
-#logo {
-    width: 1032px;
+
+.logo {
     margin: 0 auto;
-    height: 140px;
     padding-top: 60px;
     padding-left: 60px;
 }
 
-#logo h1 {
+.logo h1 {
     margin-top: 25px;
 }
 
-#logo h1 a {
+.logo h1 a {
     font: 28px Arial, Helvetica, sans-serif;
     color: #ffffff;
     font-weight: bold;
@@ -43,11 +42,41 @@
     display:block;
 }
 
-#logo a small {
+.logo a small {
     font: 12px Arial, Helvetica, sans-serif;
     color: #ffffff;
     font-weight: normal;
     text-decoration: none;
+}
+
+.logo.visible-xs {
+    padding-left: 0px;
+    align-content: center;
+}
+
+.logo.visible-xs h1 {
+    font: 20px Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    display:block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.logo.visible-xs h2 {
+    font: 20px Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    display:block;
+    margin-top: 0px;
+}
+
+.logo.visible-xs h2 a {
+    color: #ffffff;
 }
 
 #column_box p {

@@ -24,17 +24,24 @@ html(xmlns="http://www.w3.org/1999/xhtml" ng-app="bold")
         include ./includes/top_bar_ang.jade
         
         .container
-            #logo
-                #logoimage
+            .logo.hidden-xs
+                .logoimage
                     a(href='/')
                         img(src="/images/bold.png", width="128", height="128", alt="Brave Operations - Lollipop Division")
-                .hidden-xs
-                    h1
-                        a(href='/') Brave Operations - Lollipop Division
+                h1
+                    a(href='/') Brave Operations - Lollipop Division
+                a(href='/')
+                    small Big things come in small packages
+            .logo.visible-xs
+                .logoimage-xs
                     a(href='/')
-                        small Big things come in small packages
-            .visible-xl
-            
+                        img.center-block(src="/images/bold.png", width="128", height="128", alt="Brave Operations - Lollipop Division")
+                h1 
+                    a(href="/") Brave Operations
+                h2 
+                    a(href="/") - Lollipop Division
+                
+                                                
 
   
             block content
