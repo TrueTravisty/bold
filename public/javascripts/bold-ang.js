@@ -27,28 +27,28 @@ app.controller('FrontPageCarouselCtrl', ['$scope', '$http', function ($scope, $h
 
 app.controller('LatestKillsCtrl', ['$scope', '$http', function ($scope, $http) {
     var kills = $scope.kills = [];
-    $http.get('http://localhost:3000/corpkills/5').success(function(response) {
+    $http.get('/corpkills/5').success(function(response) {
         addKills(response, kills);    
     });    
 }]);
 
 app.controller('LatestLossesCtrl', ['$scope', '$http', function ($scope, $http) {
     var kills = $scope.kills = [];
-    $http.get('http://localhost:3000/corplosses/5').success(function(response) {
+    $http.get('/corplosses/5').success(function(response) {
         addKills(response, kills);    
     });    
 }]);
 
 app.controller('LargestKillsCtrl', ['$scope', '$http', function ($scope, $http) {
     var kills = $scope.kills = [];
-    $http.get('http://localhost:3000/corpkills/top/14/5').success(function(response) {
+    $http.get('/corpkills/top/14/5').success(function(response) {
         addKills(response, kills);    
     });    
 }]);
 
 app.controller('LargestLossesCtrl', ['$scope', '$http', function ($scope, $http) {
     var kills = $scope.kills = [];
-    $http.get('http://localhost:3000/corplosses/top/14/5').success(function(response) {
+    $http.get('/corplosses/top/14/5').success(function(response) {
         addKills(response, kills);    
     });    
 }]);
