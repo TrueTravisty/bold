@@ -1,0 +1,17 @@
+<td>
+    {{kill.time}}<br>
+    <a href="https://zkillboard.com/kill/{{kill.id}}">{{kill.value | numeraljs:'iska'}}</a>
+</td>
+<td class="ship">
+    <img ng-src="/images/Types/{{kill.shipId}}_64.png" class="ship">
+</td>
+<td class="place">
+    <a href="http://evemaps.dotlan.net/system/{{kill.system}}">{{kill.system}}</a>
+</td>
+<td class="victimimg">
+    <img ng-src="/eveimages/{{kill.victim.id}}">
+</td>
+<td class="victim">
+    <span class="victimname">{{kill.victim.name}}</span>
+    <span class="victimship">({{kill.victim.ship}})</span>
+</td>
