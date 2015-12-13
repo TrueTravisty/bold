@@ -265,3 +265,48 @@ input[type="color"],
 .badge-info {
    background-color: #3a87ad;
 }
+
+.killmails img {
+  max-height: 40px;
+}
+
+.killmails th {
+  text-align: left;
+}
+
+.killmails tr:nth-child(even) {
+  background-color: #303030;
+}
+
+.killmails table {
+  width: 400px;
+}
+.killmails td, .killmails th {
+  padding: 1px 4px;
+}
+
+.killmails tr a {
+    color: #ffffff;
+}
+
+
+#kills, #losses {
+
+  background-color: rgba(8,112,215,.25);
+  padding: 5px;
+
+}
+
+.victimname {
+  font-weight: bold;
+}
+
+.victimship {
+  font-weight: thin;
+  font-style: italic;
+  color: lightgray;
+}
+
+td.ship, td.victimimg {
+  background-color: black;
+}
