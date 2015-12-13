@@ -78,6 +78,7 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/javascripts/', express.static(path.join(__dirname, 'node_modules/angular')));
 app.use('/javascripts/', express.static(path.join(__dirname, 'node_modules/angular-route')));
+app.use('/javascripts/', express.static(path.join(__dirname, 'node_modules/numeral/min')));
 
 
 app.use(bodyParser.json());
