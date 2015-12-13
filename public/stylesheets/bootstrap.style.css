@@ -275,11 +275,11 @@ input[type="color"],
 }
 
 .killmails tr:nth-child(even) {
-  background-color: #303030;
+  background-color: black;
 }
 
 .killmails table {
-  width: 400px;
+  width: 380px;
 }
 .killmails td, .killmails th {
   padding: 1px 4px;
@@ -309,4 +309,13 @@ input[type="color"],
 
 td.ship, td.victimimg {
   background-color: black;
+}
+
+.panel {
+    background-color: rgba(8,112,215,.25);
+}
+
+.panel-default>.panel-heading{
+    background-color: rgba(8,112,215,.25);
+    color: #ffffff;
 }
