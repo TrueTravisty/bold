@@ -120,6 +120,13 @@ router.get('/corpkills/:count', requireCorp, function(req, res, next) {
   });
 });
 
+router.get('/corpkills/:count/kills.json', requireCorp, function(req, res, next) {
+  zkb.getLatestKills(req.count, function(err, killmails) {
+    if (err) return next(err);
+    res.json(killmails);
+  });
+});
+
 router.param('days', function(req, res, next, days) {
   req.days = days;
   next();

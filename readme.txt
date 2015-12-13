@@ -25,14 +25,14 @@ to export from mySql: (do a select * to find fields, but remove description)
   'capacity','portionSize','raceID','basePrice','published','marketGroupID','iconID','soundID')
   union
   (SELECT typeID,groupID,typeName,mass,volume,
-  capacity,portionSize,raceID,basePrice,published,marketGroupID,iconID,soundID FROM parallax.invTypes
+  capacity,portionSize,raceID,basePrice,published,marketGroupID,iconID,soundID FROM frostline.invTypes
   INTO OUTFILE '/Users/torlivar/dbdata/invTypes.csv'
   FIELDS ENCLOSED BY '"' TERMINATED BY ';'
   LINES TERMINATED BY '\n');
 
   (SELECT 'groupID', 'categoryID','groupName','iconID','useBasePrice','anchored','anchorable','fittableNonSingleton','published')
   union
-  (SELECT * FROM parallax.invGroups
+  (SELECT * FROM frostline.invGroups
   INTO OUTFILE '/Users/torlivar/dbdata/invGroups.csv'
   FIELDS ENCLOSED BY '"' TERMINATED BY ';'
   LINES TERMINATED BY '\n');
