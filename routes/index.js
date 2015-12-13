@@ -114,15 +114,6 @@ router.get('/instructions', function(req,res,next) {
 router.get('/corpkills/:count', requireCorp, function(req, res, next) {
   zkb.getLatestKills(req.count, function(err, killmails) {
     if (err) return next(err);
-    res.render('includes/killmaillist', {
-      killmails: killmails
-    });
-  });
-});
-
-router.get('/corpkills/:count/kills.json', requireCorp, function(req, res, next) {
-  zkb.getLatestKills(req.count, function(err, killmails) {
-    if (err) return next(err);
     res.json(killmails);
   });
 });
@@ -147,7 +138,6 @@ router.param('page', function(req, res, next, page) {
   next();
 })
 
-
 router.get('/srpstatus/:kmid',requireCorp, function(req, res, next) {
   var km = req.kmid;
   zkb.getLoss(km, function (err, loss) {
@@ -160,40 +150,14 @@ router.get('/srpstatus/:kmid',requireCorp, function(req, res, next) {
         paid: loss.paid
       }
     };
-    return res.end(JSON.stringify(data));
+    return res.json(data);
   });
 });
-
-router.get('/requestsrp/:kmid',requireCorp, function(req, res, next) {
-  var km = req.kmid;
-  zkb.getLoss(km, function(err, loss) {
-    if (err) return next(err);
-    if (req.user.characterID != loss.user) {
-      var error = new Error("You can only request SRP for your own losses");
-      error.status = 403;
-      return next(error);
-    }
-    if (loss.requested) {
-      var error = new Error("SRP already requested for kill " + km);
-      error.status = 403;
-      return next(error);
-    }
-
-    loss.requested = true;
-    loss.save(function(err) {
-      if (err) return next(err);
-      return res.end("Success");
-    });
-
-  });
-})
 
 router.get('/corpkills/top/:days/:count',requireCorp, function(req, res, next) {
   zkb.getToppKillList(req.count, req.days, true, function(err, killmails){
     if(err) return next(err);
-    res.render('includes/killmaillist', {
-      killmails: killmails
-    });
+    res.json(killmails);
   });
 });
 
@@ -204,36 +168,28 @@ router.get('/charloss/:count/:page', requireCorp, function(req, res, next) {
   zkb.getCharLosses(req.user.characterID, count, count*(page-1),function(err, killmails) {
     if (err) return next(err);
     var tmpl = page == 1 ? 'killmaillist' : 'killmailrows';
-    res.render('includes/' + tmpl, {
-      killmails: killmails
-    });
+    res.json(killmails);    
   });
 });
 
 router.get('/corplosses/top/:days/:count', requireCorp, function(req, res, next) {
   zkb.getToppKillList(req.count, req.days, false, function(err, killmails){
     if(err) return next(err);
-    res.render('includes/killmaillist', {
-      killmails: killmails
-    });
+    res.json(killmails);
   });
 });
 
 router.get('/killmail/:kmid', requireCorp, function(req, res, next) {
   zkb.getKillMail(req.kmid, function(err, killmail) {
     if(err) return next(err);
-    res.render('includes/killmaillist', {
-      killmails: killmails
-    });
+    res.json(killmail);
   })
 });
 
 router.get('/corplosses/:count', requireCorp, function(req, res, next) {
   zkb.getLatestLosses(req.count, function(err, killmails) {
     if (err) return next(err);
-    res.render('includes/killmaillist', {
-      killmails: killmails
-    });
+    res.json(killmails);
   });
 });
 
@@ -241,21 +197,9 @@ router.get('/redditnews', requireCorp, function(req, res, next) {
   var settings = req.app.get("settings").settings;
   reddit.getThreads(settings, 10, function(err, threads) {
     if (err) return next(err);
-    res.render('includes/latestreddit', {
-      threads: threads
-    });
+    res.json(threads);
   });
 });
-
-router.get('/bnireddit', requireCorp, function(req, res, next) {
-  var settings = req.app.get("settings").settings;
-  reddit.getBniThreads(settings, 10, function(err, threads) {
-    if (err) return next(err);
-    res.render('includes/latestreddit', {
-      threads: threads
-    });
-  });
-})
 
 router.get('/fireside201504', requireCorp, function(req,res,next) {
   var filePath = path.join (__dirname, '..','files','fireside201504.mp3');
