@@ -28,7 +28,19 @@ app.controller('FrontPageCarouselCtrl', ['$scope', '$http', function ($scope, $h
 app.controller('LatestKillsCtrl', ['$scope', '$http', function ($scope, $http) {
     var kills = $scope.kills = [];
     $http.get('http://localhost:3000/corpkills/5').success(function(response) {
-        for (var i = 0; i < response.length; i++) {
+        addKills(response, kills);    
+    });    
+}]);
+
+app.controller('LatestLossesCtrl', ['$scope', '$http', function ($scope, $http) {
+    var kills = $scope.kills = [];
+    $http.get('http://localhost:3000/corplosses/5').success(function(response) {
+        addKills(response, kills);    
+    });    
+}]);
+
+function addKills(response, kills) {
+    for (var i = 0; i < response.length; i++) {
             var k = response[i];
             var kill = {};
             kill.id = k.killID;
@@ -47,9 +59,8 @@ app.controller('LatestKillsCtrl', ['$scope', '$http', function ($scope, $http) {
                 ship: k.victim.shipType 
             }
             kills.push(kill);
-        }
-    });    
-}]);
+    }
+}
 
 })();
 
