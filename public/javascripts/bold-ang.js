@@ -39,6 +39,20 @@ app.controller('LatestLossesCtrl', ['$scope', '$http', function ($scope, $http) 
     });    
 }]);
 
+app.controller('LargestKillsCtrl', ['$scope', '$http', function ($scope, $http) {
+    var kills = $scope.kills = [];
+    $http.get('http://localhost:3000/corpkills/top/14/5').success(function(response) {
+        addKills(response, kills);    
+    });    
+}]);
+
+app.controller('LargestLossesCtrl', ['$scope', '$http', function ($scope, $http) {
+    var kills = $scope.kills = [];
+    $http.get('http://localhost:3000/corplosses/top/14/5').success(function(response) {
+        addKills(response, kills);    
+    });    
+}]);
+
 function addKills(response, kills) {
     for (var i = 0; i < response.length; i++) {
             var k = response[i];
