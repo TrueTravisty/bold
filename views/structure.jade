@@ -1,44 +1,48 @@
-extends ./layout.jade
+extends ./layout.bs
 
 block content
-  h2 Our Team
-  .personblock
-    each manager in managers
-      .person
-        img(src="/eveimages/" + manager.ID, height="100", width="100")
-        .name
-          = manager.name
-        .title
-          = manager.title
-        .function
-          = manager.function
+  .col-md-12
+    h2 Our Team
+  
+    .personblock
+        each manager in managers
+            .person
+                img(src="/eveimages/" + manager.ID, height="100", width="100")
+                .name
+                    = manager.name
+                .title
+                    = manager.title
+                .function
+                    = manager.function
 
   h2 Our Divisions
   table.structure
-    tr
-      th Division
-      th Responsible Officer
-    tr
-      th Diplomacy
-      td Lenny Kravitz2
-    tr
-      th Finance
-      td Asmodean Shepherd &amp; Thalonia
-    tr
-      th Internal Affairs
-      td
-    tr
-      th IT
-      td Yaldo Asanari
-    tr
-      th Logistics
-      td Thalonia
-    tr
-      th Military
-      td Scythian Painspike
-    tr
-      th Recruitment
-      td All officers/directors
-    tr
-      th Security
-      td Tierdar
+    thead
+        tr
+            th Division
+            th Responsible Officer
+    tbody
+        tr
+            th Diplomacy
+            td Lenny Kravitz2
+        tr
+            th Finance
+            td Asmodean Shepherd &amp; Thalonia
+        tr
+            th Internal Affairs
+            td
+        tr
+            th IT
+            td Yaldo Asanari
+        tr
+            th Logistics
+            td Thalonia
+        tr
+            th Military
+            td Scythian Painspike
+        tr
+            th Recruitment
+            td All officers/directors
+        tr
+            th Security
+            td Tierdar

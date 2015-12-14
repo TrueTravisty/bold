@@ -211,3 +211,40 @@ td.ship, td.victimimg {
 #logoutlink {
 	text-align: center;
 }
+
+.personblock .person {
+  float: left;
+  width: 120px;
+  margin-right: 20px;
+  margin-bottom: 15px;
+  min-height: 190px;
+}
+.personblock .person img {
+  margin: 0 20px 10px 20px;
+}
+
+.personblock .person .name {
+  width: 140px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 120%;
+}
+
+.personblock .person .title {
+  width: 140px;
+  text-align: center;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.personblock .person .function {
+  width: 140px;
+  text-align: center;
+  font-style: italic;
+}
+
+table.team th, table.structure th {
+  min-width: 125px;
+  vertical-align: top;
+  text-align: left;
+}
