@@ -64,10 +64,10 @@ app.controller('LargestLossesCtrl', ['$scope', '$http', function ($scope, $http)
 
 app.controller('SrpLossListCtrl',  ['$scope', '$http', function ($scope, $http) {
     var kills = $scope.kills = [];
-    var page = 0;
+    $scope.page = 1;
     
     $scope.addLosses = function() { 
-        $http.get('/charloss/5/' + page++).success(function(response) {
+        $http.get('/charloss/5/' + $scope.page++).success(function(response) {
             addKills(response, kills);
         });
     }
@@ -90,6 +90,10 @@ app.controller('BuybackCtrl', ['$scope', '$http', function ($scope, $http) {
 
 function addKills(response, kills) {
     var curdate;
+    if (kills.length > 0) {
+        var k = kills[kills.length - 1];
+        curdate = k.curdate;
+    }
     for (var i = 0; i < response.length; i++) {
             var k = response[i];
             var kill = {};
@@ -100,6 +104,7 @@ function addKills(response, kills) {
                 curdate = d;
                 kill.newdate = curdate;
             }
+            kill.curdate = curdate;
             var h = kd.getHours()
             if (h < 10) h = "0" + h;
             var m = kd.getMinutes();
@@ -113,7 +118,7 @@ function addKills(response, kills) {
                 name: k.victim.characterName,
                 ship: k.victim.shipType 
             }
-            kills.push(kill);
+            kills.push(kill);            
     }
 }
 

@@ -292,6 +292,6 @@ table.team th, table.structure th {
   margin: 0px 20px;
 }
 
-div.mylosses div div.killmails table{
+.mylosses .killmails table{
     width: 500px;
 }
