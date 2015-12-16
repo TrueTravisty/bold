@@ -249,12 +249,12 @@ table.team th, table.structure th {
   text-align: left;
 }
 
-#buybackcalculator textarea {
+.buyback textarea {
   width: 876px;
   height: 150px;
 }
 
-#buybackcalculator button {
+.buyback button {
   margin-top: 5px;
   width: 75px;
   height: 28px;
@@ -266,4 +266,9 @@ table.team th, table.structure th {
 
 #contractvalue_input {
     color: blue;
+}
+
+.buybackvalue {
+    background: white;
+    color: blue;    
 }

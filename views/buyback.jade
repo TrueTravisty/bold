@@ -9,14 +9,13 @@ block content
   p: i.
     CTRL-C in the game in a list, CTRL-V in the box below, press the calculate button,
     and it will put out in the bottom how much you should make the contract out for
-  div
-    form(id="buybackcalculator", method="POST")
-      textarea(id="raw_textarea",
+  .buyback(ng-controller="BuybackCtrl")   
+    textarea(ng-model="items", ng-change="value = 0",
         placeholder="CTRL-C in the game in a list, CTRL-V in this box, press the calculate button, "
         + "and it will put out in the bottom how much you should make the contract out for")
-      button(id="result_submit", type="submit") Calculate
+    button(id="result_submit", ng-click="checkValue(items)") Calculate
     hr
-    .contractvalue_section
+    .contractvalue_section(ng-show="value")
       table.contractvalue
         thead: tr: th Contract Information
         tr
@@ -33,8 +32,8 @@ block content
           td 0.0
         tr
           th I will receive:
-          td: input#contractvalue_input(name="value", value="0")
-  hr
+          td.buybackvalue: {{value}} 
+      hr
   ul
     li.
       The buyback program is run personally by <i>Thalonia</i>. If you have any questions about the buyback program, please
