@@ -13,7 +13,8 @@ app.directive('killList', function() {
         templateUrl: '/templates/killlist.html',
         scope: {
             kills: "=",
-            showSrp: "="
+            showSrp: "=",
+            requestSrp: "&"
         }
     }
 })
@@ -24,7 +25,8 @@ app.directive('killMail', function() {
         templateUrl: '/templates/killmail.html',
         scope: {
             kill: "=",
-            showSrp: "="
+            showSrp: "=",
+            requestSrp: "&"
         }
         
     }
@@ -88,6 +90,26 @@ app.controller('SrpLossListCtrl',  ['$scope', '$http', function ($scope, $http) 
     }
     
     $scope.addLosses();    
+    
+    $scope.requestSrp = function(kill) {
+        if (!kill) return;
+        
+        var name = kill.victim.name.replace(" ", "+");
+        var zkill = 'https://zkillboard.com/kill/' + kill.id;
+        var ship = kill.victim.ship;
+        var sclass = kill.victim.sclass;
+        var isk = kill.value;
+        var system = kill.system;
+        
+        var url="https://docs.google.com/forms/d/1mCuTFEOlPEV0bVrGllzvdoHMGVbu2rm89YTQTEVQgGQ/viewform?entry.9614536="+kill.victim.name+
+            "&entry.1850675988="+zkill+
+            "&entry.884950497="+ship+
+            "&entry.334392335="+sclass+
+            "&entry.808596200="+isk+
+            "&entry.1843731024="+system;
+    
+        window.open(url, '_blank');
+    }
 }]);
 
 app.controller('BuybackCtrl', ['$scope', '$http', function ($scope, $http) {
@@ -131,7 +153,8 @@ function addKills(response, kills) {
             kill.victim = {
                 id: k.victim.characterID,
                 name: k.victim.characterName,
-                ship: k.victim.shipType 
+                ship: k.victim.shipType,
+                sclass: k.victim.shipClass 
             }
             kills.push(kill);            
     }

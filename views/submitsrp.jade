@@ -8,6 +8,6 @@ block content
   .contentsection
     h3 My latest lossmails
     .mylosses(ng-controller="SrpLossListCtrl")
-        kill-list(kills="kills" show-srp="true")
+        kill-list(kills="kills" show-srp="true" request-srp="requestSrp(km)")
         button.more(ng-click="addLosses()") Show more
     

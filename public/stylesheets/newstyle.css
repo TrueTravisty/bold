@@ -1,3 +1,11 @@
+button {
+  margin-top: 5px;
+  background-color: #0870D7;
+  color: white;
+  border-radius: 3px;
+  border: 1px black;
+}
+
 .column img {
     float: left;
     padding-right: 20px;
@@ -261,14 +269,11 @@ table.team th, table.structure th {
   height: 150px;
 }
 
+
+
 .buyback button {
-  margin-top: 5px;
   width: 75px;
-  height: 28px;
-  background-color: #0870D7;
-  color: white;
-  border-radius: 3px;
-  border: 1px black;
+  height: 28px;  
 }
 
 #contractvalue_input {
@@ -294,4 +299,8 @@ table.team th, table.structure th {
 
 .mylosses .killmails table{
     width: 500px;
+}
+
+button.SRPButton {
+    font-size: smaller;    
 }
