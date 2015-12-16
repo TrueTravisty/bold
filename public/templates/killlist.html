@@ -8,8 +8,13 @@
                 <th></th>
                 <th>Victim</th>
             </tr>
-            <tbody>
-                <tr killmail ng-repeat="kill in kills">                   
+            <tbody>                
+                <tr ng-repeat-start="kill in kills" ng-show="kill.newdate"> 
+                    <td colspan=5 class="dateline">
+                        {{kill.newdate | date:'EEE MMM d yyyy'}}
+                    </td>
+                </tr>
+                <tr killmail ng-repeat-end>                   
             </tbody>
         </thead>
     </table>    

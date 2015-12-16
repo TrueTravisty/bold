@@ -35,7 +35,7 @@ app.controller('FrontPageCarouselCtrl', ['$scope', '$http', function ($scope, $h
 }]);
 
 app.controller('LatestKillsCtrl', ['$scope', '$http', function ($scope, $http) {
-    var kills = $scope.kills = [];
+    var kills = $scope.kills = [];    
     $http.get('/corpkills/5').success(function(response) {
         addKills(response, kills);    
     });    
@@ -49,7 +49,7 @@ app.controller('LatestLossesCtrl', ['$scope', '$http', function ($scope, $http) 
 }]);
 
 app.controller('LargestKillsCtrl', ['$scope', '$http', function ($scope, $http) {
-    var kills = $scope.kills = [];
+    var kills = $scope.kills = [];    
     $http.get('/corpkills/top/14/5').success(function(response) {
         addKills(response, kills);    
     });    
@@ -76,11 +76,17 @@ app.controller('BuybackCtrl', ['$scope', '$http', function ($scope, $http) {
 
 
 function addKills(response, kills) {
+    var curdate;
     for (var i = 0; i < response.length; i++) {
             var k = response[i];
             var kill = {};
             kill.id = k.killID;
             var kd = new Date(k.killTime);
+            var d = new Date(kd.getUTCFullYear(), kd.getUTCMonth(), kd.getUTCDate(), 0, 0, 0, 0)
+            if (!curdate || d.getDate() != curdate.getDate() || d.getMonth() != curdate.getMonth()) {
+                curdate = d;
+                kill.newdate = curdate;
+            }
             var h = kd.getHours()
             if (h < 10) h = "0" + h;
             var m = kd.getMinutes();

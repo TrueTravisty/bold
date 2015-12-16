@@ -13,16 +13,16 @@ block content
 
   .col-md-6  
     uib-accordion(close-others="false")
-        uib-accordion-group(heading="Latest Kills", is-open="true")
+        uib-accordion-group(heading="Latest Kills", is-open="false")
             div(ng-controller="LatestKillsCtrl", ng-include="'templates/killlist.html'")
-        uib-accordion-group(heading="Latest Losses", is-open="true")    
+        uib-accordion-group(heading="Latest Losses", is-open="false")    
             div(ng-controller="LatestLossesCtrl", ng-include="'templates/killlist.html'")
     
   .col-md-6
     uib-accordion(close-others="false")
-        uib-accordion-group(heading="Biggest kills last 14 days", is-open="true")
+        uib-accordion-group(heading="Biggest kills last 14 days", is-open="false")
             div(ng-controller="LargestKillsCtrl", ng-include="'templates/killlist.html'")
-        uib-accordion-group(heading="Biggest losses last 14 days", is-open="true")
+        uib-accordion-group(heading="Biggest losses last 14 days", is-open="false")
             div(ng-controller="LargestLossesCtrl", ng-include="'templates/killlist.html'")
       
   // .col-md-12

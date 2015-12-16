@@ -186,6 +186,13 @@ a#loginlink {
   color: lightgray;
 }
 
+.dateline {
+  color: lightgray;
+  font-weight: normal;
+  font-style: italic;
+  height: 20px;
+}
+
 td.ship, td.victimimg {
   background-color: black;
 }
