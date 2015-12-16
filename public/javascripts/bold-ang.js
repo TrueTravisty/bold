@@ -6,11 +6,26 @@ app.controller('MainCtrl', ['$scope', function($scope) {
     
 }]);
 
-app.directive('killmail', function() {
+
+app.directive('killList', function() {
     return {
-        restrict: 'A',
-        
+        restrict: 'EA',
+        templateUrl: '/templates/killlist.html',
+        scope: {
+            kills: "=",
+            showSrp: "="
+        }
+    }
+})
+
+app.directive('killMail', function() {
+    return {
+        restrict: 'A',        
         templateUrl: '/templates/killmail.html',
+        scope: {
+            kill: "=",
+            showSrp: "="
+        }
         
     }
 })
