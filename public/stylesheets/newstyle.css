@@ -279,3 +279,19 @@ table.team th, table.structure th {
     background: white;
     color: blue;    
 }
+
+#srpinfo {
+  background-color: rgba(10,10,10,0.8);
+  margin: 10px;
+  padding: 15px;
+  border-style: solid;
+  border-width: thin;
+}
+
+#srpinfo ol li {
+  margin: 0px 20px;
+}
+
+div.mylosses div div.killmails table{
+    width: 500 px;
+}

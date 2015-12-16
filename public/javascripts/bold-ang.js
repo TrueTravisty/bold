@@ -62,6 +62,19 @@ app.controller('LargestLossesCtrl', ['$scope', '$http', function ($scope, $http)
     });    
 }]);
 
+app.controller('SrpLossListCtrl',  ['$scope', '$http', function ($scope, $http) {
+    var kills = $scope.kills = [];
+    var page = 0;
+    
+    $scope.addLosses = function() { 
+        $http.get('/charloss/5/' + page++).success(function(response) {
+            addKills(response, kills);
+        });
+    }
+    
+    $scope.addLosses();    
+}]);
+
 app.controller('BuybackCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.items='';
     $scope.value = 0;
