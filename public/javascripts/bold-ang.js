@@ -4,7 +4,16 @@ var app = angular.module('bold', ['ui.bootstrap', 'ngTouch', 'ngNumeraljs']);
 
 app.controller('MainCtrl', ['$scope', function($scope) {
     
-}])
+}]);
+
+app.directive('killmail', function() {
+    return {
+        restrict: 'A',
+        
+        templateUrl: '/templates/killmail.html',
+        
+    }
+})
 
 app.config(['$numeraljsConfigProvider', function ($numeraljsConfigProvider) {
     $numeraljsConfigProvider.setFormat('iska', '0.0a');
