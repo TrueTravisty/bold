@@ -189,9 +189,9 @@ router.get('/slack', function(req,res,next) {
   var settings = req.app.get("settings").settings;
   ;
   slack.getMemberList(settings, function(err, members) {
+    if (err) return next(err);  
     var active = members.filter(function(item, index, array) {return !item.deleted});
-    var disabled = members.filter(function(item, index, array) {return item.deleted});
-    if (err) return next(err);
+    var disabled = members.filter(function(item, index, array) {return item.deleted});    
     res.render('admin/slack', {members: active, disabled: disabled});
   });
 });
