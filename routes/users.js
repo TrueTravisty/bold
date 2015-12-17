@@ -64,6 +64,31 @@ router.get('/evecb', function(req, res, next) {
 
 });
 
+router.param('userid', function(req, res, next, id){
+    eveApi.getPublicCharacterInfo(id, function(err, character) {
+        if (err || !character) {
+            var err = new Error("Not found");
+            err.status = 404;
+            return next(err);
+        }
+        req.characterData = character;
+        return next();
+    })  
+})
+
+router.get('/impersonate/:userid', function(req, res, next) {
+   if (!req.isAuthenticated() || !req.can('administrate')) {
+    var err = new Error("Not authorized!");
+    err.status = 401;
+    return next(err);
+  } 
+  var characterData = {
+      CharacterID: req.characterData.characterID,
+      CharacterName: req.characterData.characterName
+  };
+  return characterLoggedIn(req, res, next, characterData);
+});
+
 function characterLoggedIn(req,res,next,characterData) {
   User.findOne({characterID: characterData.CharacterID}, function(err, user){
     if (err) return next(err);
