@@ -309,3 +309,28 @@ table.team th, table.structure th {
 button.SRPButton {
     font-size: smaller;    
 }
+
+.tableform {
+    display: table;
+}
+
+.tableform div {
+    display: table-row;
+}
+
+.tableform div input {
+    display: table-cell;
+}
+
+.tableform div label {
+    display: table-cell;
+}
+
+.tableform div div {
+    display: table-cell;
+}
+
+.tableform div ul li {
+    list-style-type: none;
+    text-align: left;
+}

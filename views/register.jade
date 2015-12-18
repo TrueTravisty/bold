@@ -1,9 +1,9 @@
-extends ./layout.jade
+extends ./layout.bs
 
 block content
   h2 Register User
 
-  form#registerform(action="/register", method="POST")
+  form.tableform#registerform(action="/register", method="POST")
     div
       label Username:
       input#username(type="text", name="username")
@@ -22,4 +22,4 @@ block content
     #buttons
       div
       #submit
-        input(type="submit", value="Register")
+        button(type="submit", value="Register") Register
