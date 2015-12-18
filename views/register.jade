@@ -1,25 +1,31 @@
 extends ./layout.bs
 
+append bodyscripts
+    script(type="text/javascript", src="/javascripts/app/registeruser.js")
+
 block content
-  h2 Register User
-
-  form.tableform#registerform(action="/register", method="POST")
-    div
-      label Username:
-      input#username(type="text", name="username")
-      #usererror.formerror
-
-    div
-      label Password:
-      input#password(type="password", name="password")
-      #pwerror.formerror
-
-    div
-      label Repeat password:
-      input#repeat(type="password", name="repeat")
-      #reperror.formerror
-
-    #buttons
-      div
-      #submit
-        button(type="submit", value="Register") Register
+  h2 Register New User
+  
+  div(ng-controller="UserRegistrationCtrl")
+    .col-md-6
+        form(name="regForm", ng-submit="registerUser()", novalidate)
+            .form-group(ng-class="{ 'has-error' : regForm.username.$invalid && !regForm.username.$pristine}")
+                label Username:
+                input.form-control(type="text", name="username", ng-model="username", ng-minlength="4", required=true)
+                div(ng-messages="regForm.username.$error")
+                    div(ng-messages-include="/templates/messages.html")
+        
+            .form-group(ng-class="{ 'has-error' : regForm.password.$invalid && !regForm.password.$pristine}")
+                label Password:
+                input.form-control(type="password", name="password", ng-model="password", ng-minlength=8, required=true)
+                div(ng-messages="regForm.password.$error")
+                    div(ng-messages-include="/templates/messages.html")
+        
+            .form-group(ng-class="{ 'has-error': regForm.repeat.$invalid && !regForm.repeat.$pristine}")
+                label Confirm password:
+                input.form-control(type="password", ng-model="repeat", name="repeat", ng-minlength=8, required=true, compare-to="password")
+                div(ng-messages="regForm.repeat.$error")
+                    div(ng-messages-include="/templates/messages.html")
+        
+            input.btn.btn-primary(type="submit", ng-disabled="regForm.$invalid", value="Register")
+        

@@ -267,3 +267,6 @@ input[type="color"],
    background-color: #3a87ad;
 }
 
+.has-error .form-control {
+    color: red;
+}

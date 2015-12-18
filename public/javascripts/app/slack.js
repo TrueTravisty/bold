@@ -12,8 +12,6 @@ app.controller('SlackCtrl', ['$scope', '$http', function ($scope, $http) {
     
     getStatus();
     
-    $scope.alerts = [];
-        
     $scope.register = function(email) {
         if (!email || !$scope.slackForm.$valid)
             return; 
@@ -40,10 +38,6 @@ app.controller('SlackCtrl', ['$scope', '$http', function ($scope, $http) {
         });  
         
     }
-    
-    $scope.closeAlert = function(index) {
-        $scope.alerts.splice(index, 1);
-    };
         
 }]);
 

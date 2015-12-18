@@ -32,5 +32,3 @@ block content
     div(ng-show="status =='invite_sent'")
         h2 Thank you for registering
         div An invite to slack should be on its way to your email.
-    uib-alert(ng-repeat="alert in alerts", type="{{alert.type}}" close="closeAlert($index)") {{alert.msg}}
-

@@ -44,6 +44,8 @@ html(xmlns="http://www.w3.org/1999/xhtml" ng-app="bold")
                                                 
             .clear
             
+            uib-alert(ng-repeat="alert in alerts", type="{{alert.type}}" close="closeAlert($index)") {{alert.msg}}
+            
             block content
             
         .container
@@ -55,11 +57,12 @@ html(xmlns="http://www.w3.org/1999/xhtml" ng-app="bold")
     
         block bodyscripts
             script(type="text/javascript", src="/javascripts/angular.min.js")
-            script(type="text/javascript", src="/javascripts/angular-touch.js")
+            script(type="text/javascript", src="/javascripts/angular-touch.min.js")
+            script(type="text/javascript", src="/javascripts/angular-messages.min.js")
             script(type="text/javascript", src="/javascripts/ui-bootstrap-tpls-0.14.3.min.js") 
             script(type="text/javascript", src="/javascripts/numeral.min.js")
-            script(type="text/javascript", src="/javascripts/angular-numeraljs.min.js")           
-            script(type="text/javascript", src="/javascripts/app/module.js")
+            script(type="text/javascript", src="/javascripts/angular-numeraljs.min.js")
+            script(type="text/javascript", src="/javascripts/app/module.js")            
             
       
         block analytics_script

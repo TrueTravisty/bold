@@ -1,10 +1,13 @@
 (function() {
 
-var app = angular.module('bold', ['ui.bootstrap', 'ngTouch', 'ngNumeraljs']);
+var app = angular.module('bold', ['ui.bootstrap', 'ngMessages', 'ngTouch', 'ngNumeraljs']);
 
 
 app.controller('MainCtrl', ['$scope', function($scope) {
-    
+    $scope.alerts = [];
+    $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+    };
 }]);
 
 app.config(['$numeraljsConfigProvider', function ($numeraljsConfigProvider) {
