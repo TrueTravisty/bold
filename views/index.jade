@@ -1,5 +1,8 @@
 extends ./layout.bs.jade
 
+append bodyscripts
+    script(type="text/javascript", src="/javascripts/app/frontpage.js")
+
 block content
     #header
         .carousel(ng-controller="FrontPageCarouselCtrl")

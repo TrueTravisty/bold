@@ -1,5 +1,8 @@
 extends ./layout.bs
 
+append bodyscripts
+    script(type="text/javascript", src="/javascripts/app/slack.js")
+    
 block content
   div(ng-controller="SlackCtrl")
     div(ng-show="status == 'unregistered'")
