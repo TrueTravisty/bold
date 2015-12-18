@@ -3,11 +3,21 @@
 var app = angular.module('bold', ['ui.bootstrap', 'ngMessages', 'ngTouch', 'ngNumeraljs']);
 
 
-app.controller('MainCtrl', ['$scope', function($scope) {
+app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.alerts = [];
     $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
     };
+    
+    $http.get('/flashmessages').success(function(flash) {
+        if (!flash) return;
+        ['danger', 'warning', 'success', 'info'].forEach(function(cat){
+            flash[cat].forEach(function(msg){
+                $scope.alerts.push({msg:msg, type: cat});    
+            })    
+        })        
+    });
+    
 }]);
 
 app.config(['$numeraljsConfigProvider', function ($numeraljsConfigProvider) {

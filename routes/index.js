@@ -94,6 +94,30 @@ router.get('/submitsrp', requireCorp, function(req, res, next) {
   });
 });
 
+router.get('/flashmessages', function(req, res, next) {
+  var f = {
+      danger:[],
+      warning: [],
+      success: []
+  };
+  req.flash("error").forEach(function(msg) {
+    f.danger.push(msg);
+  });
+  req.flash("warning").forEach(function(msg) {
+    f.warning.push(msg);
+  });
+  var all = req.flash();
+  for (cat in all) {
+    if (cat === "error" && cat === "warning") {
+      continue;
+    }
+    all[cat].forEach(function(msg) {
+      f.success.push(msg);
+    });
+  }
+  res.json(f);
+})
+
 router.param('days', function(req, res, next, days) {
   req.days = days;
   next();
