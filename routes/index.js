@@ -218,6 +218,35 @@ router.get('/slack', requireCorp, function(req,res,next) {
   res.render('joinslack');
 });
 
+router.get('/slackinfo.json', requireCorp, function(req,res,next) {
+  var settings = req.app.get("settings").settings;
+  slack.getMemberList(settings, function(err, members) {
+    var user = req.user.username;
+    if (err) return next(err);  
+    var active = members.filter(function(item, index, array) {return !item.deleted});
+    var disabled = members.filter(function(item, index, array) {return item.deleted});
+    var slackStatus = "unregistered";
+    var member;
+    for (var i = 0; i < active.length; i++) {
+        if (user == active[i].profile.real_name_normalized){
+            slackStatus = "active";
+            member = active[i];
+            break;
+        }
+    }
+    if (!member) {
+        for (var i = 0; i < disabled.length; i++) {
+            if (user == disabled[i].profile.real_name_normalized){
+                slackStatus = "disabled";
+                member = disabled[i];
+                break;
+            }
+        }
+    }
+    return res.json({status:slackStatus, member:member});
+  });  
+})
+
 router.post('/slack', requireCorp, function(req, res, next) {
   var settings = req.app.get("settings").settings;
   var member = {

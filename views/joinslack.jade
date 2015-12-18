@@ -1,17 +1,33 @@
-extends ./layout.jade
-
-append bodyscripts
-  script(type="text/javascript", src="/javascripts/slack.js")
+extends ./layout.bs
 
 block content
-  h2 Join us on Slack
-  div.
-    Slack is the application we use to chat outside of the Eve client.
-    You can join us by entering an email address here and click join.
-    An invite will be sent to the email address you enter.
+  div(ng-controller="SlackCtrl")
+    div(ng-show="status == 'unregistered'")
+        h2 Join us on Slack
+        div.
+            Slack is the application we use to chat outside of the Eve client.
+            You can join us by entering an email address here and click join.
+            An invite will be sent to the email address you enter.
+        
+        
+        form(name="slackForm")
+            label E-mail address:&nbsp;
+            input(type="email" ng-model="email" required)
+            button(ng-click="register(email)" ng-disabled="!slackForm.$valid") Get Invite
+            tt {{slackForm.$valid}}
+    div(ng-show="status == 'active'")
+        h2 You are already registered on Slack
+        div Join us in the&nbsp;
+            a(href="https://braveops.slack.com") conversation
+            |.
+        div E-mail used for slack registration: {{member.profile.email}}
+    div(ng-show="status == 'disabled'")
+        h2 Your Slack user has been disabled
+        div.
+            This typically happens if you are a returned member. 
+            Please contact Yaldo Asanari in an ingame mail to get it restored.
+    div(ng-show="status =='invite_sent'")
+        h2 Thank you for registering
+        div An invite to slack should be on its way to your email.
+    uib-alert(ng-repeat="alert in alerts", type="{{alert.type}}" close="closeAlert($index)") {{alert.msg}}
 
-  div
-    form(id="slackform", method="POST")
-      label E-mail address:&nbsp;
-      input(id="email")
-      button(id="slack_submit", type="submit") Get Invite

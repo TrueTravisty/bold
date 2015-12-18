@@ -6,6 +6,10 @@ button {
   border: 1px black;
 }
 
+buddon:disabled {
+    background-color: #95b6d7;;
+}
+
 .column img {
     float: left;
     padding-right: 20px;
@@ -119,6 +123,7 @@ button {
     padding-top: 0px;
     margin-left: -5px;
     margin-right: -5px;
+    margin-top: 20px;
 }
 
 a#loginlink {
