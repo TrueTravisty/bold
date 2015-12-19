@@ -1,28 +1,15 @@
-extends ../layout.jade
+extends ../layout.bs
+
+append bodyscripts
+    script(type="text/javascript" src="/javascripts/app/adminusers.js")
 
 block content
   h2 Users
-  div #{users.length} users:
-  table#usertable
-    thead
-      tr
-        th Username
-        th Displayname
-        th Character names
-        if canroles
-          th Roles
-    tbody
-      each u in users
-        tr
-          td #{u.username}
-          td #{u.displayname}
-          td
-            if u.characternames
-              each character in u.characternames
-                .charactername
-                  character
-          if canroles
-            td
-              if u.roles
-                each role in u.roles
-                  .role #{role}
+  div(ng-controller="UsersCtrl")
+    {{usernames.length}} users:
+    
+    table#usertable
+        tbody
+        tr(ng-repeat="username in usernames")
+            td {{username}}
+            
