@@ -98,21 +98,19 @@ router.get('/flashmessages', function(req, res, next) {
   var f = {
       danger:[],
       warning: [],
-      success: []
+      success: [],
+      info: []
   };
-  req.flash("error").forEach(function(msg) {
-    f.danger.push(msg);
+  ['danger', 'warning', 'success', 'info'].forEach(function(category){
+     req.flash(category).forEach(function(msg) {
+         f[category].push(msg);
+     }) 
   });
-  req.flash("warning").forEach(function(msg) {
-    f.warning.push(msg);
-  });
+  
   var all = req.flash();
   for (cat in all) {
-    if (cat === "error" && cat === "warning") {
-      continue;
-    }
     all[cat].forEach(function(msg) {
-      f.success.push(msg);
+      f.info.push(msg);
     });
   }
   res.json(f);
