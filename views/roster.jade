@@ -8,6 +8,9 @@ append bodyscripts
 
 block content
     div(ng-controller="RosterCtrl")
+        span.glyphicon.blyphicon-sort-by-attributes
+        h2 Members of BO-LD 
+            span.glyphicon.glyphicon-sort-by-attributes
         table.table.table-striped.table-small(st-table="displayedRoster" st-safe-src="roster")
             thead
                 tr
@@ -17,7 +20,7 @@ block content
                     th(st-sort="logoffDateTime") Last Logoff
                     th(st-sort="location") Location
                     th(st-sort="comments") Notes
-                    th(st-sort="missingKey", st-sort-default="reverse") Status
+                    th(st-sort="missingKey", st-sort-default="reverse") Key
             tbody 
                 tr(ng-repeat="member in displayedRoster")
                     td {{member.name}}
@@ -29,10 +32,13 @@ block content
                         span(time-passed="member.logoffDateTime")
                     td {{member.location}}
                     td 
-                        div(ng-show="member.comments") {{member.comments}}
+                        div(ng-show="member.comments") 
+                            .span.glyphicon.glyphicon-tags
                     td 
-                        .keynotok(ng-hide="!member.missingKey") Missing
+                        .keynotok(ng-hide="!member.missingKey") Missing                            
                         .keyok(ng-hide="member.missingKey") Ok
+                            
+
                     
                         
                     

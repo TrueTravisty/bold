@@ -412,9 +412,27 @@ button.SRPButton {
 }
 
 .st-sort-ascent:before{
-    content: '\25B2';
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    content: '\e155';
+    padding-right: 4px;
 }
 
 .st-sort-descent:before{
-    content: '\25BC';
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    content: '\e156';
+    padding-right: 4px;
 }
