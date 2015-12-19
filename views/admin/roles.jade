@@ -1,23 +1,27 @@
-extends ../layout.jade
+extends ../layout.bs
 
 append bodyscripts
-  script(type="text/javascript" src="/javascripts/rolemanagement.js")
+  script(type="text/javascript" src="/javascripts/app/adminroles.js")
 
 block content
   h2 Manage Roles
-  table#roles
-    thead
-      tr
-        th User
-        each role in available_roles
-          th #{role}
-    tbody
-      each user in users
-        - var uroles = user.roles;
-        - if(user.username == 'superadmin') uroles = available_roles;
-        tr
-          td #{user.username}
-          each role in available_roles
-            td
-              - var status = (uroles.indexOf(role) >= 0) ? 'hasrole' : 'missingrole'
-              button.togglerole(data-role=role data-user=user.username value=status) #{status}
+  div.roles(ng-controller="RolesCtrl")
+    uib-tabset(vertical="true", type="pills")
+        uib-tab(ng-repeat="role in roles", heading="{{role}}")
+            .roletab(ng-controller="RoleCtrl")
+                h4 Users with the role of {{role}}:
+                .userlist
+                    .user(ng-repeat="user in users" ng-class="{odd: $index % 2 == 1}")
+                        .actions 
+                            button.btn.btn-primary.btn-xs(ng-click="toggle(role, user, false)")
+                                span.glyphicon.glyphicon-minus
+                        .username {{user}}
+                form(name="addForm", ng-submit="toggle(role, newUser, true)")
+                    .adduser.form-group(ng-class="{ 'has-error' : addForm.newUser.$invalid && !addForm.newUser.$pristine}")
+                        label Add user:
+                        input.form-control(type="text", name="newUser", ng-model="newUser", uib-typeahead="user for user in usernames | filter:$viewValue | limitTo:8", required, in-list="usernames")
+                    button.btn.btn-primary.btn-sm(type="submit", ng-disabled="addForm.$invalid")
+                        span.glyphicon.glyphicon-plus
+                        | Add user
+
+                    

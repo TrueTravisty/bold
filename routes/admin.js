@@ -71,17 +71,15 @@ router.post('/togglerole', requireRole('manageroles'), function(req,res,next) {
     var role = req.body.role;
     var ind = roles.indexOf(role);
     var result = '';
-    if (ind < 0) {
-      roles.push(role);
-      result = 'hasrole';
-    } else {
-      roles.splice(ind, 1);
-      result = 'missingrole';
+    if (ind < 0 && req.body.grant) {       
+      roles.push(role);      
+    } else if(ind >= 0 && !req.body.grant) {
+      roles.splice(ind, 1);      
     }
     user.roles = roles;
     user.save(function(err) {
       if (err) return next(err);
-      return res.end(result);
+      return res.json(roles);
     });
   })
 
@@ -106,7 +104,36 @@ router.get('/roles', requireRole('manageroles'), function(req,res,next) {
       available_roles: available_roles
     });
   });
+});
 
+router.get('/roles.json', requireRole('manageroles'), function(req,res,next) {
+    available_roles = req.getRoles();
+    res.json(available_roles);
+});
+
+router.param('role', function(req, res, next, role) {
+    req.role = role;
+    return next();
+})
+
+router.get('/usernames.json', function(req, res, next) {
+  User.find({}).select('username').sort('username').exec(function(err, users) {
+    var usernames = users.map(function(u){return u.username});
+    res.json(usernames);    
+  });
+});
+
+router.get('/roles/:role', requireRole('manageroles'), function(req, res, next) {
+    User.find({}).select('username roles').sort('username').exec(function(err, users) {
+        if (err) return next(err);
+        var usersInRole = [];
+        users.forEach(function(user) {
+            if (user.roles.indexOf(req.role) >= 0) {
+                usersInRole.push(user.username);
+            }
+        });
+        res.json(usersInRole);
+    });
 });
 
 router.param('user', function(req, res, next, id){

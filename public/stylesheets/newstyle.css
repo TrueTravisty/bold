@@ -334,3 +334,45 @@ button.SRPButton {
     list-style-type: none;
     text-align: left;
 }
+
+.roles .nav-pills {
+  float: left;
+}
+
+.roles .tab-content {
+  float: left;
+}
+
+.roletab h4 {
+    margin-top: 0px;
+}
+
+.roletab {
+    padding-left: 20px;
+}
+
+.userlist {
+    display: table;
+}
+
+.userlist .user {
+    display: table-row;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 28px;    
+}
+
+.userlist .user .actions {
+    display: table-cell;   
+    
+}
+
+.userlist .user .username {
+    display: table-cell;
+    padding-left: 3px;
+    vertical-align: middle;    
+}
+
+.adduser {
+    margin-top: 20px;
+}
