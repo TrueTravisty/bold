@@ -42,7 +42,7 @@ router.post('/register', function(req, res) {
 
 router.get('/logout', function(req,res) {
   req.logout();
-  req.flash("info", "Logged out")
+  req.flash("success", "Logged out")
   res.redirect('/');
 });
 
@@ -127,7 +127,7 @@ function randomstring(count)
 
 router.get('/loginredirect', function(req,res) {
   var redirect = req.session.loginredirect;
-  req.flash("info", "Logged in as " + req.user.username);
+  req.flash("success", "Logged in as " + req.user.username);
   eveApi.getCorpId(req.user.characterID, function(err, id){
     if (!err) req.session.corpid = id;
     else req.session.corpid ="";
