@@ -1,9 +1,0 @@
-//<![CDATA[
-$(window).load(function() {
-    $('#slider').nivoSlider({
-      pauseTime: 20000,
-      effect: 'fade',
-      randomStart: true,
-    });
-});
-//]]>
