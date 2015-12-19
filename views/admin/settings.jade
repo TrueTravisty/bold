@@ -1,14 +1,13 @@
-extends ../layout.jade
+extends ../layout.bs
 
 append bodyscripts
-    script(type="text/javascript" src="/javascripts/settings.js")
+    script(type="text/javascript" src="/javascripts/app/adminsettings.js")
 
 block content
   h2 Site Settings
-  form#settingsform(action="/admin/settings/test", method="POST", name="settingsform")
-    each setting in settings
-      div
-        label
-          = setting.name
-        input(type="text", name= setting.name, value=setting.value)
-    #blur
+  div(ng-controller="SettingsCtrl")
+    form#settingsform(name="settingsform")
+        div(ng-repeat="setting in settings")
+            label
+                {{setting.name}}: 
+            input(type="text", ng-model="setting.value", ng-blur="updateSetting(setting)")

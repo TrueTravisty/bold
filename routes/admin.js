@@ -206,21 +206,22 @@ router.get('/settings', function(req,res){
   });
 });
 
+router.get('/settings.json', function(req, res) {
+  var s = [];
+  
+  var Settings = req.app.get("settings");
+  for (var setting in Settings.permissions) {
+    if (req.can(Settings.permissions[setting])) {
+      s.push({name: setting, value: Settings.settings[setting]});
+    }
+  }
+  res.json(s)
+})
+
 router.get('/settings/:setting', function(req,res,next){
   var setting = req.settingName;
   var Settings = req.app.get("settings");
-  res.end(Settings.settings[setting]);
-});
-
-router.get('/slack', function(req,res,next) {
-  var settings = req.app.get("settings").settings;
-  ;
-  slack.getMemberList(settings, function(err, members) {
-    if (err) return next(err);  
-    var active = members.filter(function(item, index, array) {return !item.deleted});
-    var disabled = members.filter(function(item, index, array) {return item.deleted});    
-    res.render('admin/slack', {members: active, disabled: disabled});
-  });
+  res.json(Settings.settings[setting]);
 });
 
 router.post('/settings/:setting', function(req,res,next){
@@ -234,6 +235,17 @@ router.post('/settings/:setting', function(req,res,next){
   } else {
     res.end("Unchanged");
   }
+});
+
+router.get('/slack', function(req,res,next) {
+  var settings = req.app.get("settings").settings;
+  ;
+  slack.getMemberList(settings, function(err, members) {
+    if (err) return next(err);  
+    var active = members.filter(function(item, index, array) {return !item.deleted});
+    var disabled = members.filter(function(item, index, array) {return item.deleted});    
+    res.render('admin/slack', {members: active, disabled: disabled});
+  });
 });
 
 router.get('/srp', requireRole('managesrp'), function(req, res, next) {

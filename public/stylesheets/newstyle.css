@@ -376,3 +376,21 @@ button.SRPButton {
 .adduser {
     margin-top: 20px;
 }
+
+#settingsform {
+    display: table;
+}
+
+#settingsform div {
+    display: table-row;
+}
+
+#settingsform div label {
+    display: table-cell;
+    text-align: right;
+    padding-right: 10px;
+}
+
+#settingsform div input {
+    display: table-cell;    
+}
