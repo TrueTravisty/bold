@@ -172,10 +172,6 @@ router.get('/users/:user', requireRole('manageusers'), function(req,res, next) {
    })
 });
 
-router.post('/users/:user', requireRole('manageusers'), function(req,res,next) {
-
-});
-
 router.param('setting', function(req, res, next, setting){
   var Settings = req.app.get("settings");
   if (!Settings.permissions[setting]){
@@ -193,17 +189,7 @@ router.param('setting', function(req, res, next, setting){
 });
 
 router.get('/settings', function(req,res){
-  var s = [];
-  ;
-  var Settings = req.app.get("settings");
-  for (setting in Settings.permissions) {
-    if (req.can(Settings.permissions[setting])) {
-      s.push({name: setting, value: Settings.settings[setting]});
-    }
-  }
-  res.render('admin/settings.jade', {
-    settings: s
-  });
+  res.render('admin/settings.jade');
 });
 
 router.get('/settings.json', function(req, res) {
