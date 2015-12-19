@@ -17,18 +17,21 @@ router.use(function(req,res,next) {
 });
 
 router.get('/', function(req, res, next) {
-	var settings = req.app.get("settings").settings;
+	return res.render('roster',
+        { current: 'roster' }		
+    );    
+});
+
+router.get('/roster.json', function(req, res, next) {
+    var settings = req.app.get("settings").settings;
 	var corpId = settings['corp-id'];
 	
 	seat.getMembers(corpId, function(err, members) {
 		if (err) return next(err);
 		
-		res.render('roster',
-			{ members: members, current: 'roster' }		
-		);
+		res.json(members);
 	});
-	
-});
+})
 
 router.get('/ang', function(req, res, next) {
 	var settings = req.app.get("settings").settings;
@@ -46,7 +49,7 @@ router.get('/ang', function(req, res, next) {
 router.param('member', function(req, res, next, id) {
    seat.getCharacterInfo(id, function(err, character) {
        if (err) return next(err);
-       if (character.comments){
+       if (character && character.comments){
            for (var i = 0, l = character.comments.length; i<l;++i){
                character.comments[i].editable = false && (req.can('administrate') || req.username == character.comments[i].user);
            }

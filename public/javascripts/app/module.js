@@ -1,6 +1,6 @@
 (function() {
 
-var app = angular.module('bold', ['ui.bootstrap', 'ngMessages', 'ngTouch', 'ngNumeraljs']);
+var app = angular.module('bold', ['ui.bootstrap', 'ngMessages', 'ngTouch', 'ngNumeraljs', 'smart-table']);
 
 
 app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {

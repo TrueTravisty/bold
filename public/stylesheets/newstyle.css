@@ -394,3 +394,27 @@ button.SRPButton {
 #settingsform div input {
     display: table-cell;    
 }
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #021B45;
+}
+
+.table-small {
+    font-size: 8pt;
+}
+
+.keyok {
+    color: green;
+}
+
+.keynotok {
+    color: red;
+}
+
+.st-sort-ascent:before{
+    content: '\25B2';
+}
+
+.st-sort-descent:before{
+    content: '\25BC';
+}

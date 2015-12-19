@@ -1,44 +1,38 @@
-extends ./layout.jade
+extends ./layout.bs
 
 append bodyscripts
-    script(type="text/javascript", src="/javascripts/jquery.tablesorter.js")
-    script(type="text/javascript", src="/javascripts/roster.js")
+    script(type="text/javascript", src="/javascripts/app/roster.js")
+    script(type="text/javascript", src="/javascripts/app/helpers/timespan.js")
     
     
 
 block content
-    table#rosterTable.tablesorter
-        thead
-            th Name
-            th Joined
-            th Last Logon
-            th Last Logoff
-            th Location
-            th Notes
-            th
-        tbody
-            each member in members 
+    div(ng-controller="RosterCtrl")
+        table.table.table-striped.table-small(st-table="displayedRoster" st-safe-src="roster")
+            thead
                 tr
+                    th(st-sort="name") Name
+                    th(st-sort="startDateTime") Joined
+                    th(st-sort="logonDateTime") Last Logon
+                    th(st-sort="logoffDateTime") Last Logoff
+                    th(st-sort="location") Location
+                    th(st-sort="notes") Notes
+                    th(st-sort="missingKey", st-sort-default="reverse") Status
+            tbody 
+                tr(ng-repeat="member in displayedRoster")
+                    td {{member.name}}
                     td 
-                        a(href='/roster/' + member.characterID)
-                            = member.name
+                        span(time-passed="member.startDateTime")
                     td 
-                        = member.startDateTime.toISOString().substr(0,10)
-                    td
-                        = member.logonDateTime.toISOString().substr(0,10)
-                    td
-                        = member.logoffDateTime.toISOString().substr(0,10)
-                    td
-                        = member.location
-                    td
-                        if member.comments
-                            a(href='/roster/' + member.characterID + '#comments')
-                                = member.comments
-                    td
-                        if member.isOk || member.exempt
-                            div.keyok Not missing
-                        else
-                            div.keynotok Missing key
-                        
+                        span(time-passed="member.logonDateTime")
+                    td 
+                        span(time-passed="member.logoffDateTime")
+                    td {{member.location}}
+                    td 
+                        div(ng-show="member.comments") {{member.comments}}
+                    td 
+                        .keynotok(ng-hide="!member.missingKey") Missing
+                        .keyok(ng-hide="member.missingKey") Ok
+                    
                         
                     
