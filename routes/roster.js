@@ -80,6 +80,22 @@ function returnComments(req, res, next) {
     }); 
 }
 
+router.get('/:member/comments.json', function(req, res, next) {
+    seat.getCharacterComments(req.member.characterID, function(err, comments) {
+        if (err) return next(err);
+        var result = comments.map(function(dbComment) {
+            return {
+                id: dbComment.id,
+                user: dbComment.user,
+                text: dbComment.text,
+                time: dbComment.updated_at
+            }
+        })
+        res.json(result);
+    });
+})
+
+
 router.post('/:member/comments', function(req,res, next){
     var text = req.body.text;
     var user = req.user.username;

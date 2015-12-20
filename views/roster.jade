@@ -10,6 +10,8 @@ block content
     div(ng-controller="RosterCtrl")
         span.glyphicon.blyphicon-sort-by-attributes
         h2 Members of BO-LD 
+        div
+            | 
         table.table.table-striped.table-small(st-table="displayedRoster" st-safe-src="roster")
             thead
                 tr
@@ -35,7 +37,7 @@ block content
                     td {{member.location}}
                     td 
                         div(ng-show="member.comments") 
-                            .span.glyphicon.glyphicon-tags
+                            .span.glyphicon.glyphicon-tags(uib-tooltip-template="'commentTooltipTemplate.html'")
                     td 
                         .keynotok(ng-hide="!member.missingKey") Missing                            
                         .keyok(ng-hide="member.missingKey") Ok
@@ -43,4 +45,9 @@ block content
 
                     
                         
-                    
+        script(type="text/ng-template" id="commentTooltipTemplate.html")
+            .comment-tooltip 
+                .header Comments about {{member.name}}:                
+                .comment(ng-repeat="comment in member.commentData")
+                    .text {{comment.text}}
+                    .user By {{comment.user}} at {{comment.time | date: 'short'}}
