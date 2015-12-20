@@ -10,9 +10,11 @@ block content
     div(ng-controller="RosterCtrl")
         span.glyphicon.blyphicon-sort-by-attributes
         h2 Members of BO-LD 
-            span.glyphicon.glyphicon-sort-by-attributes
         table.table.table-striped.table-small(st-table="displayedRoster" st-safe-src="roster")
             thead
+                tr
+                    th(colspan=3)
+                        input.input-sm.form-control(type="search", st-search="name", placeholder="Search for members")
                 tr
                     th(st-sort="name") Name
                     th(st-sort="startDateTime") Joined
