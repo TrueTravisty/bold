@@ -459,3 +459,11 @@ button.SRPButton {
     padding-left: 8px;
     padding-right: 8px;
 }
+
+.member-row:hover {
+    background-color: #4A0000;
+}
+
+.table-striped>tbody>tr.member-row:nth-of-type(odd):hover {
+    background-color: #4A0000;
+}

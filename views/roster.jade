@@ -26,7 +26,7 @@ block content
                     th(st-sort="comments") Notes
                     th(st-sort="missingKey", st-sort-default="reverse") Key
             tbody 
-                tr(ng-repeat="member in displayedRoster")
+                tr.member-row(ng-repeat="member in displayedRoster", ng-click="show(member)")
                     td {{member.name}}
                     td 
                         span(time-passed="member.startDateTime")

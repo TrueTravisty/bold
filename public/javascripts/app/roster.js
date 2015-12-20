@@ -4,6 +4,10 @@ var app = angular.module('bold');
 app.controller('RosterCtrl', ['$scope', '$http', function ($scope, $http) {
     var roster = $scope.roster=[];
     var displayedRoster = [];  
+    
+    $scope.show = function(member) {
+        
+    }
    
     $http.get('/roster/roster.json').then(function(response) {
        var rosterData = response.data;
