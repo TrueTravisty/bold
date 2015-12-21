@@ -1,0 +1,16 @@
+.membercard(ng-class="{memberapiok: characterInfo.isOk, memberapibad: !characterInfo.isOk}") 
+    h2 {{characterInfo.name}}
+    img.toonimage(ng-src="/eveimages/{{characterInfo.characterID}}")
+    div(ng-show="characterInfo.alts")
+        h3 Known Alts
+        table.alttable
+            thead
+                th
+                th Name
+                th Corporation
+            tbody
+                tr(ng-repeat="alt in characterInfo.alts", ng-class="{main: characterInfo.main.characterID == alt.characterID}", ng-click="setCharacter({id:alt.characterID})")
+                    td
+                        img(ng-src="/eveimages/{{alt.characterID}}")
+                    td {{alt.characterName}}
+                    td {{alt.corporationName}} 

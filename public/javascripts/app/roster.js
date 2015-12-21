@@ -6,9 +6,10 @@ app.controller('RosterCtrl', ['$scope', '$http', function ($scope, $http) {
     var displayedRoster = [];  
     
     $scope.membersPerPage = 20;
+    $scope.characterId = null;
     
-    $scope.show = function(member) {
-        
+    $scope.show = function(characterID) {
+        $scope.characterId = characterID;
     }
    
     $http.get('/roster/roster.json').then(function(response) {
@@ -29,5 +30,35 @@ app.controller('RosterCtrl', ['$scope', '$http', function ($scope, $http) {
     
 }]);
 
+ app.directive('characterInfo', ['$http', function($http) {
+    return {
+        restrict: 'C',
+        templateUrl: '/roster/character-info',
+        scope: {
+            characterId: "=",
+            setCharacter: "&"            
+        },
+        link: function(scope, elm, attrs) {
+            var updateCharacterInfo = function() {
+                if (!scope.characterId) {
+                    scope.characterInfo = null;
+                    return;
+                }
+                
+                $http.get('/roster/' + scope.characterId).then(function(response) {
+                    scope.characterInfo = response.data;
+                    if (!scope.characterInfo.name && scope.characterInfo.characterName)
+                        scope.characterInfo.name = scope.characterInfo.characterName;
+                })
+            }
+            
+            updateCharacterInfo();
+            
+            scope.$watch(attrs.characterId, function(value) {
+                updateCharacterInfo();
+            })
+        }
+    }
+}]);
 
 })(window);

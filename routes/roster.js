@@ -22,6 +22,10 @@ router.get('/', function(req, res, next) {
     );    
 });
 
+router.get('/character-info', function(req, res) {
+    return res.render('includes/rosterCharacterInfo');
+})
+
 router.get('/roster.json', function(req, res, next) {
     var settings = req.app.get("settings").settings;
 	var corpId = settings['corp-id'];

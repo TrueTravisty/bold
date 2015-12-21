@@ -8,6 +8,7 @@ append bodyscripts
 
 block content
     div(ng-controller="RosterCtrl")
+        .character-info(ng-show="characterId", character-id="characterId" set-character="show(id)")            
         h2 Member List
          
         .form-group.col-md-3
@@ -27,7 +28,7 @@ block content
                     th(st-sort="comments") Notes
                     th(st-sort="missingKey", st-sort-default="reverse") Key
             tbody 
-                tr.member-row(ng-repeat="member in displayedRoster", ng-click="show(member)")
+                tr.member-row(ng-repeat="member in displayedRoster", ng-click="show(member.characterID)")
                     td {{member.name}}
                     td 
                         span(time-passed="member.startDateTime")
