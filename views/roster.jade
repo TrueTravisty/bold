@@ -8,10 +8,11 @@ append bodyscripts
 
 block content
     div(ng-controller="RosterCtrl")
-        span.glyphicon.blyphicon-sort-by-attributes
-        h2 Members of BO-LD 
-        div
-            | 
+        h2 Member List
+         
+        .form-group.col-md-3
+            label Members per page: 
+            input.form-control(type="number", name="membersPerPage", ng-model="membersPerPage", min=10, max=250)            
         table.table.table-striped.table-small(st-table="displayedRoster" st-safe-src="roster")
             thead
                 tr
@@ -41,7 +42,10 @@ block content
                     td 
                         .keynotok(ng-hide="!member.missingKey") Missing                            
                         .keyok(ng-hide="member.missingKey") Ok
-                            
+            tfoot
+                tr
+                    td.text-center(colspan=7)
+                        div(st-pagination="" st-items-by-page="membersPerPage" st-displayed-pages="15")                
 
                     
                         

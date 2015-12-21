@@ -5,6 +5,8 @@ app.controller('RosterCtrl', ['$scope', '$http', function ($scope, $http) {
     var roster = $scope.roster=[];
     var displayedRoster = [];  
     
+    $scope.membersPerPage = 20;
+    
     $scope.show = function(member) {
         
     }
@@ -17,7 +19,7 @@ app.controller('RosterCtrl', ['$scope', '$http', function ($scope, $http) {
            roster.push(data);
            
            if (data.comments) {
-               (function(data) {$http.get('/roster/' + member + '/comments.json').then(function(response) {
+               (function(data) {$http.get('/roster/' + member + '/comments').then(function(response) {
                    data.commentData = response.data;
                })})(data);
            }

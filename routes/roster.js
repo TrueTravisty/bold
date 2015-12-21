@@ -49,25 +49,10 @@ router.param('member', function(req, res, next, id) {
 });
 
 router.get('/:member', function(req, res, next) {
-   res.render('rostertoon', {
-       current: 'roster',
-       member: req.member
-   });
+   res.json(req.member);
 });
 
-router.get('/:member/comments', returnComments);
-
-function returnComments(req, res, next) {
-    seat.getCharacterComments(req.member.characterID, function(err, comments) {
-        if (err) return next(err);
-        for (var i = 0, l = comments.length; i<l;++i){
-            comments[i].editable = (req.can('administrate') || req.username == comments[i].user);
-        }
-        res.render('includes/comments', {comments: comments})    
-    }); 
-}
-
-router.get('/:member/comments.json', function(req, res, next) {
+router.get('/:member/comments', function(req, res, next) {
     seat.getCharacterComments(req.member.characterID, function(err, comments) {
         if (err) return next(err);
         var result = comments.map(function(dbComment) {
@@ -105,13 +90,18 @@ router.delete('/:member/comment/:comment', function(req,res,next) {
    seat.getCharacterComments(req.member.characterID, function(err, comments) {
         if (err) return next(err);
         var found = false;
+        var user;
         for (var i = 0, l = comments.length; i < l; ++i) {
             if (comments[i].id == commentId){
                 found = true;
+                user = comments[i].user;
                 break;
             }
         }
         if (!found) { return res.status(404).send('Member comment with that id not found') }
+        
+        if (req.user.username != user && !req.can('administrate'))
+            return res.status(403).send(); // forbidden
         
         seat.deleteCharacterComment(commentId, function(err) {
             if (err) return next(err);
@@ -130,8 +120,8 @@ router.get('/:member/exemption', function(req, res, next) {
     //return res.send(JSON.stringify(req.member));
     seat.hasExemption(req.member.characterID, function(err, exemption) {
        if (err) return next (err);
-       if (exemption && exemption.length == 1 && exemption[0].reason) return res.send(exemption[0].reason);
-       return res.send("");  
+       if (exemption && exemption.length == 1 && exemption[0].reason) return res.json(exemption[0].reason);
+       return res.json(false);  
     });
 });
 
