@@ -16,11 +16,13 @@ router.use(function(req,res,next) {
   return next();
 });
 
-router.get('/', function(req, res, next) {
-	return res.render('roster',
+router.get('/', renderRoster);
+
+function renderRoster(req,res,next) {
+    return res.render('roster',
         { current: 'roster' }		
     );    
-});
+}
 
 router.get('/character-info', function(req, res) {
     return res.render('includes/rosterCharacterInfo');
@@ -52,11 +54,13 @@ router.param('member', function(req, res, next, id) {
    
 });
 
-router.get('/:member', function(req, res, next) {
+router.get('/:member', renderRoster);
+
+router.get('/toon/:member', function(req, res, next) {
    res.json(req.member);
 });
 
-router.get('/:member/comments', function(req, res, next) {
+router.get('/toon/:member/comments', function(req, res, next) {
     seat.getCharacterComments(req.member.characterID, function(err, comments) {
         if (err) return next(err);
         var result = comments.map(function(dbComment) {
@@ -72,7 +76,7 @@ router.get('/:member/comments', function(req, res, next) {
 })
 
 
-router.post('/:member/comments', function(req,res, next){
+router.post('/toon/:member/comments', function(req,res, next){
     var text = req.body.text;
     var user = req.user.username;
     var id = req.member.characterID;
@@ -89,7 +93,7 @@ router.param('comment', function(req, res, next, id) {
     next();
 })
 
-router.delete('/:member/comment/:comment', function(req,res,next) {
+router.delete('/toon/:member/comment/:comment', function(req,res,next) {
    var commentId = req.commentId;
    seat.getCharacterComments(req.member.characterID, function(err, comments) {
         if (err) return next(err);
@@ -115,7 +119,7 @@ router.delete('/:member/comment/:comment', function(req,res,next) {
     });        
 });
 
-router.get('/:member/exemption', function(req, res, next) {
+router.get('/toon/:member/exemption', function(req, res, next) {
     if (!req.member) {
         var err = Error("Member not found");
         err.status(404);
@@ -129,7 +133,7 @@ router.get('/:member/exemption', function(req, res, next) {
     });
 });
 
-router.post('/:member/exemption', function(req, res, next) {
+router.post('/toon/:member/exemption', function(req, res, next) {
     if (!req.member) {
         var err = Error("Member not found");
         err.status(404);
@@ -141,7 +145,7 @@ router.post('/:member/exemption', function(req, res, next) {
     })
 });
 
-router.delete('/:member/exemption', function(req, res, next) {
+router.delete('/toon/:member/exemption', function(req, res, next) {
    if (!req.member) {
         var err = Error("Member not found");
         err.status(404);

@@ -4,7 +4,8 @@ append bodyscripts
     script(type="text/javascript", src="/javascripts/app/roster.js")
     script(type="text/javascript", src="/javascripts/app/helpers/timespan.js")
     
-    
+block headerExtra
+    base(href="/roster/")    
 
 block content
     div(ng-controller="RosterCtrl")
