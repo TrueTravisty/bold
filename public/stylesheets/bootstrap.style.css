@@ -222,10 +222,10 @@ input[type="color"],
 }
 
 .navbar-default .navbar-nav>.active {
-    background-color: #e7e7e7;
+    background-color: #3a87ad;
 }
 .navbar-default .navbar-nav>.active>a {
-   background-color:  #e7e7e7;
+   background-color:  #3a87ad;
 }
 
 .navbar .divider-vertical {
@@ -280,4 +280,9 @@ input[type="color"],
 
 .has-error .form-control {
     color: red;
+}
+
+.navbar-default .navbar-brand {
+    color: #ffffff;
+    font-weight: normal;
 }
