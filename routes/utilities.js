@@ -81,6 +81,14 @@ router.use(function(req,res,next) {
           displayname: 'Roster'
       })
   }
+  
+  if (req.can('administrate')) {
+      res.locals.mainpages.push({
+          path: '/admin',
+          name: 'admin',
+          displayname: 'Admin'
+      })
+  }
 
   res.locals.flash = {
     errors: [],
