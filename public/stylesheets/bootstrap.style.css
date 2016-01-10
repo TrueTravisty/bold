@@ -291,6 +291,10 @@ input[type="color"],
     font-weight: normal;
 }
 
+.navbar-default .navbar-brand:hover {
+    color: #00ffff;
+}
+
 .navbar-default .navbar-nav>li>a:hover {
     color: #00ffff;
 }
