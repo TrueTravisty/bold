@@ -221,6 +221,13 @@ input[type="color"],
   color: #ffffff;
 }
 
+.navbar-default .navbar-nav>.active {
+    background-color: #e7e7e7;
+}
+.navbar-default .navbar-nav>.active>a {
+   background-color:  #e7e7e7;
+}
+
 .navbar .divider-vertical {
   height: 41px;
   background-color: #00356b;
@@ -228,9 +235,13 @@ input[type="color"],
 }
 
 .navbar .nav > li > a {
-  padding: 10px 10px 11px;
-  font-size: 14px;
+  padding: 14px 10px 11px;
+  font-size: 20px;
   color: #a3cbf7;
+}
+
+.navbar .nav > li {
+    height: 50px;
 }
 
 .navbar .nav > .active > a,
