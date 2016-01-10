@@ -221,11 +221,15 @@ input[type="color"],
   color: #ffffff;
 }
 
-.navbar-default .navbar-nav>.active {
-    background-color: #3a87ad;
-}
-.navbar-default .navbar-nav>.active>a {
+.navbar-default .navbar-nav>.active,
+.navbar-default .navbar-nav>.active>a
+{
    background-color:  #3a87ad;
+}
+
+.navbar-default .navbar-nav>.active:hover,
+.navbar-default .navbar-nav>.active>a:hover {
+    background-color:  #00ffff;
 }
 
 .navbar .divider-vertical {
@@ -285,4 +289,8 @@ input[type="color"],
 .navbar-default .navbar-brand {
     color: #ffffff;
     font-weight: normal;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: #00ffff;
 }
