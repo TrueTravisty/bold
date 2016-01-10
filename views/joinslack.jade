@@ -16,8 +16,7 @@ block content
         form(name="slackForm")
             label E-mail address:&nbsp;
             input(type="email" ng-model="email" required)
-            button(ng-click="register(email)" ng-disabled="!slackForm.$valid") Get Invite
-            tt {{slackForm.$valid}}
+            button(ng-click="register(email)" ng-disabled="!slackForm.$valid") Get Invite            
     div(ng-show="status == 'active'")
         h2 You are already registered on Slack
         div Join us in the&nbsp;
