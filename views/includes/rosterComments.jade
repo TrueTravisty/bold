@@ -1,0 +1,22 @@
+h3 Notes
+
+.Comment(ng-repeat="comment in comments")
+    .comment-header 
+        .comment-actions(ng-show="comment.canEdit")
+            a(ng-click="deleteComment(comment.id)") Remove 
+            a(ng-click="editComment(comment)") Edit
+        div Noted by {{comment.user}} at {{comment.time | date: 'short'}}
+        
+    .comment-text(ng-hide="comment.editing") {{comment.text}}
+    .comment-text(ng-show="comment.editing")
+        .form-element
+            textarea(ng-model="comment.text")
+        button(ng-click="updateComment(comment)") Save
+    
+.Newcomment
+    .comment-header New note
+    .comment-text
+        form(name="newcomment")
+            .form-element
+                textarea(placeholder="New note...", ng-model="newComment", required)
+            button(ng-click="registerComment()", ng-disabled="!newcomment.$valid") Add note

@@ -28,6 +28,10 @@ router.get('/character-info', function(req, res) {
     return res.render('includes/rosterCharacterInfo');
 })
 
+router.get('/character-comments', function(req,res) {
+    return res.render('includes/rosterComments');
+})
+
 router.get('/roster.json', function(req, res, next) {
     var settings = req.app.get("settings").settings;
 	var corpId = settings['corp-id'];
@@ -68,7 +72,8 @@ router.get('/toon/:member/comments', function(req, res, next) {
                 id: dbComment.id,
                 user: dbComment.user,
                 text: dbComment.text,
-                time: dbComment.updated_at
+                time: dbComment.updated_at,
+                canEdit: dbComment.user == req.user.username || req.can('administrate')
             }
         })
         res.json(result);
@@ -83,7 +88,7 @@ router.post('/toon/:member/comments', function(req,res, next){
     
     seat.addCharacterComment(id, user, text, function(err) {
         if (err) return next(err);
-        returnComments(req, res, next);
+        res.status(201).send("");
     });
             
 });
@@ -93,7 +98,7 @@ router.param('comment', function(req, res, next, id) {
     next();
 })
 
-router.delete('/toon/:member/comment/:comment', function(req,res,next) {
+router.delete('/toon/:member/comments/:comment', function(req,res,next) {
    var commentId = req.commentId;
    seat.getCharacterComments(req.member.characterID, function(err, comments) {
         if (err) return next(err);
@@ -117,6 +122,33 @@ router.delete('/toon/:member/comment/:comment', function(req,res,next) {
         })     
                     
     });        
+});
+
+router.put('/toon/:member/comments/:comment', function(req,res,next) {
+   var commentId = req.commentId;
+   seat.getCharacterComments(req.member.characterID, function(err, comments) {
+        if (err) return next(err);
+        var found = false;
+        var user;
+        for (var i = 0, l = comments.length; i < l; ++i) {
+            if (comments[i].id == commentId){
+                found = true;
+                user = comments[i].user;
+                break;
+            }
+        }
+        if (!found) { return res.status(404).send('Member comment with that id not found') }
+        
+        if (req.user.username != user && !req.can('administrate'))
+            return res.status(403).send(); // forbidden
+        
+        seat.updateCharacterComment(commentId, req.body.text, function(err) {
+            if (err) return next(err);
+            return res.status(200).send();
+        })     
+                    
+    });        
+    
 });
 
 router.get('/toon/:member/exemption', function(req, res, next) {

@@ -497,18 +497,18 @@ button.SRPButton {
 
 .Comment {
     margin-bottom: 5px;
-    background-color: blue;
+    border-style: solid;
+    border-width: thin;
+    border-color: #0870D7;
 }
 
-.commentheader {
-    background-color: blue;
+.comment-header {
+    background-color: #0870D7;
 }
 
-.Comment .text {
+.Comment .comment-text {
     padding-top: 5px;
     padding-bottom: 5px;
-    background-color: white;
-    color: black;
 }
 
 .Comment .action {
@@ -517,4 +517,12 @@ button.SRPButton {
     
     //margin-top: -20px;
     
+}
+
+.comment-text textarea {
+    width: 100%;
+}
+
+.comment-actions {
+    float: right;
 }

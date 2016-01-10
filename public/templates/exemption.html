@@ -1,0 +1,13 @@
+<div ng-show="exempt">
+    <h3>API Exempt</h3>
+    <p>{{exemptReason}}</p>
+    <p><a href="#" ng-click="removeExemption()">Remove</a></p>
+</div>
+<div ng-hide="exempt">
+    <h3>Not API Exempt</h3>
+    <div class="formElement">
+        <textarea ng-model="exemptReason" required="reason" placeholder="Enter reason for exemption"></textarea>
+    </div>
+    <button ng-click="registerExemption()">Register Exemption</button>
+    
+</div>
