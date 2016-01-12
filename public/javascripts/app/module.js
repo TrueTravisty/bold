@@ -9,6 +9,16 @@ app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.alerts.splice(index, 1);
     };
     
+    $http.get('/userinfo.json').then(function(result) {
+        if (result.data && !result.data.isOk) {
+            $http.get('/exemption.json').then(function(result) {
+                if (!result.data) {
+                    $scope.alerts.push({msg: "NOTE: BO-LD requires a full, valid key for all accounts of all members. We don't seem to have this for you. Please contact Yaldo Asanari ASAP to resolve.", type: "danger"});
+                }
+            })
+        }
+    })
+    
     $http.get('/flashmessages').success(function(flash) {
         if (!flash) return;
         ['danger', 'warning', 'success', 'info'].forEach(function(cat){

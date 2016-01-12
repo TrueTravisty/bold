@@ -7,6 +7,7 @@ var Character = require('../model/Character');
 var Api = require('../model/Api');
 var eveApi = require('../lib/eveApi');
 var reddit = require('../lib/reddit');
+var seat = require('./../lib/seatdb');
 
 router.get('/loginlocal', function(req, res) {
   if (req.isAuthenticated()) {
@@ -123,6 +124,30 @@ function randomstring(count)
 
   return text;
 }
+
+router.get('/userinfo.json', function(req, res) {
+   if (!req.user || !req.user.characterID) return res.json(null);
+   seat.getCharacterInfo(req.user.characterID, function(err, character) {
+       if (err) return next(err);
+       return res.json({
+           characterID: character.characterID,
+           name: character.name,
+           isOk: character.isOk
+       })
+       
+   });
+   
+});
+
+
+router.get('/exemption.json', function(req, res, next) {
+    if (!req.user || !req.user.characterID) return res.json(false);
+    seat.hasExemption(req.user.characterID, function(err, exemption) {
+       if (err) return next (err);
+       if (exemption && exemption.length == 1 && exemption[0].reason) return res.json(true);
+       return res.json(false);  
+    });
+});
 
 
 router.get('/loginredirect', function(req,res) {
