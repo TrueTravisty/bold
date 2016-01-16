@@ -9,7 +9,5 @@
   if username
     #logoutlink
       a(href="/logout") Log out
-
-  if canadmin
-    #adminlink
-      a(href="/admin") Admin
+    #adminlink(ng-class="{keyok: keyok, keynotok: !keyok}")
+      {{keyStatus}}

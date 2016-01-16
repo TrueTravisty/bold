@@ -223,7 +223,6 @@ td.ship, td.victimimg {
 #user_info, #adminlink, #logoutlink{
 	width: 290px;
 	float: left;
-    color: #ffffff;
 }
 
 #adminlink {
