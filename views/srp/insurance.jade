@@ -1,0 +1,36 @@
+extends ../layout.bs
+
+append bodyscripts
+  script(type="text/javascript", src="/javascripts/app/srp_insurance.js")
+
+block content
+  div(ng-controller="InsuranceCtrl")
+    h2 SRP Settings for ships
+    
+    table.table.table-striped.table-small(st-table="displayedShips" st-safe-src="ships")
+        thead
+            tr
+                th(colspan=2)
+                    input.input-sm.form-control(type="search", st-search="typeName", placeholder="Search for ships")
+            tr
+                th(st-sort="typeName") Name
+                th(st-sort="groupName") Class
+                th(st-sort="insurancePrice") Insurance Cost
+                th(st-sort="insurancePayout") Insurance Payout
+                th(st-sort="insuranceValue") Insurance Value
+                th(st-sort="srpPercentage") SRP Percentage
+                th(st-sort="notes") Notes
+        tbody           
+            tr(ng-repeat="ship in displayedShips")
+                td {{ship.typeName}}
+                td {{ship.groupName}}
+                td: div(ng-show="ship.insurancePrice") {{ship.insurancePrice | number: 2}} isk
+                td: div(ng-show="ship.insurancePayout") {{ship.insurancePayout | number: 2}} isk
+                td: div(ng-show="ship.insuranceValue") {{ship.insuranceValue | number: 2}} isk
+                td {{ship.srpPercentage}}
+                td {{ship.notes}}
+        tfoot
+            tr
+                td.text-center(colspan=7)
+                    div(st-pagination="" st-items-by-page="40" st-displayed-pages="7")
+  
