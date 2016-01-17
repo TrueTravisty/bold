@@ -29,6 +29,7 @@ var apiRoute = require('./routes/api');
 var buyback = require('./routes/buyback');
 var admin = require('./routes/admin');
 var roster = require('./routes/roster');
+var srp = require('./routes/srp');
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -122,6 +123,7 @@ app.use('/api/', apiRoute);
 app.use('/', buyback);
 app.use('/roster/', roster);
 app.use('/admin/', admin);
+app.use('/corpsrp/', srp);
 
 
 /// catch 404 and forward to error handler
