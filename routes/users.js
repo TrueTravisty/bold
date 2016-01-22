@@ -129,6 +129,10 @@ router.get('/userinfo.json', function(req, res) {
    if (!req.user || !req.user.characterID) return res.json(null);
    seat.getCharacterInfo(req.user.characterID, function(err, character) {
        if (err) return next(err);
+       if (!character) {
+           res.status(400)
+           return res.json({error:"Did not find character in database"})
+       }
        return res.json({
            characterID: character.characterID,
            name: character.name,
