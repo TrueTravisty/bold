@@ -524,5 +524,17 @@ button.SRPButton {
 }
 
 .comment-actions {
-    float: right;
+    float: right;    
+}
+
+div[contentEditable] {
+  cursor: text;  
+  display: inline;
+}
+div[contentEditable]:focus {
+  cursor: text;
+  background-color: #D0D0D0;
+  border: 1px solid red;
+  color:darkblue;
+  padding: .2em;
 }

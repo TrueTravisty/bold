@@ -24,11 +24,15 @@ block content
             tr(ng-repeat="ship in displayedShips")
                 td {{ship.typeName}}
                 td {{ship.groupName}}
-                td: div(ng-show="ship.insurancePrice") {{ship.insurancePrice | number: 2}} isk
-                td: div(ng-show="ship.insurancePayout") {{ship.insurancePayout | number: 2}} isk
-                td: div(ng-show="ship.insuranceValue") {{ship.insuranceValue | number: 2}} isk
-                td {{ship.srpPercentage}}
-                td {{ship.notes}}
+                td 
+                    div(contentEditable="true" ng-model="ship.insurancePrice" ship="ship" field="insurancePrice") 
+                    span(ng-show="ship.insurancePrice") &nbsp;isk
+                td 
+                    div(contentEditable="true" ng-model="ship.insurancePayout" ship="ship" field="insurancePayout") 
+                    span(ng-show="ship.insurancePayout") &nbsp;isk
+                td: div(ng-show="ship.insurancePrice && ship.insurancePayout") {{ship.insurancePayout - ship.insurancePrice | number: 2}} isk
+                td: div(contentEditable="true" ng-model="ship.srpPercentage" ship="ship" field="srpPercentage" format="0")                 
+                td: div(contentEditable="true" ng-model="ship.notes" allowtext="true" ship="ship" field="notes") {{ship.notes}}
         tfoot
             tr
                 td.text-center(colspan=7)
