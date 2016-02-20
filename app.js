@@ -10,6 +10,9 @@ try{
   console.log("Could not read env.json")
 }
 
+var sslRootCAs = require('ssl-root-cas/latest')
+sslRootCAs.inject()
+
 var mongodb = process.env.DATABASE || 'boldsite';
 
 
