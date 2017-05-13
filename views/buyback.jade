@@ -5,11 +5,11 @@ append bodyscripts
 
 block content
   h2 Buyback program (currently inactive, sorry guys)
-  h4 Calculator
-  p: i.
+  //h4 Calculator
+  //p: i.
     CTRL-C in the game in a list, CTRL-V in the box below, press the calculate button,
     and it will put out in the bottom how much you should make the contract out for
-  .buyback(ng-controller="BuybackCtrl")   
+  //.buyback(ng-controller="BuybackCtrl")   
     textarea(ng-model="items", ng-change="value = 0",
         placeholder="CTRL-C in the game in a list, CTRL-V in this box, press the calculate button, "
         + "and it will put out in the bottom how much you should make the contract out for")
@@ -34,7 +34,7 @@ block content
           th I will receive:
           td.buybackvalue: {{value}} 
       hr
-  ul
+  //ul
     li.
       The buyback program is run personally by <i>Thalonia</i>. If you have any questions about the buyback program, please
       direct all questions toward Thalonia. The BO-LD officers will not be able to help you sort out problems with the buyback program.
