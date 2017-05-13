@@ -1,18 +1,15 @@
 
     [
-    { "name": "Thalonia", "ID": "758027032", "title": "Director", "function": "Logistics" },
+    { "name": "Thalonia", "ID": "758027032", "title": "Director", "function": "" },
     { "name": "Asmodean Shepherd", "ID": "1703625820", "title": "CEO", "function": "" },
     { "name": "Trueno Crux", "ID": "94439685", "title": "Officer", "function": "" },
-    { "name": "Tierdar", "ID": "1217760776", "title": "Officer", "function": "Security, SRP"},
     { "name": "Yaldo Asanari", "ID": "94314126", "title": "Officer", "function": "IT"},
     { "name": "Jasper Madullier", "ID": "94284621", "title": "Officer", "function": "Recruitment, Logistics"},
     { "name": "MSpamQ OfTheEnts", "ID": "93630773", "title": "Officer", "function": "Recruitment, Logistics"},
-    { "name": "Lenny Kravitz2", "ID": "628327755", "title": "Director", "function": "Diplo"},
     { "name": "Marauder84", "ID": "1800752466", "title": "Officer", "function": ""},
-    { "name": "Scythian Painspike", "ID": "110914152", "title": "Officer", "function": "Executive Mildir"},
-    { "name": "Nammo", "ID": "822515395", "title": "Officer", "function": "Millitary (EU)" },
-    { "name": "Edwarde Teache", "ID": "93687264", "title": "Officer", "function": "Millitary (US)"},
-    { "name": "Sir Meephunter", "ID": "466135483", "title": "Officer", "function": ""},
     { "name": "Master Bubba Kush", "ID": "92003770", "title": "Officer", "function": ""},
-    { "name": "Angeu Nova", "ID": "91551843", "title": "Officer", "function": ""}
+    { "name": "Nammo", "ID": "822515395", "title": "Officer", "function": "Military (EU)" },
+    { "name": "Edwarde Teache", "ID": "93687264", "title": "Officer", "function": "Military (US)"},
+    { "name": "Janlina", "ID": "1789554924", "title": "Officer", "function": "" },
+    { "name": "Adam Algaert", "ID": "94307228", "title": "Officer", "function": "" },
     ]
